@@ -13,7 +13,7 @@ const routes = [
     // разделение кода на уровне маршрута
     // это генерирует отдельный фрагмент (about.[hash].js) для этого маршрута
     // который загружается в режиме ожидания при посещении маршрута.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AddRecipesView.vue')
+    component: () => import('../views/AddRecipesView.vue')
   }
 ]
 
