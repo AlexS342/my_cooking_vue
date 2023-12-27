@@ -11,17 +11,20 @@
         </footer>
     </template>
     <template v-else>
-        нужна авторизация
+        <div class="WRP">
+            <LoginView/>
+        </div>
     </template>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import LoginView from '@/views/LoginView.vue'
 import {defineComponent} from "vue";
 
 export default defineComponent({
-    components: {Footer: Footer, Header},
+    components: {LoginView, Footer: Footer, Header},
     data() {
         return {
             isAuth: false,

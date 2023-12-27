@@ -38,6 +38,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 60px;
 }
 .header__logoImg{
     width: 42px;
