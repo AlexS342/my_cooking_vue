@@ -120,6 +120,9 @@ export default {
     border: 1px solid #a1a1a1;
     box-shadow: 1px 1px 0 0 #a5a5a5, inset 0 -1px 4px 0 #979797;
 }
+.login__listButtonsItem:hover{
+    background-color: #d2e9d3;
+}
 .login__listButtonsItem:active{
     margin: 2px 0 0 0;
     background-color: #beffc1;

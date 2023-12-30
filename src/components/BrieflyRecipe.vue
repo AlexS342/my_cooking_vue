@@ -5,11 +5,11 @@
         <div class="brieflyRecipe__details">
             <p class="brieflyRecipe__detailsHeader">Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу</p>
             <div class="brieflyRecipe__productList">
-                <img class="brieflyRecipe__productImg" src="../assets/list.png" alt="list">
+                <img class="brieflyRecipe__productImg" src="../assets/icon/list.png" alt="list">
                 <p class="brieflyRecipe__productText">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум</p>
             </div>
             <div class="brieflyRecipe__detailsList">
-                <img class="brieflyRecipe__detailsImg" src="../assets/time.png" alt="list">
+                <img class="brieflyRecipe__detailsImg" src="../assets/icon/time.png" alt="list">
                 <p class="brieflyRecipe__detailsText">40 мин</p>
             </div>
         </div>

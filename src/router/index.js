@@ -1,11 +1,17 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import RecipesView from '../views/RecipesView.vue'
+import RecipeView from '../views/RecipeView.vue'
 
 const routes = [
   {
     path: '/recipes',
     name: 'recipes',
     component: RecipesView
+  },
+  {
+    path: '/recipe',
+    name: 'recipe',
+    component: RecipeView
   },
   {
     path: '/add_recipes',

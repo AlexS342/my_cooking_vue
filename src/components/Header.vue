@@ -1,16 +1,17 @@
 <template>
     <div class="header">
         <div class="header__logo">
-            <img class="header__logoImg" alt="logo" src="../assets/chef.png">
+            <img class="header__logoImg" alt="logo" src="../assets/icon/chef.png">
             <p class="header__logoName" >Моя кухня</p>
         </div>
         <div class="header__nav">
             <router-link class="header__navLink" to="/recipes">Рецепты</router-link>
+            <router-link class="header__navLink" to="/recipe">Рецепт</router-link>
             <router-link class="header__navLink" to="/add_recipes">Добавить</router-link>
             <router-link class="header__navLink" to="/cooking">Готовить</router-link>
         </div>
         <div class="header__ava">
-            <img class="header__avaImg" alt="logo" src="../assets/man_cook.png">
+            <img class="header__avaImg" alt="logo" src="../assets/icon/man_cook.png">
         </div>
     </div>
 </template>

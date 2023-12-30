@@ -35,6 +35,7 @@ export default {
     .recipes__header{
         text-transform: uppercase;
         padding: 12px;
+        text-align: center;
     }
     .recipes__list{
         display: flex;
