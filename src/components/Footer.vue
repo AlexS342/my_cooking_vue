@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .footer{
     display: flex;
     flex-grow: 1;

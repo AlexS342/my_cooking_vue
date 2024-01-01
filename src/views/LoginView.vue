@@ -25,7 +25,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .login__WRP{
     height: 100vh;
     width: 100%;

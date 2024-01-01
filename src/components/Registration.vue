@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .login{
     display: flex;
     flex-direction: column;

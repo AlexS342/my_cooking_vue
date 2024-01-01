@@ -9,14 +9,14 @@
 // @ является псевдонимом для /src
 import AddRecipe from '@/components/AddRecipe.vue'
 export default {
-    name: 'RecipesView',
+    name: 'AddRecipeView',
     components: {
         AddRecipe
     },
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .recipes{
     display: flex;
     flex-direction: column;

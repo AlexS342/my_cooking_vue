@@ -43,9 +43,9 @@
                         <p class="subtitleItem w20p">ед.</p>
                     </div>
                     <div class="itemProduct mrt2 w100p">
-                        <input class="inputText pdl1" type="text">
-                        <input class="inputNum" type="number">
-                        <select class="select">
+                        <input class="inputText pdl1 w60p" type="text">
+                        <input class="inputNum w20p" type="number">
+                        <select class="select w20p">
                             <option class="option" value="г.">г.</option>
                             <option class="option" value="ст.л.">ст.л.</option>
                             <option class="option" value="ч.л.">ч.л.</option>
@@ -55,9 +55,9 @@
                         </select>
                     </div>
                     <div class="itemProduct mrt2 w100p">
-                        <input class="inputText" type="text">
-                        <input class="inputNum" type="number">
-                        <select class="select">
+                        <input class="inputText pdl1 w60p" type="text">
+                        <input class="inputNum w20p" type="number">
+                        <select class="select w20p">
                             <option value="г.">г.</option>
                             <option value="ст.л.">ст.л.</option>
                             <option value="ч.л.">ч.л.</option>
@@ -67,9 +67,9 @@
                         </select>
                     </div>
                     <div class="itemProduct mrt2 w100p">
-                        <input class="inputText" type="text">
-                        <input class="inputNum" type="number">
-                        <select class="select">
+                        <input class="inputText pdl1 w60p" type="text">
+                        <input class="inputNum w20p" type="number">
+                        <select class="select w20p">
                             <option value="г.">г.</option>
                             <option value="ст.л.">ст.л.</option>
                             <option value="ч.л.">ч.л.</option>
@@ -298,14 +298,14 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
                 box-sizing: border-box;
 
                 .inputText{
-                    width: 60%;
+                    //width: 60%;
                     height: 24px;
                     box-sizing: border-box;
                     border-radius: 4px;
                     border: 1px solid #9b9b9b;
                 }
                 .inputNum{
-                    width: 20%;
+                    //width: 20%;
                     text-align: center;
                     height: 24px;
                     box-sizing: border-box;
@@ -313,7 +313,7 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
                     border: 1px solid #9b9b9b;
                 }
                 .select{
-                    width: 20%;
+                    //width: 20%;
                     text-align: center;
                     height: 24px;
                     box-sizing: border-box;

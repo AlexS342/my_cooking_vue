@@ -1,9 +1,7 @@
 <template>
     <div class="recipes">
-        <h3 class="recipes__header">Вяленая курица в такжикском маринаде</h3>
-<!--        <div class="recipes__list">-->
-            <Recipe/>
-<!--        </div>-->
+        <h3 class="recipes__header">Жареная куропатка</h3>
+        <Recipe/>
     </div>
 </template>
 
@@ -11,14 +9,14 @@
 // @ является псевдонимом для /src
 import Recipe from '@/components/Recipe.vue'
 export default {
-    name: 'RecipesView',
+    name: 'RecipeView',
     components: {
         Recipe
     },
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .recipes{
     display: flex;
     flex-direction: column;
