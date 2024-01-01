@@ -1,16 +1,16 @@
 <template>
     <div class="recipes">
         <h3 class="recipes__header">Мои рецепты</h3>
-        <div class="recipes__list">
+<!--        <div class="recipes__list">-->
             <BrieflyRecipe/>
-            <BrieflyRecipe/>
-            <BrieflyRecipe/>
-            <BrieflyRecipe/>
-            <BrieflyRecipe/>
-            <BrieflyRecipe/>
-            <BrieflyRecipe/>
-            <BrieflyRecipe/>
-        </div>
+<!--            <BrieflyRecipe/>-->
+<!--            <BrieflyRecipe/>-->
+<!--            <BrieflyRecipe/>-->
+<!--            <BrieflyRecipe/>-->
+<!--            <BrieflyRecipe/>-->
+<!--            <BrieflyRecipe/>-->
+<!--            <BrieflyRecipe/>-->
+<!--        </div>-->
     </div>
 </template>
 
@@ -36,12 +36,6 @@ export default {
         text-transform: uppercase;
         padding: 12px;
         text-align: center;
-    }
-    .recipes__list{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        box-sizing: border-box;
     }
 
 </style>

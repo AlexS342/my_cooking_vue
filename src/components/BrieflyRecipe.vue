@@ -1,21 +1,90 @@
 <template>
-    <div class="brieflyRecipe">
-        <div class="brieflyRecipe__picture">
-        </div>
-        <div class="brieflyRecipe__details">
-            <p class="brieflyRecipe__detailsHeader">Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу</p>
-            <div class="brieflyRecipe__productList">
-                <img class="brieflyRecipe__productImg" src="../assets/icon/list.png" alt="list">
-                <p class="brieflyRecipe__productText">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум</p>
+    <div class="brieflyRecipe w100p">
+        <div class="list w100p">
+            <div class="container pd3 w100p">
+                <div class="imgWRP">
+                    <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
+                </div>
+                <div class="description pdl2">
+                    <p class="header mrb1">Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу</p>
+                    <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
+                    <div class="icons">
+                        <div class="itemIcon pd1 mrl1">
+                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
+                            <p class="iconText pdl1">40мин</p>
+                        </div>
+                        <div class="itemIcon pd1 mrl1">
+                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
+                            <p class="iconText pdl1">40мин</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="brieflyRecipe__detailsList">
-                <img class="brieflyRecipe__detailsImg" src="../assets/icon/time.png" alt="list">
-                <p class="brieflyRecipe__detailsText">40 мин</p>
+        </div>
+        <div class="list w100p">
+            <div class="container pd3 w100p">
+                <div class="imgWRP">
+                    <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
+                </div>
+                <div class="description pdl2">
+                    <p class="header mrb1">Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу</p>
+                    <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
+                    <div class="icons">
+                        <div class="itemIcon pd1 mrl1">
+                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
+                            <p class="iconText pdl1">40мин</p>
+                        </div>
+                        <div class="itemIcon pd1 mrl1">
+                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
+                            <p class="iconText pdl1">40мин</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
+        <div class="list w100p">
+            <div class="container pd3 w100p">
+                <div class="imgWRP">
+                    <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
+                </div>
+                <div class="description pdl2">
+                    <p class="header mrb1">Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу</p>
+                    <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
+                    <div class="icons">
+                        <div class="itemIcon pd1 mrl1">
+                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
+                            <p class="iconText pdl1">40мин</p>
+                        </div>
+                        <div class="itemIcon pd1 mrl1">
+                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
+                            <p class="iconText pdl1">40мин</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="list w100p">
+            <div class="container pd3 w100p">
+                <div class="imgWRP">
+                    <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
+                </div>
+                <div class="description pdl2">
+                    <p class="header mrb1">Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу</p>
+                    <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
+                    <div class="icons">
+                        <div class="itemIcon pd1 mrl1">
+                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
+                            <p class="iconText pdl1">40мин</p>
+                        </div>
+                        <div class="itemIcon pd1 mrl1">
+                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
+                            <p class="iconText pdl1">40мин</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 </template>
 
 <script>
@@ -25,92 +94,100 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.brieflyRecipe {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    box-sizing: border-box;
-    box-shadow: 0 0 5px 0 #bbbbbb;
-    min-height: 40px;
-    background-color: #FFFFFF;
-}
 
-.brieflyRecipe__picture {
-    min-width: 100px;
-    max-width: 100px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-    background-image: url("../assets/img/grecheskiy-salat.jpg");
-    background-position: center;
-    background-size: cover;
-}
+.w10p{width: 10%}  .w20p{width: 20%}  .w30p{width: 30%}  .w40p{width: 40%}  .w50p{width: 50%}  .w60p{width: 60%}  .w70p{width: 70%}  .w80p{width: 80%}  .w90p{width: 90%}  .w100p{width: 100%}
 
-.brieflyRecipe__pictureImg {
-}
+.bc1{background-color: #ebffff;}  .bc2{background-color: #f4fff0;}  .bc3{background-color: #fff5f5}  .bc4{background-color: #f5f4ff}
 
-.brieflyRecipe__details {
-    width: 100%;
+$length-mr1: 3px;  $length-mr2: 6px;  $length-mr3: 12px;
+
+.mr1{margin: $length-mr1}  .mrt1{margin-top: $length-mr1}  .mrr1{margin-right: $length-mr1}  .mrb1{margin-bottom: $length-mr1}  .mrl1{margin-left: $length-mr1}  .mrx1{margin: 0 $length-mr1}  .mry1{margin: $length-mr1 0}
+.mr2{margin: $length-mr2}  .mrt2{margin-top: $length-mr2}  .mrr2{margin-right: $length-mr2}  .mrb2{margin-bottom: $length-mr2}  .mrl2{margin-left: $length-mr2}  .mrx2{margin: 0 $length-mr2}  .mry2{margin: $length-mr2 0}
+.mr3{margin: $length-mr3}  .mrt3{margin-top: $length-mr3}  .mrr3{margin-right: $length-mr3}  .mrb3{margin-bottom: $length-mr3}  .mrl3{margin-left: $length-mr3}  .mrx3{margin: 0 $length-mr3}  .mry3{margin: $length-mr3 0}
+
+$length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
+
+.pd1{padding: $length-pd1}  .pdt1{padding-top: $length-pd1}  .pdr1{padding-right: $length-pd1}  .pdb1{padding-bottom: $length-pd1}  .pdl1{padding-left: $length-pd1}  .pdx1{padding: 0 $length-pd1}  .pdy1{padding: $length-pd1 0}
+.pd2{padding: $length-pd2}  .pdt2{padding-top: $length-pd2}  .pdr2{padding-right: $length-pd2}  .pdb2{padding-bottom: $length-pd2}  .pdl2{padding-left: $length-pd2}  .pdx2{padding: 0 $length-pd2}  .pdy2{padding: $length-pd2 0}
+.pd3{padding: $length-pd3}  .pdt3{padding-top: $length-pd3}  .pdr3{padding-right: $length-pd3}  .pdb3{padding-bottom: $length-pd3}  .pdl3{padding-left: $length-pd3}  .pdx3{padding: 0 $length-pd3}  .pdy3{padding: $length-pd3 0}
+
+.brieflyRecipe{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
-    margin: 6px;
+    align-items: center;
+    color: #4d4d4d;
+    border-bottom: 1px solid #9b9b9b;
+
+    .list{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-top: 1px solid #9b9b9b;
+
+        .container{
+            display: flex;
+            max-width: 800px;
+            box-sizing: border-box;
+
+            .imgWRP{
+                min-width: 35%;
+                max-width: 35%;
+
+                .img{
+                    width: 100%;
+                    margin-bottom: -4px;
+                }
+            }
+
+            .description{
+                min-width: 65%;
+                max-width: 65%;
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                justify-content: space-between;
+
+                .header{
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    font-weight: 700;
+                }
+
+                .productList{
+                    font-size: 14px;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+
+                .icons{
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: flex-end;
+
+                    .itemIcon{
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        background-color: #d7d7ff;
+                        border-radius: 4px;
+
+                        .iconImg{
+                            width: 12px;
+                            height: 12px;
+                        }
+                        .iconText{
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-.brieflyRecipe__detailsHeader {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-weight: 700;
-}
-.brieflyRecipe__productList{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center
-    //min-height: 2em;
-    //max-height: 3em;
-    //overflow: hidden;
-}
-.brieflyRecipe__productImg{
-    min-width: 18px;
-    min-height: 18px;
-    max-width: 18px;
-    max-height: 18px;
-    margin-right: 3px;
-}
-.brieflyRecipe__productText{
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-size: 14px;
-    color: #8d8d8d;
-}
-.brieflyRecipe__detailsList{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
-    align-items: center;
-    color: #8d8d8d;
-    font-size: 12px;
-}
-.brieflyRecipe__detailsImg{
-    min-width: 12px;
-    min-height: 12px;
-    max-width: 12px;
-    max-height: 12px;
-    margin-right: 3px;
-}
-.brieflyRecipe__detailsText{
-    margin: 2px 4px;
-}
-.brieflyRecipe__detailsItem__green{
-    background-color: #b3ffdd;
-}
 </style>
