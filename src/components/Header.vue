@@ -6,13 +6,11 @@
         </div>
         <div class="header__nav">
             <router-link class="header__navLink" to="/recipes">Рецепты</router-link>
-            <router-link class="header__navLink" to="/recipe">Рецепт</router-link>
             <router-link class="header__navLink" to="/add_recipes">Добавить</router-link>
-            <router-link class="header__navLink" to="/cooking">Готовить</router-link>
         </div>
-        <div class="header__ava">
+        <router-link class="header__ava" to="/login">
             <img class="header__avaImg" alt="logo" src="../assets/icon/man_cook.png">
-        </div>
+        </router-link>
     </div>
 </template>
 

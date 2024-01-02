@@ -1,9 +1,9 @@
-<template>
+<template >
     <div v-if="login" class="login__WRP">
-        <Login/>
+        <Login v-on:getRegistration="getRegistration"/>
     </div>
     <div v-else class="login__WRP">
-        <Registration/>
+        <Registration v-on:getLogin="getLogin"/>
     </div>
 </template>
 
@@ -22,6 +22,14 @@ export default {
             login: true,
         }
     },
+    methods: {
+        getRegistration: function () {
+            this.login = false
+        },
+        getLogin: function () {
+            this.login = true
+        }
+    }
 }
 </script>
 

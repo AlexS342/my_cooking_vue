@@ -114,7 +114,10 @@
             <div class="list w100p">
                 <div class="container pd3 w100p">
                     <div class="action w100p">
-                        <input class="button" type="button" value="отмена">
+                        <router-link to="/recipes">
+                            <input class="button" type="button" value="отмена">
+                        </router-link>
+
                         <input class="button" type="button" value="сохранить">
                     </div>
                 </div>

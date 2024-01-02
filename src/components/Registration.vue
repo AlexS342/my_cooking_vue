@@ -2,7 +2,7 @@
     <div class="login">
         <div class="login__windows">
             <div class="login__windowsItem">
-                <input class="login__windowsButton" type="button" value="Авторизация">
+                <input class="login__windowsButton" v-on:click="$emit('getLogin')" type="button" value="Авторизация">
             </div>
             <div class="login__windowsItem">
                 <input class="login__windowsButton__active" type="button" value="Регистрация">
@@ -73,7 +73,8 @@ export default {
     cursor: pointer;
 }
 .login__windowsButton:hover{
-    background-color: #d2e9d3;
+    cursor: pointer;
+    background-color: #e8ecfb;
 }
 .login__windowsButton:active{
     background-color: #beffc1;

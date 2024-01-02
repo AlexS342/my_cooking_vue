@@ -6,13 +6,11 @@
                     <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
                 </div>
                 <div class="description pdl2">
-                    <p class="header mrb1">Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу</p>
+                    <router-link class="header mrb1" to="/recipe/1">
+                        Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу
+                    </router-link>
                     <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
                     <div class="icons">
-                        <div class="itemIcon pd1 mrl1">
-                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                            <p class="iconText pdl1">40мин</p>
-                        </div>
                         <div class="itemIcon pd1 mrl1">
                             <img class="iconImg" src="../assets/icon/time.png" alt="list">
                             <p class="iconText pdl1">40мин</p>
@@ -27,13 +25,11 @@
                     <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
                 </div>
                 <div class="description pdl2">
-                    <p class="header mrb1">Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу</p>
+                    <router-link class="header mrb1" to="/recipe/2">
+                        Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу
+                    </router-link>
                     <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
                     <div class="icons">
-                        <div class="itemIcon pd1 mrl1">
-                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                            <p class="iconText pdl1">40мин</p>
-                        </div>
                         <div class="itemIcon pd1 mrl1">
                             <img class="iconImg" src="../assets/icon/time.png" alt="list">
                             <p class="iconText pdl1">40мин</p>
@@ -48,13 +44,11 @@
                     <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
                 </div>
                 <div class="description pdl2">
-                    <p class="header mrb1">Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу</p>
+                    <router-link class="header mrb1" to="/recipe/3">
+                        Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу
+                    </router-link>
                     <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
                     <div class="icons">
-                        <div class="itemIcon pd1 mrl1">
-                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                            <p class="iconText pdl1">40мин</p>
-                        </div>
                         <div class="itemIcon pd1 mrl1">
                             <img class="iconImg" src="../assets/icon/time.png" alt="list">
                             <p class="iconText pdl1">40мин</p>
@@ -69,13 +63,11 @@
                     <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
                 </div>
                 <div class="description pdl2">
-                    <p class="header mrb1">Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу</p>
+                    <router-link class="header mrb1" to="/recipe/4">
+                        Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу
+                    </router-link>
                     <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
                     <div class="icons">
-                        <div class="itemIcon pd1 mrl1">
-                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                            <p class="iconText pdl1">40мин</p>
-                        </div>
                         <div class="itemIcon pd1 mrl1">
                             <img class="iconImg" src="../assets/icon/time.png" alt="list">
                             <p class="iconText pdl1">40мин</p>
@@ -94,6 +86,26 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+a{
+    text-decoration: none;
+    color: #4d4d4d;
+}
+a:link {
+    //непосещенная ссылка
+}
+a:visited {
+    //посещенная ссылка
+    color: #a1a1a1;
+}
+a:active {
+    //в момент нажатия
+    color: #5c60a3;
+}
+a:hover {
+    //при наведении
+    color: #272727;
+}
 
 .w10p{width: 10%}  .w20p{width: 20%}  .w30p{width: 30%}  .w40p{width: 40%}  .w50p{width: 50%}  .w60p{width: 60%}  .w70p{width: 70%}  .w80p{width: 80%}  .w90p{width: 90%}  .w100p{width: 100%}
 
@@ -148,6 +160,7 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
                 justify-content: space-between;
 
                 .header{
+                    text-decoration: none;
                     display: -webkit-box;
                     -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;

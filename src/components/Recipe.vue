@@ -66,9 +66,13 @@
         <div class="list w100p">
             <div class="container pd3 w100p">
                 <div class="action w100p">
-                    <input class="button" type="button" value="назад">
-                    <input class="button" type="button" value="Редактировать">
-                    <input class="button" type="button" value="готовить">
+                    <router-link to="/recipes">
+                        <input class="button" type="button" value="назад">
+                    </router-link>
+<!--                    <input class="button" type="button" value="Редактировать">-->
+                    <router-link to="/cooking/1">
+                        <input class="button" type="button" value="готовить">
+                    </router-link>
                 </div>
             </div>
         </div>

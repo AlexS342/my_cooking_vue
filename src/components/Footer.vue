@@ -2,7 +2,6 @@
     <div class="footer">
             <router-link class="footer__link" to="/recipes">Рецепты</router-link>
             <router-link class="footer__link" to="/add_recipes">Добавить</router-link>
-            <router-link class="footer__link" to="/cooking">Готовить</router-link>
     </div>
 </template>
 

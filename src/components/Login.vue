@@ -5,7 +5,7 @@
                 <input class="login__windowsButton__active" type="button" value="Авторизация">
             </div>
             <div class="login__windowsItem">
-                <input class="login__windowsButton" type="button" value="Регистрация">
+                <input class="login__windowsButton" v-on:click="$emit('getRegistration')" type="button" value="Регистрация">
             </div>
         </div>
         <div class="login__form">
@@ -58,6 +58,10 @@ export default {
     box-sizing: border-box;
     border-bottom: 1px solid #d3d3d3;
     background-color: #e9e9e9;
+}
+.login__windowsButton:hover{
+    cursor: pointer;
+    background-color: #e8ecfb;
 }
 .login__windowsButton__active{
     width: 100%;

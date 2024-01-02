@@ -24,7 +24,7 @@ import LoginView from '@/views/LoginView.vue'
 import {defineComponent} from "vue";
 
 export default defineComponent({
-    components: {LoginView, Footer: Footer, Header},
+    components: {LoginView, Footer, Header},
     data() {
         return {
             isAuth: false,
