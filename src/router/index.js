@@ -19,6 +19,7 @@ const routes = [
     path: '/recipe/:id',
     name: 'recipe',
     component: RecipeView
+    //this.$route.params.id
   },
   {
     path: '/cooking/:id',

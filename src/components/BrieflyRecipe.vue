@@ -1,87 +1,222 @@
 <template>
     <div class="brieflyRecipe w100p">
-        <div class="list w100p">
+
+        <div class="list w100p" v-for="recipe in recipes">
             <div class="container pd3 w100p">
                 <div class="imgWRP">
                     <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
                 </div>
                 <div class="description pdl2">
-                    <router-link class="header mrb1" to="/recipe/1">
-                        Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу
+                    <router-link class="header mrb1" :to="'/recipe/' + recipe.id">
+                        {{recipe.id + " " + recipe.header }}
                     </router-link>
-                    <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
+                    <p class="productList mrb1">
+                        <span v-for="item in recipe.products">{{item.product + ", "}}</span>
+                    </p>
                     <div class="icons">
                         <div class="itemIcon pd1 mrl1">
                             <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                            <p class="iconText pdl1">40мин</p>
+                            <p class="iconText pdl1">{{ recipe.fullTime }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="list w100p">
-            <div class="container pd3 w100p">
-                <div class="imgWRP">
-                    <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
-                </div>
-                <div class="description pdl2">
-                    <router-link class="header mrb1" to="/recipe/2">
-                        Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу
-                    </router-link>
-                    <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
-                    <div class="icons">
-                        <div class="itemIcon pd1 mrl1">
-                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                            <p class="iconText pdl1">40мин</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="list w100p">
-            <div class="container pd3 w100p">
-                <div class="imgWRP">
-                    <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
-                </div>
-                <div class="description pdl2">
-                    <router-link class="header mrb1" to="/recipe/3">
-                        Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу
-                    </router-link>
-                    <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
-                    <div class="icons">
-                        <div class="itemIcon pd1 mrl1">
-                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                            <p class="iconText pdl1">40мин</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="list w100p">
-            <div class="container pd3 w100p">
-                <div class="imgWRP">
-                    <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
-                </div>
-                <div class="description pdl2">
-                    <router-link class="header mrb1" to="/recipe/4">
-                        Наивкуснейший салат из свежих овощей с домашнего огорода на закуску к праздничому столу
-                    </router-link>
-                    <p class="productList mrb1">свенина, конина, рыба, огурец, редиска, компот, ботинок, обезьяна, дум, конина, рыба, огурец, редиска,</p>
-                    <div class="icons">
-                        <div class="itemIcon pd1 mrl1">
-                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                            <p class="iconText pdl1">40мин</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </template>
 
 <script>
 export default {
     name: 'BrieflyRecipe',
+    data() {
+        return {
+            // showImg: true,
+            // showProduct: true,
+            // showProcess: true,
+            recipes:{
+                1:{
+                    id:1,
+                    header:'Десерт "Страчателла" с малиновым соусом',
+                    products: {
+                        0:{product:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
+                        1:{product:"Маскарпоне", quantity:250, items:"г."},
+                        2:{product:"Молоко сгущенное", quantity:100, items:"мл."},
+                        3:{product:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
+                        4:{product:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
+                        5:{product:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
+                        6:{product:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
+                        7:{product:"Шоколад темный", quantity:50, items:"г."},
+                        8:{product:"Мята (листочки)", quantity:12, items:"шт"},
+                    },
+                    active: {
+                        0:{product:"Взбить творог блендором", quantity:30, items:"сек"},
+                        1:{product:"Перемешать творог с маскарпоне блендором до однородной массы", quantity:30, items:"сек"},
+                        2:{product:"Добавить сахар и ванильный сахар и еще раз перемешать блендором", quantity:30, items:"сек"},
+                        3:{product:"Влить ликер и еще раз перемешать блендором", quantity:1, items:"мин"},
+                        4:{product:"В полученную массу добавить сгущенное молоко и перемешать ложкой (не сильно)", quantity:1, items:"мин"},
+                        5:{product:"Полученную массу разложить по стаканам",},
+                        6:{product:"Натереть на мелкой терке",},
+                        7:{product:"Посыпать ровномерно все порции",},
+                        8:{product:"Украсить каждую порцию двумялисточками мяты и одной ягодой малины"},
+                    },
+                    fullTime:"10 мин",
+                    portions:6,
+                },
+                2:{
+                    id:2,
+                    header:'Десерт "Страчателла" с малиновым соусом',
+                    products: {
+                        0:{product:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
+                        1:{product:"Маскарпоне", quantity:250, items:"г."},
+                        2:{product:"Молоко сгущенное", quantity:100, items:"мл."},
+                        3:{product:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
+                        4:{product:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
+                        5:{product:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
+                        6:{product:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
+                        7:{product:"Шоколад темный", quantity:50, items:"г."},
+                        8:{product:"Мята (листочки)", quantity:12, items:"шт"},
+                    },
+                    active: {
+                        0:{product:"Взбить творог блендором", quantity:30, items:"сек"},
+                        1:{product:"Перемешать творог с маскарпоне блендором до однородной массы", quantity:30, items:"сек"},
+                        2:{product:"Добавить сахар и ванильный сахар и еще раз перемешать блендором", quantity:30, items:"сек"},
+                        3:{product:"Влить ликер и еще раз перемешать блендором", quantity:1, items:"мин"},
+                        4:{product:"В полученную массу добавить сгущенное молоко и перемешать ложкой (не сильно)", quantity:1, items:"мин"},
+                        5:{product:"Полученную массу разложить по стаканам",},
+                        6:{product:"Натереть на мелкой терке",},
+                        7:{product:"Посыпать ровномерно все порции",},
+                        8:{product:"Украсить каждую порцию двумяли сточками мяты и одной ягодой малины"},
+                    },
+                    fullTime:"10 мин",
+                    portions:6,
+                },
+                3:{
+                    id:3,
+                    header:'Десерт "Страчателла" с малиновым соусом',
+                    products: {
+                        0:{product:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
+                        1:{product:"Маскарпоне", quantity:250, items:"г."},
+                        2:{product:"Молоко сгущенное", quantity:100, items:"мл."},
+                        3:{product:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
+                        4:{product:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
+                        5:{product:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
+                        6:{product:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
+                        7:{product:"Шоколад темный", quantity:50, items:"г."},
+                        8:{product:"Мята (листочки)", quantity:12, items:"шт"},
+                    },
+                    active: {
+                        0:{product:"Взбить творог блендором", quantity:30, items:"сек"},
+                        1:{product:"Перемешать творог с маскарпоне блендором до однородной массы", quantity:30, items:"сек"},
+                        2:{product:"Добавить сахар и ванильный сахар и еще раз перемешать блендором", quantity:30, items:"сек"},
+                        3:{product:"Влить ликер и еще раз перемешать блендором", quantity:1, items:"мин"},
+                        4:{product:"В полученную массу добавить сгущенное молоко и перемешать ложкой (не сильно)", quantity:1, items:"мин"},
+                        5:{product:"Полученную массу разложить по стаканам",},
+                        6:{product:"Натереть на мелкой терке",},
+                        7:{product:"Посыпать ровномерно все порции",},
+                        8:{product:"Украсить каждую порцию двумялисточками мяты и одной ягодой малины"},
+                    },
+                    fullTime:"10 мин",
+                    portions:6,
+                },
+                4:{
+                    id:4,
+                    header:'Десерт "Страчателла" с малиновым соусом',
+                    products: {
+                        0:{product:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
+                        1:{product:"Маскарпоне", quantity:250, items:"г."},
+                        2:{product:"Молоко сгущенное", quantity:100, items:"мл."},
+                        3:{product:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
+                        4:{product:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
+                        5:{product:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
+                        6:{product:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
+                        7:{product:"Шоколад темный", quantity:50, items:"г."},
+                        8:{product:"Мята (листочки)", quantity:12, items:"шт"},
+                    },
+                    active: {
+                        0:{product:"Взбить творог блендором", quantity:30, items:"сек"},
+                        1:{product:"Перемешать творог с маскарпоне блендором до однородной массы", quantity:30, items:"сек"},
+                        2:{product:"Добавить сахар и ванильный сахар и еще раз перемешать блендором", quantity:30, items:"сек"},
+                        3:{product:"Влить ликер и еще раз перемешать блендором", quantity:1, items:"мин"},
+                        4:{product:"В полученную массу добавить сгущенное молоко и перемешать ложкой (не сильно)", quantity:1, items:"мин"},
+                        5:{product:"Полученную массу разложить по стаканам",},
+                        6:{product:"Натереть на мелкой терке",},
+                        7:{product:"Посыпать ровномерно все порции",},
+                        8:{product:"Украсить каждую порцию двумялисточками мяты и одной ягодой малины"},
+                    },
+                    fullTime:"10 мин",
+                    portions:6,
+                },
+                5:{
+                    id:5,
+                    header:'Десерт "Страчателла" с малиновым соусом',
+                    products: {
+                        0:{product:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
+                        1:{product:"Маскарпоне", quantity:250, items:"г."},
+                        2:{product:"Молоко сгущенное", quantity:100, items:"мл."},
+                        3:{product:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
+                        4:{product:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
+                        5:{product:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
+                        6:{product:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
+                        7:{product:"Шоколад темный", quantity:50, items:"г."},
+                        8:{product:"Мята (листочки)", quantity:12, items:"шт"},
+                    },
+                    active: {
+                        0:{product:"Взбить творог блендором", quantity:30, items:"сек"},
+                        1:{product:"Перемешать творог с маскарпоне блендором до однородной массы", quantity:30, items:"сек"},
+                        2:{product:"Добавить сахар и ванильный сахар и еще раз перемешать блендором", quantity:30, items:"сек"},
+                        3:{product:"Влить ликер и еще раз перемешать блендором", quantity:1, items:"мин"},
+                        4:{product:"В полученную массу добавить сгущенное молоко и перемешать ложкой (не сильно)", quantity:1, items:"мин"},
+                        5:{product:"Полученную массу разложить по стаканам",},
+                        6:{product:"Натереть на мелкой терке",},
+                        7:{product:"Посыпать ровномерно все порции",},
+                        8:{product:"Украсить каждую порцию двумялисточками мяты и одной ягодой малины"},
+                    },
+                    fullTime:"10 мин",
+                    portions:6,
+                },
+                6:{
+                    id:6,
+                    header:'Десерт "Страчателла" с малиновым соусом',
+                    products: {
+                        0:{product:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
+                        1:{product:"Маскарпоне", quantity:250, items:"г."},
+                        2:{product:"Молоко сгущенное", quantity:100, items:"мл."},
+                        3:{product:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
+                        4:{product:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
+                        5:{product:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
+                        6:{product:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
+                        7:{product:"Шоколад темный", quantity:50, items:"г."},
+                        8:{product:"Мята (листочки)", quantity:12, items:"шт"},
+                    },
+                    active: {
+                        0:{product:"Взбить творог блендором", quantity:30, items:"сек"},
+                        1:{product:"Перемешать творог с маскарпоне блендором до однородной массы", quantity:30, items:"сек"},
+                        2:{product:"Добавить сахар и ванильный сахар и еще раз перемешать блендором", quantity:30, items:"сек"},
+                        3:{product:"Влить ликер и еще раз перемешать блендором", quantity:1, items:"мин"},
+                        4:{product:"В полученную массу добавить сгущенное молоко и перемешать ложкой (не сильно)", quantity:1, items:"мин"},
+                        5:{product:"Полученную массу разложить по стаканам",},
+                        6:{product:"Натереть на мелкой терке",},
+                        7:{product:"Посыпать ровномерно все порции",},
+                        8:{product:"Украсить каждую порцию двумялисточками мяты и одной ягодой малины"},
+                    },
+                    fullTime:"10 мин",
+                    portions:6,
+                },
+            }
+        }
+    },
+    methods: {
+        // changeShowImg: function () {
+        //     this.showImg = !this.showImg
+        // },
+        // changeShowProduct: function () {
+        //     this.showProduct = !this.showProduct
+        // },
+        // changeShowProcess: function () {
+        //     this.showProcess = !this.showProcess
+        // },
+    }
 }
 </script>
 
