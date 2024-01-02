@@ -1,143 +1,110 @@
 <template>
-    <div class="recipe">
-        <img class="mainImg" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
+    <div class="recipe w100p">
+<!--        КАРТИНКА                -->
+        <div class="list w100p">
+            <div class="container pd3 w100p">
+                <div class="title mrb2 w100p">
+                    <h3 class="titleText">Фото блюда</h3>
+                    <p class="titleShow">свернуть</p>
+                </div>
+                <div class="imgWRP">
+                    <img class="img  w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
+                </div>
+            </div>
+        </div>
+
 
 <!--        СПИСОК ПРОДУКТОВ                -->
-        <div class="listWRP">
-            <div class="title">
-                <h3 class="titleText">Продукты</h3>
-                <p class="titleShow">свернуть</p>
+        <div class="list w100p">
+            <div class="container pd3 w100p">
+                <div class="title mrb2 w100p">
+                    <h3 class="titleText">Продукты</h3>
+                    <p class="titleShow">свернуть</p>
+                </div>
+
+                <div class="listProduct w100p">
+                    <div class="itemProduct pdy2 w100p">
+                        <div class="check">
+                            <input class="checkInput mrr2" type="checkbox">
+                            <label class="checkLabel">Шея мраморной говядины запеценная с яблоками</label>
+                        </div>
+                        <p class="weight">450 г.</p>
+                    </div>
+                    <div class="itemProduct pdy2 w100p">
+                        <div class="check">
+                            <input class="checkInput mrr2" type="checkbox">
+                            <label class="checkLabel">Яйцо</label>
+                        </div>
+                        <p class="weight">2 шт</p>
+                    </div>
+                    <div class="itemProduct pdy2 w100p">
+                        <div class="check">
+                            <input class="checkInput mrr2" type="checkbox">
+                            <label class="checkLabel">Соль</label>
+                        </div>
+                        <p class="weight">1 ч.л.</p>
+                    </div>
+                    <div class="itemProduct pdy2 w100p">
+                        <div class="check">
+                            <input class="checkInput mrr2" type="checkbox">
+                            <label class="checkLabel">Перец</label>
+                        </div>
+                        <p class="weight">по вкусу</p>
+                    </div>
+                </div>
             </div>
-            <ul class="list">
-                <li class="itemProduct">
-                    <label class="check">
-                        <input class="input" type="checkbox">
-                        <span class="text">Шея мраморной говядины</span>
-                    </label>
-                    <span class="weight">450 г.</span>
-                </li>
-                <li class="itemProduct">
-                    <label class="check">
-                        <input class="input" type="checkbox">
-                        <span class="text">Морковь</span>
-                    </label>
-                    <span class="weight">100 г.</span>
-                </li>
-                <li class="itemProduct">
-                    <label class="check">
-                        <input class="input" type="checkbox">
-                        <span class="text">Лук репчатый</span>
-                    </label>
-                    <span class="weight">150 г.</span>
-                </li>
-                <li class="itemProduct">
-                    <label class="check">
-                        <input class="input" type="checkbox">
-                        <span class="text">Баклажан</span>
-                    </label>
-                    <span class="weight">200 г.</span>
-                </li>
-                <li class="itemProduct">
-                    <label class="check">
-                        <input class="input" type="checkbox">
-                        <span class="text">Яйцо</span>
-                    </label>
-                    <span class="weight">2 шт</span>
-                </li>
-                <li class="itemProduct">
-                    <label class="check">
-                        <input class="input" type="checkbox">
-                        <span class="text">Майонез</span>
-                    </label>
-                    <span class="weight">150 г.</span>
-                </li>
-                <li class="itemProduct">
-                    <label class="check">
-                        <input class="input" type="checkbox">
-                        <span class="text">Соль</span>
-                    </label>
-                    <span class="weight">1 ст.л.</span>
-                </li>
-                <li class="itemProduct">
-                    <label class="check">
-                        <input class="input" type="checkbox">
-                        <span class="text">Перец черный</span>
-                    </label>
-                    <span class="weight">по вкусу</span>
-                </li>
-            </ul>
         </div>
 
 <!--        ПРОЦЕСС ПРИГОТОВЛЕНИЯ           -->
-        <div class="listWRP">
-            <div class="title">
-                <h3 class="titleText">Процесс</h3>
-                <p class="titleShow">свернуть</p>
+        <div class="list w100p">
+            <div class="container pd3 w100p">
+                <div class="title mrb2 w100p">
+                    <h3 class="titleText">Процесс</h3>
+                    <p class="titleShow">свернуть</p>
+                </div>
+
+                <div class="listProcess w100p">
+                    <div class="itemProcess pdy2 w100p">
+                        <div class="check">
+                            <input class="checkInput mrr2" type="checkbox">
+                            <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
+                        </div>
+                        <div class="time pdy1">
+                            <p class="timeWeight">365 c.</p>
+                        </div>
+                    </div>
+                    <div class="itemProcess pdy2 w100p">
+                        <div class="check">
+                            <input class="checkInput mrr2" type="checkbox">
+                            <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
+                        </div>
+                        <div class="time pdy1">
+                            <p class="timeWeight">3 ч.</p>
+                        </div>
+                    </div>
+                    <div class="itemProcess pdy2 w100p">
+                        <div class="check">
+                            <input class="checkInput mrr2" type="checkbox">
+                            <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
+                        </div>
+                        <div class="time pdy1">
+                            <p class="timeWeight">37 м.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <ul class="list">
-                <li class="itemProcess">
-                    <img class="icon" src="../assets/icon/done.png" alt="play">
-<!--                    <input class="check" type="checkbox">-->
-                    <p class="action">Нарезать свинину мелкими неравномерными плоскими кусочками по 3 - 5 см длиной, 1 - 2 см шириной и 0,5 см толщиной</p>
-                </li>
-                <li class="itemProcess">
-                    <img class="icon" src="../assets/icon/done.png" alt="play">
-<!--                    <input class="check" type="checkbox">-->
-                    <span class="action">Сварить нарезаную всинину на медленом огне</span>
-                </li>
-                <li class="itemProcess">
-                    <img class="icon" src="../assets/icon/done.png" alt="play">
-<!--                    <input class="check" type="checkbox">-->
-                    <span class="action">Натереть морковь на крупной терке</span>
-                </li>
-                <li class="itemProcess">
-                    <img class="icon" src="../assets/icon/done.png" alt="play">
-<!--                    <input class="check" type="checkbox">-->
-                    <span class="action">Нарезать лук полукольцами</span>
-                </li>
-                <li class="itemProcess">
-                    <img class="icon" src="../assets/icon/done.png" alt="play">
-<!--                    <input class="check" type="checkbox">-->
-                    <span class="action">Обжарить лук и морковь на сливочном масле на медленом огне постоянно помешивая</span>
-                </li>
-                <li class="itemProcess">
-                    <img class="icon" src="../assets/icon/done.png" alt="play">
-<!--                    <input class="check" type="checkbox">-->
-                    <span class="action">Нарезать баклажан тонкими колечками</span>
-                </li>
-                <li class="itemProcess">
-                    <img class="icon" src="../assets/icon/done.png" alt="play">
-<!--                    <input class="check" type="checkbox">-->
-                    <span class="action">Обжарить баклажан  на сливочном масле на среднем огне постоянно помешивая</span>
-                </li>
-                <li class="itemProcess">
-                    <img class="icon" src="../assets/icon/done.png" alt="play">
-<!--                    <input class="check" type="checkbox">-->
-                    <span class="action">Сварить яйцо в крутую</span>
-                </li>
-                <li class="itemProcess">
-                    <img class="icon" src="../assets/icon/done.png" alt="play">
-<!--                    <input class="check" type="checkbox">-->
-                    <span class="action">Нарезать яйцо мелкими кубиками</span>
-                </li>
-                <li class="itemProcess">
-                    <img class="icon" src="../assets/icon/done.png" alt="play">
-<!--                    <input class="check" type="checkbox">-->
-                    <span class="action">Перемешать все нахер большой ложно и жрать сколько влезет</span>
-                </li>
-                <li class="itemProcess">
-                    <img class="icon" src="../assets/icon/done.png" alt="play">
-<!--                    <input class="check" type="checkbox">-->
-                    <span class="action">Посолить и поперчить все что съели и залить кипятком</span>
-                </li>
-            </ul>
         </div>
 
 <!--        КНОПКИ                          -->
-        <div class="action">
-            <input class="button" type="button" value="удалить">
-            <input class="button" type="button" value="редактировать">
+        <div class="list w100p">
+            <div class="container pd3 w100p">
+                <div class="action w100p">
+                    <input class="button" type="button" value="отмена">
+                    <input class="button" type="button" value="готово">
+                </div>
+            </div>
         </div>
+
     </div>
 </template>
 
@@ -152,142 +119,333 @@ export default {
 
 <!-- Добавьте атрибут "scoped", чтобы ограничить CSS только этим компонентом -->
 <style scoped lang="scss">
+
 input{
     margin: 0;
     padding: 0;
 }
 
+input[type="button"]{
+    margin: 0 1px 1px 0;
+    color: #333335;
+    background-color: #e3e3e3;
+    border-radius: 5px;
+    border: 1px solid #a1a1a1;
+    box-shadow: 1px 1px 0 0 #a5a5a5, inset 1px -1px 4px 0 #979797;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: #d2e9d3;
+}
+
+.button:active{
+    margin: 1px 0 0 1px;
+    background-color: #beffc1;
+    box-shadow: -1px -1px 0 0 #a5a5a5, inset 1px 1px 4px 0 #979797;
+}
+
+.w10p{width: 10%}  .w20p{width: 20%}  .w30p{width: 30%}  .w40p{width: 40%}  .w50p{width: 50%}  .w60p{width: 60%}  .w70p{width: 70%}  .w80p{width: 80%}  .w90p{width: 90%}  .w100p{width: 100%}
+
+$length-mr1: 3px;  $length-mr2: 6px;  $length-mr3: 12px;
+
+.mr1{margin: $length-mr1}  .mrt1{margin-top: $length-mr1}  .mrr1{margin-right: $length-mr1}  .mrb1{margin-bottom: $length-mr1}  .mrl1{margin-left: $length-mr1}  .mrx1{margin: 0 $length-mr1}  .mry1{margin: $length-mr1 0}
+.mr2{margin: $length-mr2}  .mrt2{margin-top: $length-mr2}  .mrr2{margin-right: $length-mr2}  .mrb2{margin-bottom: $length-mr2}  .mrl2{margin-left: $length-mr2}  .mrx2{margin: 0 $length-mr2}  .mry2{margin: $length-mr2 0}
+.mr3{margin: $length-mr3}  .mrt3{margin-top: $length-mr3}  .mrr3{margin-right: $length-mr3}  .mrb3{margin-bottom: $length-mr3}  .mrl3{margin-left: $length-mr3}  .mrx3{margin: 0 $length-mr3}  .mry3{margin: $length-mr3 0}
+
+$length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
+
+.pd1{padding: $length-pd1}  .pdt1{padding-top: $length-pd1}  .pdr1{padding-right: $length-pd1}  .pdb1{padding-bottom: $length-pd1}  .pdl1{padding-left: $length-pd1}  .pdx1{padding: 0 $length-pd1}  .pdy1{padding: $length-pd1 0}
+.pd2{padding: $length-pd2}  .pdt2{padding-top: $length-pd2}  .pdr2{padding-right: $length-pd2}  .pdb2{padding-bottom: $length-pd2}  .pdl2{padding-left: $length-pd2}  .pdx2{padding: 0 $length-pd2}  .pdy2{padding: $length-pd2 0}
+.pd3{padding: $length-pd3}  .pdt3{padding-top: $length-pd3}  .pdr3{padding-right: $length-pd3}  .pdb3{padding-bottom: $length-pd3}  .pdl3{padding-left: $length-pd3}  .pdx3{padding: 0 $length-pd3}  .pdy3{padding: $length-pd3 0}
+
 .recipe{
     display: flex;
     flex-direction: column;
-    max-width: 600px;
+    align-items: center;
     color: #4d4d4d;
-
-.mainImg{
-    max-width: 100%;
-    margin: 12px;
-}
-
-.listWRP{
-    display: flex;
-    flex-direction: column;
-    color: #4d4d4d;
-    margin-bottom: 12px;
-
-    .title{
-        display: flex;
-        justify-content: space-between;
-        margin: 12px;
-        align-items: center;
-
-        .titleText{
-        }
-        .titleShow{
-            font-size: 12px;
-            text-decoration: underline;
-        }
-    }
 
     .list{
         display: flex;
         flex-direction: column;
-        max-width: 600px;
-        box-shadow: 0 -6px 16px -16px #9b9b9b;
+        align-items: center;
+        border-top: 1px solid #9b9b9b;
 
-        .itemProduct{
+        .container{
             display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            padding: 10px 12px;
-            margin-bottom: 2px;
-            box-shadow: 0 4px 16px -12px #9b9b9b;
+            max-width: 800px;
+            box-sizing: border-box;
 
-            .check{
+            .title{
                 display: flex;
-                flex-direction: row;
-                flex-wrap: nowrap;
+                justify-content: space-between;
                 align-items: center;
 
-                .input{
-                    width: 24px;
-                    height: 24px;
-                    margin-right: 8px;
+                .titleText{
                 }
-                .text{
-                    font-size: 16px;
-                    line-height: 16px;
-                    margin-top: 4px;
+                .titleShow{
+                    font-size: 12px;
+                    text-decoration: underline;
                 }
             }
-            .weight{
-                text-align: center;
-                font-size: 16px;
-                line-height: 16px;
-                width: 70px;
-                margin-top: 6px;
+
+            .imgWRP{
+                flex-grow: 1;
+
+                .img{
+                    min-width: 250px;
+                    max-width: 450px;
+                }
             }
-        }
 
-        .itemProcess{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            align-items: center;
-            padding: 8px 12px;
-            margin-bottom: 2px;
-            box-shadow: 0 4px 16px -12px #9b9b9b;
+            .listProduct {
+                display: flex;
+                flex-direction: column;
 
-            .icon{
-                    width: 24px;
-                    height: 24px;
-                    margin-right: 6px;
+                .itemProduct {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    align-items: center;
+                    box-sizing: border-box;
+                    border-bottom: 1px solid #dddddd;
+
+                    .check{
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        align-items: center;
+
+                        .checkInput{
+                            min-width: 24px;
+                            max-width: 24px;
+                            min-height: 24px;
+                            max-height: 24px;
+                        }
+                        .checkLabel{}
+                    }
+                    .weight{
+                        min-width: 65px;
+                        max-width: 65px;
+                        text-align: end;
+                    }
                 }
-            .check{
-                    min-width: 24px;
-                    min-height: 24px;
-                    margin-right: 12px;
+            }
+
+            .itemProduct:nth-last-child(1){
+                border: none;
+            }
+
+            .listProcess{
+                display: flex;
+                flex-direction: column;
+
+                .itemProcess{
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    box-sizing: border-box;
+                    border-bottom: 1px solid #dddddd;
+
+                    .check{
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        align-items: flex-start;
+
+                        .checkInput{
+                            min-width: 24px;
+                            max-width: 24px;
+                            min-height: 24px;
+                            max-height: 24px;
+                        }
+                        .checkLabel{}
+                    }
+
+                    .time{
+                        min-width: 50px;
+                        max-width: 50px;
+                        background-color: #d7d7ff;
+                        border-radius: 4px;
+
+                        .timeWeight{
+                            min-width: 50px;
+                            max-width: 50px;
+                            text-align: center;
+                        }
+                    }
                 }
+            }
+
+            .itemProcess:nth-last-child(1){
+                border: none;
+            }
+
             .action{
-                    word-break: break-word;
-                    text-align: justify;
-                    -moz-hyphens: auto;
-                    -webkit-hyphens: auto;
-                    -ms-hyphens: auto;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .button{
+                    padding: 6px 12px;
+                    font-size: 14px;
+                    font-weight: 700;
+                    text-transform: uppercase;
                 }
+            }
         }
     }
 }
 
-.action{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 12px;
-
-    .button{
-        margin: 0 1px 1px 0;
-        padding: 6px 16px;
-        font-size: 14px;
-        font-weight: 700;
-        color: #333335;
-        text-transform: uppercase;
-        background-color: #e3e3e3;
-        border-radius: 5px;
-        border: 1px solid #a1a1a1;
-        box-shadow: 1px 1px 0 0 #a5a5a5, inset 1px -1px 4px 0 #979797;
-        cursor: pointer;
-    }
-    .button:hover{
-        background-color: #d2e9d3;
-    }
-    .button:active{
-        margin: 1px 0 0 1px;
-        background-color: #beffc1;
-        box-shadow: -1px -1px 0 0 #a5a5a5, inset 1px 1px 4px 0 #979797;
-    }
-}
-}
 
 </style>
+
+
+
+
+
+<!--<style scoped lang="scss">-->
+<!--input{-->
+<!--    margin: 0;-->
+<!--    padding: 0;-->
+<!--}-->
+
+<!--.recipe{-->
+<!--    display: flex;-->
+<!--    flex-direction: column;-->
+<!--    max-width: 600px;-->
+<!--    color: #4d4d4d;-->
+
+<!--.mainImg{-->
+<!--    max-width: 100%;-->
+<!--    margin: 12px;-->
+<!--}-->
+
+<!--.listWRP{-->
+<!--    display: flex;-->
+<!--    flex-direction: column;-->
+<!--    color: #4d4d4d;-->
+<!--    margin-bottom: 12px;-->
+
+<!--    .title{-->
+<!--        display: flex;-->
+<!--        justify-content: space-between;-->
+<!--        margin: 12px;-->
+<!--        align-items: center;-->
+
+<!--        .titleText{-->
+<!--        }-->
+<!--        .titleShow{-->
+<!--            font-size: 12px;-->
+<!--            text-decoration: underline;-->
+<!--        }-->
+<!--    }-->
+
+<!--    .list{-->
+<!--        display: flex;-->
+<!--        flex-direction: column;-->
+<!--        max-width: 600px;-->
+<!--        box-shadow: 0 -6px 16px -16px #9b9b9b;-->
+
+<!--        .itemProduct{-->
+<!--            display: flex;-->
+<!--            flex-direction: row;-->
+<!--            flex-wrap: nowrap;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--            padding: 10px 12px;-->
+<!--            margin-bottom: 2px;-->
+<!--            box-shadow: 0 4px 16px -12px #9b9b9b;-->
+
+<!--            .check{-->
+<!--                display: flex;-->
+<!--                flex-direction: row;-->
+<!--                flex-wrap: nowrap;-->
+<!--                align-items: center;-->
+
+<!--                .input{-->
+<!--                    width: 24px;-->
+<!--                    height: 24px;-->
+<!--                    margin-right: 8px;-->
+<!--                }-->
+<!--                .text{-->
+<!--                    font-size: 16px;-->
+<!--                    line-height: 16px;-->
+<!--                    margin-top: 4px;-->
+<!--                }-->
+<!--            }-->
+<!--            .weight{-->
+<!--                text-align: center;-->
+<!--                font-size: 16px;-->
+<!--                line-height: 16px;-->
+<!--                width: 70px;-->
+<!--                margin-top: 6px;-->
+<!--            }-->
+<!--        }-->
+
+<!--        .itemProcess{-->
+<!--            display: flex;-->
+<!--            flex-direction: row;-->
+<!--            flex-wrap: nowrap;-->
+<!--            align-items: center;-->
+<!--            padding: 8px 12px;-->
+<!--            margin-bottom: 2px;-->
+<!--            box-shadow: 0 4px 16px -12px #9b9b9b;-->
+
+<!--            .icon{-->
+<!--                    width: 24px;-->
+<!--                    height: 24px;-->
+<!--                    margin-right: 6px;-->
+<!--                }-->
+<!--            .check{-->
+<!--                    min-width: 24px;-->
+<!--                    min-height: 24px;-->
+<!--                    margin-right: 12px;-->
+<!--                }-->
+<!--            .action{-->
+<!--                    word-break: break-word;-->
+<!--                    text-align: justify;-->
+<!--                    -moz-hyphens: auto;-->
+<!--                    -webkit-hyphens: auto;-->
+<!--                    -ms-hyphens: auto;-->
+<!--                }-->
+<!--        }-->
+<!--    }-->
+<!--}-->
+
+<!--.action{-->
+<!--    display: flex;-->
+<!--    flex-direction: row;-->
+<!--    justify-content: space-between;-->
+<!--    margin: 12px;-->
+
+<!--    .button{-->
+<!--        margin: 0 1px 1px 0;-->
+<!--        padding: 6px 16px;-->
+<!--        font-size: 14px;-->
+<!--        font-weight: 700;-->
+<!--        color: #333335;-->
+<!--        text-transform: uppercase;-->
+<!--        background-color: #e3e3e3;-->
+<!--        border-radius: 5px;-->
+<!--        border: 1px solid #a1a1a1;-->
+<!--        box-shadow: 1px 1px 0 0 #a5a5a5, inset 1px -1px 4px 0 #979797;-->
+<!--        cursor: pointer;-->
+<!--    }-->
+<!--    .button:hover{-->
+<!--        background-color: #d2e9d3;-->
+<!--    }-->
+<!--    .button:active{-->
+<!--        margin: 1px 0 0 1px;-->
+<!--        background-color: #beffc1;-->
+<!--        box-shadow: -1px -1px 0 0 #a5a5a5, inset 1px 1px 4px 0 #979797;-->
+<!--    }-->
+<!--}-->
+<!--}-->
+
+<!--</style>-->
