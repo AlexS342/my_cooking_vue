@@ -9,10 +9,10 @@
 // @ является псевдонимом для /src
 import BrieflyRecipe from '@/components/BrieflyRecipe.vue'
 export default {
-  name: 'RecipesView',
-  components: {
-      BrieflyRecipe
-  }
+    name: 'RecipesView',
+    components: {
+        BrieflyRecipe
+    },
 }
 </script>
 

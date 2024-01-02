@@ -1,6 +1,5 @@
 <template>
     <form class="form w100p" method="post" enctype="multipart/form-data">
-
         <!--        КАРТИНКА-->
         <div class="list w100p bc2">
             <div class="container pd3 w100p">
@@ -26,26 +25,13 @@
                     <p class="titleShow" v-if="!showProduct" v-on:click="changeShowProduct">показать</p>
                 </div>
                 <template v-if="showProduct">
-                    <div class="itemProduct mrt3 w100p">
-                        <p class="productIndex w10p">1.</p>
-                        <p class="productText w70p">Курица</p>
-                        <p class="productNum w20p">1шт</p>
-                    </div>
-                    <div class="itemProduct mrt3 w100p">
-                        <p class="productIndex w10p">1.</p>
-                        <p class="productText w70p">Огурцы</p>
-                        <p class="productNum w20p">200г.</p>
-                    </div>
-                    <div class="itemProduct mrt3 w100p">
-                        <p class="productIndex w10p">1.</p>
-                        <p class="productText w70p">Приправа для курицы "Хмели сумели"</p>
-                        <p class="productNum w20p">1ч.л.</p>
-                    </div>
-                    <div class="itemProduct mrt3 w100p">
-                        <p class="productIndex w10p">1.</p>
-                        <p class="productText w70p">Соль</p>
-                        <p class="productNum w20p">по вкусу</p>
-                    </div>
+                    <template v-for="(item, index) in recipe.products">
+                        <div class="itemProduct mrt3 w100p">
+                            <p class="productIndex w10p">{{ Number(index) + 1 }}.</p>
+                            <p class="productText w70p">{{ item.product }}</p>
+                            <p class="productNum w20p">{{ item.quantity + " " + item.items}}</p>
+                        </div>
+                    </template>
                 </template>
             </div>
         </div>
@@ -59,14 +45,12 @@
                     <p class="titleShow" v-if="!showProcess" v-on:click="changeShowProcess">показать</p>
                 </div>
                 <template v-if="showProcess">
-                    <div class="itemProcess mrt3 w100p">
-                        <p class="number w10p">1.</p>
-                        <p class="text w90p">Почистить огурци от кожуры, нарезать косыми круглежками. Кожура испортит вкус, лучше ее выкинуть.</p>
-                    </div>
-                    <div class="itemProcess mrt3 w100p">
-                        <p class="number w10p">2.</p>
-                        <p class="text w90p">Рразделать курицу на части: две грудинки, двеспинки, два окорочка, две голени. шею не рекомендуется использовать</p>
-                    </div>
+                    <template v-for="(item, index) in recipe.active">
+                        <div class="itemProcess mrt3 w100p">
+                            <p class="number w10p">{{ Number(index) + 1 }}.</p>
+                            <p class="text w90p">{{ item.product }}</p>
+                        </div>
+                    </template>
                 </template>
             </div>
         </div>
@@ -91,10 +75,10 @@
 
 <script>
 export default {
-    name: 'AddRecipe',
-    // props: {
-    //   msg: String
-    // }
+    name: 'Recipe',
+    props: {
+      recipe: Object,
+    },
     data() {
         return {
             showImg: true,
@@ -104,13 +88,13 @@ export default {
     },
     methods: {
         changeShowImg: function () {
-            this.showImg = !this.showImg
+            this.showImg = !this.showImg;
         },
         changeShowProduct: function () {
-            this.showProduct = !this.showProduct
+            this.showProduct = !this.showProduct;
         },
         changeShowProcess: function () {
-            this.showProcess = !this.showProcess
+            this.showProcess = !this.showProcess;
         },
     }
 }
