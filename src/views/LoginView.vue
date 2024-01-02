@@ -40,6 +40,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #8d8d8d;
+    background-color: #f3f3f3;
 }
 </style>

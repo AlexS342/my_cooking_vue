@@ -124,6 +124,12 @@ table {
     min-height: 100%;
     display: flex;
     flex-direction: column;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 header {
@@ -135,8 +141,6 @@ header {
 main {
     display: flex;
     min-height: 30px;
-    margin-top: 12px;
-    margin-bottom: 12px;
 }
 
 footer {

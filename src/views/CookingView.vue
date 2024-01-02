@@ -24,6 +24,7 @@ export default {
     align-items: center;
 }
 .recipes__header{
+    margin-top: 12px;
     text-transform: uppercase;
     padding: 12px;
     text-align: center;

@@ -1,16 +1,7 @@
 <template>
     <div class="recipes">
         <h3 class="recipes__header">Мои рецепты</h3>
-<!--        <div class="recipes__list">-->
-            <BrieflyRecipe/>
-<!--            <BrieflyRecipe/>-->
-<!--            <BrieflyRecipe/>-->
-<!--            <BrieflyRecipe/>-->
-<!--            <BrieflyRecipe/>-->
-<!--            <BrieflyRecipe/>-->
-<!--            <BrieflyRecipe/>-->
-<!--            <BrieflyRecipe/>-->
-<!--        </div>-->
+        <BrieflyRecipe/>
     </div>
 </template>
 
@@ -33,6 +24,7 @@ export default {
         align-items: center;
     }
     .recipes__header{
+        margin-top: 12px;
         text-transform: uppercase;
         padding: 12px;
         text-align: center;

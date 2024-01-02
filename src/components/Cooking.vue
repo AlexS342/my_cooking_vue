@@ -5,11 +5,14 @@
             <div class="container pd3 w100p">
                 <div class="title mrb2 w100p">
                     <h3 class="titleText">Фото блюда</h3>
-                    <p class="titleShow">свернуть</p>
+                    <p class="titleShow" v-if="showImg" v-on:click="changeShowImg">свернуть</p>
+                    <p class="titleShow" v-if="!showImg" v-on:click="changeShowImg">показать</p>
                 </div>
-                <div class="imgWRP">
-                    <img class="img  w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
-                </div>
+                <template v-if="showImg">
+                    <div class="imgWRP">
+                        <img class="img  w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
+                    </div>
+                </template>
             </div>
         </div>
 
@@ -19,39 +22,42 @@
             <div class="container pd3 w100p">
                 <div class="title mrb2 w100p">
                     <h3 class="titleText">Продукты</h3>
-                    <p class="titleShow">свернуть</p>
+                    <p class="titleShow" v-if="showProduct" v-on:click="changeShowProduct">свернуть</p>
+                    <p class="titleShow" v-if="!showProduct" v-on:click="changeShowProduct">показать</p>
                 </div>
 
-                <div class="listProduct w100p">
-                    <div class="itemProduct pdy2 w100p">
-                        <div class="check">
-                            <input class="checkInput mrr2" type="checkbox">
-                            <label class="checkLabel">Шея мраморной говядины запеценная с яблоками</label>
+                <template v-if="showProduct">
+                    <div class="listProduct w100p">
+                        <div class="itemProduct pdy2 w100p">
+                            <div class="check">
+                                <input class="checkInput mrr2" type="checkbox">
+                                <label class="checkLabel">Шея мраморной говядины запеценная с яблоками</label>
+                            </div>
+                            <p class="weight">450 г.</p>
                         </div>
-                        <p class="weight">450 г.</p>
-                    </div>
-                    <div class="itemProduct pdy2 w100p">
-                        <div class="check">
-                            <input class="checkInput mrr2" type="checkbox">
-                            <label class="checkLabel">Яйцо</label>
+                        <div class="itemProduct pdy2 w100p">
+                            <div class="check">
+                                <input class="checkInput mrr2" type="checkbox">
+                                <label class="checkLabel">Яйцо</label>
+                            </div>
+                            <p class="weight">2 шт</p>
                         </div>
-                        <p class="weight">2 шт</p>
-                    </div>
-                    <div class="itemProduct pdy2 w100p">
-                        <div class="check">
-                            <input class="checkInput mrr2" type="checkbox">
-                            <label class="checkLabel">Соль</label>
+                        <div class="itemProduct pdy2 w100p">
+                            <div class="check">
+                                <input class="checkInput mrr2" type="checkbox">
+                                <label class="checkLabel">Соль</label>
+                            </div>
+                            <p class="weight">1 ч.л.</p>
                         </div>
-                        <p class="weight">1 ч.л.</p>
-                    </div>
-                    <div class="itemProduct pdy2 w100p">
-                        <div class="check">
-                            <input class="checkInput mrr2" type="checkbox">
-                            <label class="checkLabel">Перец</label>
+                        <div class="itemProduct pdy2 w100p">
+                            <div class="check">
+                                <input class="checkInput mrr2" type="checkbox">
+                                <label class="checkLabel">Перец</label>
+                            </div>
+                            <p class="weight">по вкусу</p>
                         </div>
-                        <p class="weight">по вкусу</p>
                     </div>
-                </div>
+                </template>
             </div>
         </div>
 
@@ -60,38 +66,41 @@
             <div class="container pd3 w100p">
                 <div class="title mrb2 w100p">
                     <h3 class="titleText">Процесс</h3>
-                    <p class="titleShow">свернуть</p>
+                    <p class="titleShow" v-if="showProcess" v-on:click="changeShowProcess">свернуть</p>
+                    <p class="titleShow" v-if="!showProcess" v-on:click="changeShowProcess">показать</p>
                 </div>
 
-                <div class="listProcess w100p">
-                    <div class="itemProcess pdy2 w100p">
-                        <div class="check">
-                            <input class="checkInput mrr2" type="checkbox">
-                            <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
+                <template v-if="showProcess">
+                    <div class="listProcess w100p">
+                        <div class="itemProcess pdy2 w100p">
+                            <div class="check">
+                                <input class="checkInput mrr2" type="checkbox">
+                                <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
+                            </div>
+                            <div class="time pdy1">
+                                <p class="timeWeight">365 c.</p>
+                            </div>
                         </div>
-                        <div class="time pdy1">
-                            <p class="timeWeight">365 c.</p>
+                        <div class="itemProcess pdy2 w100p">
+                            <div class="check">
+                                <input class="checkInput mrr2" type="checkbox">
+                                <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
+                            </div>
+                            <div class="time pdy1">
+                                <p class="timeWeight">3 ч.</p>
+                            </div>
+                        </div>
+                        <div class="itemProcess pdy2 w100p">
+                            <div class="check">
+                                <input class="checkInput mrr2" type="checkbox">
+                                <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
+                            </div>
+                            <div class="time pdy1">
+                                <p class="timeWeight">37 м.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="itemProcess pdy2 w100p">
-                        <div class="check">
-                            <input class="checkInput mrr2" type="checkbox">
-                            <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
-                        </div>
-                        <div class="time pdy1">
-                            <p class="timeWeight">3 ч.</p>
-                        </div>
-                    </div>
-                    <div class="itemProcess pdy2 w100p">
-                        <div class="check">
-                            <input class="checkInput mrr2" type="checkbox">
-                            <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
-                        </div>
-                        <div class="time pdy1">
-                            <p class="timeWeight">37 м.</p>
-                        </div>
-                    </div>
-                </div>
+                </template>
             </div>
         </div>
 
@@ -113,10 +122,28 @@
 
 <script>
 export default {
-  name: 'Cooking',
-  // props: {
-  //   msg: String
-  // }
+    name: 'Cooking',
+    // props: {
+    //   msg: String
+    // }
+    data() {
+        return {
+            showImg: true,
+            showProduct: true,
+            showProcess: true,
+        }
+    },
+    methods: {
+        changeShowImg: function () {
+            this.showImg = !this.showImg
+        },
+        changeShowProduct: function () {
+            this.showProduct = !this.showProduct
+        },
+        changeShowProcess: function () {
+            this.showProcess = !this.showProcess
+        },
+    }
 }
 </script>
 

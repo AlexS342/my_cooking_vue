@@ -24,15 +24,16 @@ export default {
     align-items: center;
 }
 .recipes__header{
+    margin-top: 12px;
     text-transform: uppercase;
     padding: 12px;
     text-align: center;
 }
-.recipes__list{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    box-sizing: border-box;
-}
+//.recipes__list{
+//    display: flex;
+//    flex-direction: column;
+//    width: 100%;
+//    box-sizing: border-box;
+//}
 
 </style>

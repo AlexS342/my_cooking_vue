@@ -7,10 +7,14 @@
                 <div class="container pd3 w100p">
                     <div class="title mrb2 w100p">
                         <h3 class="titleText">Название рецепта</h3>
-                        <p class="titleShow">свернуть</p>
+                        <p class="titleShow" v-if="showName" v-on:click="changeShowName">свернуть</p>
+                        <p class="titleShow" v-if="!showName" v-on:click="changeShowName">показать</p>
                     </div>
-                    <label class="hint mr1" for="name">Введите название рецепта</label>
-                    <input class="inputName mrx3 w100p" id="name" name="name" type="text">
+
+                    <template v-if="showName">
+                        <label class="hint mr1" for="name">Введите название рецепта</label>
+                        <input class="inputName mrx3 w100p" id="name" name="name" type="text">
+                    </template>
                 </div>
             </div>
 
@@ -19,14 +23,17 @@
                 <div class="container pd3 w100p">
                     <div class="title mrb2 w100p">
                         <h3 class="titleText">Фото блюда</h3>
-                        <p class="titleShow">свернуть</p>
+                        <p class="titleShow" v-if="showImg" v-on:click="changeShowImg">свернуть</p>
+                        <p class="titleShow" v-if="!showImg" v-on:click="changeShowImg">показать</p>
                     </div>
-                    <div class="imgWRP">
-                        <img class="img  w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
-                    </div>
-                    <span class="text mr1">Загрузите изображение готового блюда</span>
-                    <input class="inputFile" name="file-input" type="file" multiple>
-                    <label class="labelInputFile pdx3" for="file-input">Выберите файл <input class="inputFile" name="file-input" type="file" multiple></label>
+                    <template v-if="showImg">
+                        <div class="imgWRP">
+                            <img class="img  w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
+                        </div>
+                        <span class="text mr1">Загрузите изображение готового блюда</span>
+                        <input class="inputFile" name="file-input" type="file" multiple>
+                        <label class="labelInputFile pdx3" for="file-input">Выберите файл <input class="inputFile" name="file-input" type="file" multiple></label>
+                    </template>
                 </div>
             </div>
 
@@ -35,78 +42,85 @@
                 <div class="container pd3 w100p">
                     <div class="title mrb2 w100p">
                         <h3 class="titleText">Добавить продукты</h3>
-                        <p class="titleShow">свернуть</p>
+                        <p class="titleShow" v-if="showProduct" v-on:click="changeShowProduct">свернуть</p>
+                        <p class="titleShow" v-if="!showProduct" v-on:click="changeShowProduct">показать</p>
                     </div>
-                    <div class="subtitleList w100p">
-                        <p class="subtitleItem w60p">продукт</p>
-                        <p class="subtitleItem w20p">вес</p>
-                        <p class="subtitleItem w20p">ед.</p>
-                    </div>
-                    <div class="itemProduct mrt2 w100p">
-                        <input class="inputText pdl1 w60p" type="text">
-                        <input class="inputNum w20p" type="number">
-                        <select class="select w20p">
-                            <option class="option" value="г.">г.</option>
-                            <option class="option" value="ст.л.">ст.л.</option>
-                            <option class="option" value="ч.л.">ч.л.</option>
-                            <option class="option" value="шт">шт</option>
-                            <option class="option" value="ст">ст</option>
-                            <option class="option" value="по вкусу">по вкусу</option>
-                        </select>
-                    </div>
-                    <div class="itemProduct mrt2 w100p">
-                        <input class="inputText pdl1 w60p" type="text">
-                        <input class="inputNum w20p" type="number">
-                        <select class="select w20p">
-                            <option value="г.">г.</option>
-                            <option value="ст.л.">ст.л.</option>
-                            <option value="ч.л.">ч.л.</option>
-                            <option value="шт">шт</option>
-                            <option value="ст">ст</option>
-                            <option value="по вкусу">по вкусу</option>
-                        </select>
-                    </div>
-                    <div class="itemProduct mrt2 w100p">
-                        <input class="inputText pdl1 w60p" type="text">
-                        <input class="inputNum w20p" type="number">
-                        <select class="select w20p">
-                            <option value="г.">г.</option>
-                            <option value="ст.л.">ст.л.</option>
-                            <option value="ч.л.">ч.л.</option>
-                            <option value="шт">шт</option>
-                            <option value="ст">ст</option>
-                            <option value="по вкусу">по вкусу</option>
-                        </select>
-                    </div>
-                    <div class="editItem mrt3 w100p">
+                    <template v-if="showProduct">
+                        <div class="subtitleList w100p">
+                            <p class="subtitleItem w60p">продукт</p>
+                            <p class="subtitleItem w20p">вес</p>
+                            <p class="subtitleItem w20p">ед.</p>
+                        </div>
+                        <div class="itemProduct mrt2 w100p">
+                            <input class="inputText pdl1 w60p" type="text">
+                            <input class="inputNum w20p" type="number">
+                            <select class="select w20p">
+                                <option class="option" value="г.">г.</option>
+                                <option class="option" value="ст.л.">ст.л.</option>
+                                <option class="option" value="ч.л.">ч.л.</option>
+                                <option class="option" value="шт">шт</option>
+                                <option class="option" value="ст">ст</option>
+                                <option class="option" value="по вкусу">по вкусу</option>
+                            </select>
+                        </div>
+                        <div class="itemProduct mrt2 w100p">
+                            <input class="inputText pdl1 w60p" type="text">
+                            <input class="inputNum w20p" type="number">
+                            <select class="select w20p">
+                                <option value="г.">г.</option>
+                                <option value="ст.л.">ст.л.</option>
+                                <option value="ч.л.">ч.л.</option>
+                                <option value="шт">шт</option>
+                                <option value="ст">ст</option>
+                                <option value="по вкусу">по вкусу</option>
+                            </select>
+                        </div>
+                        <div class="itemProduct mrt2 w100p">
+                            <input class="inputText pdl1 w60p" type="text">
+                            <input class="inputNum w20p" type="number">
+                            <select class="select w20p">
+                                <option value="г.">г.</option>
+                                <option value="ст.л.">ст.л.</option>
+                                <option value="ч.л.">ч.л.</option>
+                                <option value="шт">шт</option>
+                                <option value="ст">ст</option>
+                                <option value="по вкусу">по вкусу</option>
+                            </select>
+                        </div>
+                        <div class="editItem mrt3 w100p">
                         <input class="button" type="button" value="удалить поле">
                         <input class="button" type="button" value="добавить поле">
                     </div>
+                    </template>
                 </div>
             </div>
 
             <!--        ПРОЦЕСС ПРИГОТОВЛЕНИЯ           -->
             <div class="list w100p bc4">
                 <div class="container pd3 w100p">
-                <div class="title mrb2 w100p">
-                    <h3 class="titleText">Добавить процесс</h3>
-                    <p class="titleShow">свернуть</p>
-                </div>
-                <div class="subtitleList w100p">
-                    <p class="subtitleItem w100p">Поэтапный процесс приготовления</p>
-                </div>
-                <div class="itemProcess mrt2 w100p">
-                    <p class="number mrr2">1.</p>
-                    <textarea class="textarea w100p" rows="3"></textarea>
-                </div>
-                <div class="itemProcess mrt2 w100p">
-                    <p class="number mrr2">2.</p>
-                    <textarea class="textarea w100p" rows="3"></textarea>
-                </div>
-                    <div class="editItem mrt3 w100p">
-                        <input class="button" type="button" value="удалить поле">
-                        <input class="button" type="button" value="добавить поле">
+                    <div class="title mrb2 w100p">
+                        <h3 class="titleText">Добавить процесс</h3>
+                        <p class="titleShow" v-if="showProcess" v-on:click="changeShowProcess">свернуть</p>
+                        <p class="titleShow" v-if="!showProcess" v-on:click="changeShowProcess">показать</p>
                     </div>
+
+                    <template v-if="showProcess">
+                        <div class="subtitleList w100p">
+                            <p class="subtitleItem w100p">Поэтапный процесс приготовления</p>
+                        </div>
+                        <div class="itemProcess mrt2 w100p">
+                            <p class="number mrr2">1.</p>
+                            <textarea class="textarea w100p" rows="3"></textarea>
+                        </div>
+                        <div class="itemProcess mrt2 w100p">
+                            <p class="number mrr2">2.</p>
+                            <textarea class="textarea w100p" rows="3"></textarea>
+                        </div>
+                        <div class="editItem mrt3 w100p">
+                            <input class="button" type="button" value="удалить поле">
+                            <input class="button" type="button" value="добавить поле">
+                        </div>
+                    </template>
                 </div>
             </div>
 
@@ -133,6 +147,28 @@ export default {
     // props: {
     //   msg: String
     // }
+    data() {
+        return {
+            showName: true,
+            showImg: true,
+            showProduct: true,
+            showProcess: true,
+        }
+    },
+    methods: {
+        changeShowName: function () {
+            this.showName = !this.showName
+        },
+        changeShowImg: function () {
+            this.showImg = !this.showImg
+        },
+        changeShowProduct: function () {
+            this.showProduct = !this.showProduct
+        },
+        changeShowProcess: function () {
+            this.showProcess = !this.showProcess
+        },
+    }
 }
 </script>
 
