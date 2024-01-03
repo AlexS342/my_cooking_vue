@@ -28,34 +28,19 @@
 
                 <template v-if="showProduct">
                     <div class="listProduct w100p">
-                        <div class="itemProduct pdy2 w100p">
-                            <div class="check">
-                                <input class="checkInput mrr2" type="checkbox">
-                                <label class="checkLabel">Шея мраморной говядины запеценная с яблоками</label>
+
+                        <template v-for="(item) in this.recipe.products">
+                            <div class="itemProduct pdy2 w100p">
+                                <div class="check">
+                                    <input class="checkInput mrr2" type="checkbox">
+                                    <label class="checkLabel">{{item.product}}</label>
+                                </div>
+                                <p class="weight">
+                                    {{ item.quantity + " " + item.items}}
+                                </p>
                             </div>
-                            <p class="weight">450 г.</p>
-                        </div>
-                        <div class="itemProduct pdy2 w100p">
-                            <div class="check">
-                                <input class="checkInput mrr2" type="checkbox">
-                                <label class="checkLabel">Яйцо</label>
-                            </div>
-                            <p class="weight">2 шт</p>
-                        </div>
-                        <div class="itemProduct pdy2 w100p">
-                            <div class="check">
-                                <input class="checkInput mrr2" type="checkbox">
-                                <label class="checkLabel">Соль</label>
-                            </div>
-                            <p class="weight">1 ч.л.</p>
-                        </div>
-                        <div class="itemProduct pdy2 w100p">
-                            <div class="check">
-                                <input class="checkInput mrr2" type="checkbox">
-                                <label class="checkLabel">Перец</label>
-                            </div>
-                            <p class="weight">по вкусу</p>
-                        </div>
+                        </template>
+
                     </div>
                 </template>
             </div>
@@ -72,33 +57,18 @@
 
                 <template v-if="showProcess">
                     <div class="listProcess w100p">
-                        <div class="itemProcess pdy2 w100p">
+                        <template v-for="(item) in recipe.active">
+                            <div class="itemProcess pdy2 w100p">
                             <div class="check">
                                 <input class="checkInput mrr2" type="checkbox">
-                                <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
+                                <label class="checkLabel">{{item.product}}</label>
                             </div>
                             <div class="time pdy1">
-                                <p class="timeWeight">365 c.</p>
+                                <p class="timeWeight" v-if="checkingDataType(item.quantity, item.items)">{{ item.quantity + " " + item.items}}</p>
                             </div>
                         </div>
-                        <div class="itemProcess pdy2 w100p">
-                            <div class="check">
-                                <input class="checkInput mrr2" type="checkbox">
-                                <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
-                            </div>
-                            <div class="time pdy1">
-                                <p class="timeWeight">3 ч.</p>
-                            </div>
-                        </div>
-                        <div class="itemProcess pdy2 w100p">
-                            <div class="check">
-                                <input class="checkInput mrr2" type="checkbox">
-                                <label class="checkLabel">Нарезать мелкими кубиками, убрать прожилки, промыть в холодной моде, разложить в один слой на дне большой кострючи, придавить кирпичем, залить молоком</label>
-                            </div>
-                            <div class="time pdy1">
-                                <p class="timeWeight">37 м.</p>
-                            </div>
-                        </div>
+                        </template>
+
                     </div>
                 </template>
             </div>
@@ -108,11 +78,12 @@
         <div class="list w100p">
             <div class="container pd3 w100p">
                 <div class="action w100p">
-                    <router-link to="/recipe/1">
+                    <router-link :to="'/recipe/' + recipe.id">
                         <input class="button" type="button" value="отмена">
                     </router-link>
-
-                    <input class="button" type="button" value="готово">
+                    <router-link to="/recipes">
+                        <input class="button" type="button" value="готово">
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -123,9 +94,9 @@
 <script>
 export default {
     name: 'Cooking',
-    // props: {
-    //   msg: String
-    // }
+    props: {
+        recipe: Object,
+    },
     data() {
         return {
             showImg: true,
@@ -135,14 +106,17 @@ export default {
     },
     methods: {
         changeShowImg: function () {
-            this.showImg = !this.showImg
+            this.showImg = !this.showImg;
         },
         changeShowProduct: function () {
-            this.showProduct = !this.showProduct
+            this.showProduct = !this.showProduct;
         },
         changeShowProcess: function () {
-            this.showProcess = !this.showProcess
+            this.showProcess = !this.showProcess;
         },
+        checkingDataType: function (a, b){
+            return Number.isInteger(a) && typeof b === 'string';
+        }
     }
 }
 </script>
@@ -300,13 +274,16 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
                     .time{
                         min-width: 50px;
                         max-width: 50px;
-                        background-color: #d7d7ff;
-                        border-radius: 4px;
+                        //background-color: #d7d7ff;
+                        //border-radius: 4px;
 
                         .timeWeight{
                             min-width: 50px;
                             max-width: 50px;
                             text-align: center;
+
+                            background-color: #d7d7ff;
+                            border-radius: 4px;
                         }
                     }
                 }

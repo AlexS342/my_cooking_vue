@@ -63,7 +63,7 @@
                         <input class="button" type="button" value="назад">
                     </router-link>
 <!--                    <input class="button" type="button" value="Редактировать">-->
-                    <router-link to="/cooking/1">
+                    <router-link :to="'/cooking/' + recipe.id">
                         <input class="button" type="button" value="готовить">
                     </router-link>
                 </div>
