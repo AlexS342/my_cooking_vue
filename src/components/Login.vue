@@ -16,7 +16,7 @@
                 <label class="listLabel" for="password">Пароль пользователя</label>
                 <input class="listInput" name="password" id="password" type="password"/>
                 <div class="listButtons">
-                        <input class="listButtonsItem" type="button" value="Вход">
+                    <input class="listButtonsItem" type="button" value="Регестрация">
                 </div>
             </form>
         </div>
@@ -115,7 +115,7 @@ export default {
                 justify-content: flex-end;
                 margin: 12px;
 
-                .login__listButtonsItem{
+                .listButtonsItem{
                     margin: 0 0 2px 0;
                     padding: 6px 24px;
                     font-size: 16px;

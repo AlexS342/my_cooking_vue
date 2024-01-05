@@ -15,3 +15,4 @@
 * ? Where do you prefer placing config for Babel, ESLint, etc.? In package.json
 * ? Save this as a preset for future projects? No
 
+##### Настройка удаленного репозитория: `git remote add origin git@github.com:AlexS342/my_cooking_vue.git`
