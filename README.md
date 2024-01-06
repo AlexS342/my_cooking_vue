@@ -1,5 +1,7 @@
 # My cooking (my_cooking_vue)
 
+### Как создавался проект:
+
 ##### Настройка проекта: `npm install`
 
 ##### Скомпилировать и запустить на локальном сервере в режиме dev: `npm run serve`
@@ -16,3 +18,10 @@
 * ? Save this as a preset for future projects? No
 
 ##### Настройка удаленного репозитория: `git remote add origin git@github.com:AlexS342/my_cooking_vue.git`
+
+##### Подключение библтотеки AXIOS: `npm install axios`
+
+##### Добавил PROXY в конфигурацию vue.config.js:
+devServer: { proxy: { '/api': { target: 'http://localhost:8000', }, }, }
+
+
