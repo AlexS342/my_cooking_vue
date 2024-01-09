@@ -12,11 +12,11 @@
             <h3 class="formHeader">Авторизация</h3>
             <form class="list">
                 <label class="listLabel" for="username">Email пользователя</label>
-                <input class="listInput" name="username" id="username" type="email"/>
+                <input class="listInput" name="username" id="username" type="email" v-model="login" placeholder="JonConer81"/>
                 <label class="listLabel" for="password">Пароль пользователя</label>
-                <input class="listInput" name="password" id="password" type="password"/>
+                <input class="listInput" name="password" id="password" type="password" v-model="password"/>
                 <div class="listButtons">
-                    <input class="listButtonsItem" type="button" value="Регестрация">
+                    <input :class="activeButton" type="button" :disabled="isButtonDisabled" v-on:click="sendData" value="Вход">
                 </div>
             </form>
         </div>
@@ -24,11 +24,99 @@
 </template>
 
 <script>
+import axios from "axios";
+// import router from "@/router";
+
 export default {
     name: 'Login',
     // props: {
     //     msg: String
-    // }
+    // },
+    data() {
+        return {
+            //test1@example.com
+            //123
+            login:"",
+            password:"",
+            loginBool: false,
+            passwordBool: false,
+            isButtonDisabled: true,
+            activeButton:"listButtonsItem__disable"
+        }
+    },
+    created() {
+        /**
+         * Открываем сессию и получаем токен
+         */
+        axios.get('/sanctum/csrf-cookie' )
+            .then(
+                response => {
+                    console.log(document.cookie);
+                    console.log(response);
+                }
+            )
+            .catch(
+                error => console.log(error)
+            )
+    },
+    methods: {
+        /**
+         * При нажатии на кнопку "Вход" делает запрос на аутентификацию
+         */
+        sendData: function (){
+            axios
+                .post('/login', {
+                        email: this.login,
+                        password: this.password,
+                })
+                .then((response) => {
+                        console.log('Аутентификация пройдена успешно');
+                        console.log(document.cookie);
+                        console.log(response.status, response.data);
+                        // this.router.push({path:'/recipes'})      //не хрена не работает
+                        window.location='/'
+                    })
+                .catch(function (error) {
+                        console.log('Аутентификация не пройдена catch');
+                        console.log(document.cookie);
+                        console.log(error);
+                    });
+
+        },
+        /**
+         * Активирует/Дезактивирует кнопку "Вход" на вкладке "Авторизация"
+         */
+        statusLoginButton: function (){
+            if(this.passwordBool && this.loginBool){
+                this.isButtonDisabled = false;
+                this.activeButton = "listButtonsItem";
+            }else{
+                this.isButtonDisabled = true;
+                this.activeButton = "listButtonsItem__disable";
+            }
+        },
+    },
+    watch: {
+        //Отслеживает состояние, если изменилось, то выполняется
+        /**
+         * Отслеживаем ввод логина, если валиден, то поднимаем флад для активации кновки "Вход" и вызывает statusLoginButton
+         * @param n - (boolean) новое значение при изменении состояния
+         */
+        login(n){
+            this.loginBool = n.length >= 3;
+            this.statusLoginButton()
+            // console.log('yes1 ' + this.loginBool + '; yes2 ' + this.passwordBool + '; isButton ' + this.isButtonDisabled + ';')
+        },
+        /**
+         * Отслеживаем ввод пароля, если валиден, то поднимаем флад для активации кновки "Вход" и вызывает statusLoginButton
+         * @param n - (boolean) новое значение при изменении состояния
+         */
+        password(n){
+            this.passwordBool = n.length >= 3;
+            this.statusLoginButton()
+            // console.log('yes1 ' + this.loginBool + '; yes2 ' + this.passwordBool + '; isButton ' + this.isButtonDisabled + ';')
+        },
+    }
 }
 </script>
 
@@ -134,6 +222,18 @@ export default {
                     margin: 2px 0 0 0;
                     background-color: #beffc1;
                     box-shadow: -1px -1px 0 0 #a5a5a5, inset 1px 1px 4px 0 #979797;
+                }
+                .listButtonsItem__disable{
+                    margin: 0 0 2px 0;
+                    padding: 6px 24px;
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #a7a7a7;
+                    text-transform: uppercase;
+                    background-color: #8f8f8f;
+                    border-radius: 5px;
+                    border: 1px solid #cbcbcb;
+                    box-shadow: 1px 1px 0 0 #a5a5a5, inset 0 -1px 4px 0 #ffffff;
                 }
             }
         }

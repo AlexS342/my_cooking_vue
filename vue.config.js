@@ -6,6 +6,12 @@ module.exports = defineConfig({
       '/api': {
         target: 'http://localhost:8000',
       },
+      '/login': {
+        target: 'http://localhost:8000',
+      },
+      '/sanctum/csrf-cookie': {
+        target: 'http://localhost:8000',
+      }
     },
   }
 })

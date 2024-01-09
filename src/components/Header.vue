@@ -20,7 +20,15 @@ export default {
     // props: {
     //     msg: String
     // }
+    created() {
+        const token = this.$cookies.get('XSRF-TOKEN')
+        const session = this.$cookies.get('laravel_session')
+
+        console.log('XSRF-TOKEN: ' + token)
+        console.log('laravel_session: ' + session)
+    }
 }
+
 </script>
 
 <style scoped lang="scss">

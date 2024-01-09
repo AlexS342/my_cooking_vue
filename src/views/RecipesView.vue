@@ -220,17 +220,6 @@ export default {
             testApiPost:"",
         }
     },
-    created() {
-        axios
-            .get('/api/test-get-api')
-            .then(response => (this.testApiGet = response.data.answer))
-            .catch(error => console.log(error));
-
-        axios
-            .post('/api/test-post-api')
-            .then(response => (this.testApiPost = response.data.test3))
-            .catch(error => console.log(error));
-    }
 }
 </script>
 
