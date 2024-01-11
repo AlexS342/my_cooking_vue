@@ -8,24 +8,49 @@
             <router-link class="header__navLink" to="/recipes">Рецепты</router-link>
             <router-link class="header__navLink" to="/add_recipes">Добавить</router-link>
         </div>
-        <router-link class="header__ava" to="/login">
-            <img class="header__avaImg" alt="logo" src="../assets/icon/man_cook.png">
-        </router-link>
+        <template v-if="!GET_IS_AUTH">
+            <router-link class="header__ava" to="/login">
+                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#4d4d4d" class="bi bi-person-lock" viewBox="0 0 16 16">
+                    <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m0 5.996V14H3s-1 0-1-1 1-4 6-4q.845.002 1.544.107a4.5 4.5 0 0 0-.803.918A11 11 0 0 0 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664zM9 13a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
+                </svg>
+<!--            <img class="header__avaImg" alt="logo" src="../assets/icon/man_cook.png">-->
+            </router-link>
+        </template>
+        <template v-if="GET_IS_AUTH">
+            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#4d4d4d" class="bi bi-person-fill-x" viewBox="0 0 16 16">
+                <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708"/>
+            </svg>
+        </template>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name: 'Header',
     // props: {
-    //     msg: String
-    // }
-    created() {
-        const token = this.$cookies.get('XSRF-TOKEN')
-        const session = this.$cookies.get('laravel_session')
+    //     isAuth: Boolean
+    // },
+    data() {
+        return {
+            isAuth:false,
+        }
+    },
+    methods:{
 
-        console.log('XSRF-TOKEN: ' + token)
-        console.log('laravel_session: ' + session)
+    },
+    watch: {
+        store(n,o){
+            console.log(this.$store.getters.GET_IS_AUTH)
+        }
+    },
+    computed: {
+        ...mapGetters([
+            //перечисляем гетеры из сторе и потом используем как переменные.
+            'GET_IS_AUTH',
+            // ...
+        ])
     }
 }
 
@@ -75,66 +100,10 @@ export default {
 .header__ava{
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 .header__avaImg{
     width: 42px;
 }
 </style>
 
-
-<!--<template>-->
-<!--    <div class="hello">-->
-<!--        <h1>{{ msg }}</h1>-->
-<!--        <p>-->
-<!--            Какой-то рецепт из компонента-->
-<!--            <a href="#" target="_blank" rel="noopener">Приготовить этот рецепт</a>.-->
-<!--        </p>-->
-<!--        <h3>Продукты</h3>-->
-<!--        <ul>-->
-<!--            <li><a href="#" target="_blank" rel="noopener">Морковь</a></li>-->
-<!--            <li><a href="#" target="_blank" rel="noopener">Лук репчатый</a></li>-->
-<!--            <li><a href="#" target="_blank" rel="noopener">Петрушка</a></li>-->
-<!--        </ul>-->
-<!--        <h3>Посуда</h3>-->
-<!--        <ul>-->
-<!--            <li><a href="#" target="_blank" rel="noopener">Чашка</a></li>-->
-<!--            <li><a href="#" target="_blank" rel="noopener">Ложка</a></li>-->
-<!--            <li><a href="#" target="_blank" rel="noopener">Вылка</a></li>-->
-<!--            <li><a href="#" target="_blank" rel="noopener">Сковорода</a></li>-->
-<!--            <li><a href="#" target="_blank" rel="noopener">Скалка</a></li>-->
-<!--        </ul>-->
-<!--        <h3>Авторы</h3>-->
-<!--        <ul>-->
-<!--            <li><a href="#" target="_blank" rel="noopener">Вася</a></li>-->
-<!--            <li><a href="#" target="_blank" rel="noopener">Петя</a></li>-->
-<!--            <li><a href="#" target="_blank" rel="noopener">Маша</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--export default {-->
-<!--    name: 'Recipe',-->
-<!--    props: {-->
-<!--        msg: String-->
-<!--    }-->
-<!--}-->
-<!--</script>-->
-
-<!--&lt;!&ndash; Добавьте атрибут "scoped", чтобы ограничить CSS только этим компонентом &ndash;&gt;-->
-<!--<style scoped lang="scss">-->
-<!--h3 {-->
-<!--    margin: 40px 0 0;-->
-<!--}-->
-<!--ul {-->
-<!--    list-style-type: none;-->
-<!--    padding: 0;-->
-<!--}-->
-<!--li {-->
-<!--    display: inline-block;-->
-<!--    margin: 0 10px;-->
-<!--}-->
-<!--a {-->
-<!--    color: #42b983;-->
-<!--}-->
-<!--</style>-->

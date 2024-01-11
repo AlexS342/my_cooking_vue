@@ -1,20 +1,13 @@
 <template>
-    <template v-if="isAuth">
-        <div class="WRP">
-            <Header/>
-            <main>
-                <router-view/>
-            </main>
-        </div>
-        <footer>
-            <Footer/>
-        </footer>
-    </template>
-    <template v-else>
-        <div class="WRP">
-            <LoginView/>
-        </div>
-    </template>
+    <div class="WRP">
+        <Header/>
+        <main>
+            <router-view/>
+        </main>
+    </div>
+    <footer>
+        <Footer/>
+    </footer>
 </template>
 
 <script>
@@ -31,27 +24,11 @@ export default defineComponent({
         }
     },
     created() {
-        // this.isAuth = this.getAuth()
-        this.getAuth()
+        this.isAuth = localStorage.getItem("isAuth")
+        this.$store.dispatch('SET_IS_AUTH_A', this.isAuth);
     },
-    methods: {
-        // getAuth() {
-        //     return true
-        // },
-        getAuth: function () {
-            this.isAuth = true
-            // setInterval(()=>{
-            //     this.isAuth = !this.isAuth
-            // }, 1000)
-        }
-    },
-    watch: {
-        //Отслеживает состояние, если изменилось, то выполняется
-        // isAuth(n, o){
-        //     console.log(n, o)
-        // }
-    }
-
+    methods: {},
+    watch: {},
 })
 
 

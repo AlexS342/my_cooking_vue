@@ -25,17 +25,15 @@
 
 <script>
 import axios from "axios";
-// import router from "@/router";
 
 export default {
     name: 'Login',
     // props: {
-    //     msg: String
+    //     isAuth: Boolean
     // },
     data() {
         return {
-            //test1@example.com
-            //123
+            //test1@example.com // 123
             login:"",
             password:"",
             loginBool: false,
@@ -63,28 +61,26 @@ export default {
         /**
          * При нажатии на кнопку "Вход" делает запрос на аутентификацию
          */
-        sendData: function (){
-            axios
+         sendData: async function() {
+            await axios
                 .post('/login', {
                         email: this.login,
                         password: this.password,
                 })
                 .then((response) => {
-                        console.log('Аутентификация пройдена успешно');
-                        console.log(document.cookie);
-                        console.log(response.status, response.data);
-                        // this.router.push({path:'/recipes'})      //не хрена не работает
-                        window.location='/'
-                    })
-                .catch(function (error) {
-                        console.log('Аутентификация не пройдена catch');
-                        console.log(document.cookie);
-                        console.log(error);
-                    });
+                    console.log('Аутентификация пройдена успешно');
 
+                    localStorage.setItem('isAuth', "true");
+                    this.$store.dispatch('SET_IS_AUTH_A', true);
+                    this.$router.push({path:'/recipes'})
+                })
+                .catch(function (error) {
+                    console.log('Аутентификация НЕ пройдена успешно');
+                    console.log(error);
+                });
         },
         /**
-         * Активирует/Дезактивирует кнопку "Вход" на вкладке "Авторизация"
+         * Активирует/Деактивирует кнопку "Вход" на вкладке "Авторизация"
          */
         statusLoginButton: function (){
             if(this.passwordBool && this.loginBool){

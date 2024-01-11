@@ -8,7 +8,6 @@
 <script>
 // @ является псевдонимом для /src
 import BrieflyRecipe from '@/components/BrieflyRecipe.vue'
-import axios from 'axios';
 export default {
     name: 'RecipesView',
     components: {
