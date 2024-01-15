@@ -48,10 +48,7 @@ export default {
          */
         axios.get('/sanctum/csrf-cookie' )
             .then(
-                response => {
-                    console.log(document.cookie);
-                    console.log(response);
-                }
+                // response => {}
             )
             .catch(
                 error => console.log(error)
@@ -67,16 +64,14 @@ export default {
                         email: this.login,
                         password: this.password,
                 })
-                .then((response) => {
-                    console.log('Аутентификация пройдена успешно');
+                .then(() => {
 
                     localStorage.setItem('isAuth', "true");
                     this.$store.dispatch('SET_IS_AUTH_A', true);
-                    // console.log(response)
+
                     this.$router.push({path:'/recipes'})
                 })
                 .catch(function (error) {
-                    console.log('Аутентификация НЕ пройдена успешно');
                     console.log(error);
                 });
         },
@@ -102,7 +97,6 @@ export default {
         login(n){
             this.loginBool = n.length >= 3;
             this.statusLoginButton()
-            // console.log('yes1 ' + this.loginBool + '; yes2 ' + this.passwordBool + '; isButton ' + this.isButtonDisabled + ';')
         },
         /**
          * Отслеживаем ввод пароля, если валиден, то поднимаем флад для активации кновки "Вход" и вызывает statusLoginButton
@@ -111,7 +105,6 @@ export default {
         password(n){
             this.passwordBool = n.length >= 3;
             this.statusLoginButton()
-            // console.log('yes1 ' + this.loginBool + '; yes2 ' + this.passwordBool + '; isButton ' + this.isButtonDisabled + ';')
         },
     }
 }

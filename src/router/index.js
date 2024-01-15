@@ -1,10 +1,23 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import AboutView from '../views/AboutView.vue'
+import ProfileView from '../views/ProfileView.vue'
 import LoginView from '../views/LoginView.vue'
 import RecipesView from '../views/RecipesView.vue'
 import RecipeView from '../views/RecipeView.vue'
 import CookingView from '../views/CookingView.vue'
 
 const routes = [
+  {
+    path: '/',
+    name: 'about',
+    component: AboutView
+  },
+  {
+    path: '/profile/:id',
+    name: 'profile',
+    component: ProfileView
+    //this.$route.params.id
+  },
   {
     path: '/login',
     name: 'login',

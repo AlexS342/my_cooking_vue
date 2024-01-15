@@ -227,7 +227,6 @@ export default {
         getAllRecipes: async function(){
             await axios.post('/api/get-all-recipe', {data:null})
                 .then((response) => {
-                    console.log(response.data)
                     this.recipes = response.data
                 })
                 .catch((e)=>{console.log(e)})

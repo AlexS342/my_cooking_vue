@@ -1,12 +1,13 @@
 <template>
     <div class="header">
-        <div class="header__logo">
+        <a class="header__logo" href="/">
             <img class="header__logoImg" alt="logo" src="../assets/icon/chef.png">
             <p class="header__logoName" >Моя кухня</p>
-        </div>
+        </a>
         <div class="header__nav">
             <router-link class="header__navLink" to="/recipes">Рецепты</router-link>
-            <router-link class="header__navLink" to="/add_recipes">Добавить</router-link>
+            <router-link v-if="GET_IS_AUTH" class="header__navLink" to="/add_recipes">Добавить</router-link>
+            <router-link v-if="GET_IS_AUTH" class="header__navLink" to="/profile/1">Профиль</router-link>
         </div>
         <template v-if="!GET_IS_AUTH">
             <router-link class="header__ava" to="/login">
@@ -17,16 +18,19 @@
             </router-link>
         </template>
         <template v-if="GET_IS_AUTH">
-            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#4d4d4d" class="bi bi-person-fill-x" viewBox="0 0 16 16">
-                <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
-                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708"/>
-            </svg>
+            <span class="header__ava" v-on:click="logout">
+                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#4d4d4d" class="bi bi-person-fill-x" viewBox="0 0 16 16">
+                    <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708"/>
+                </svg>
+            </span>
         </template>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import axios from "axios";
 export default {
     name: 'Header',
     // props: {
@@ -38,6 +42,20 @@ export default {
         }
     },
     methods:{
+        logout: async function (){
+            await axios.post('/logout', )
+                .then(() => {
+                    //Очистить localStore
+                    localStorage.setItem('isAuth', "false");
+
+                    //Очистить store
+                    this.$store.dispatch('SET_IS_AUTH_A', false);
+
+                    //Перенаправить пользователя
+                    this.$router.push({path:'/'})
+                })
+                .catch((e)=>{console.log(e)})
+        }
 
     },
     watch: {
@@ -71,6 +89,8 @@ export default {
     flex-direction: column;
     align-items: center;
     min-width: 60px;
+    text-decoration: none;
+    color: #4d4d4d;
 }
 .header__logoImg{
     width: 42px;
