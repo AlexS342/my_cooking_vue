@@ -11,7 +11,7 @@ module.exports = defineConfig({
       },
       '/sanctum/csrf-cookie': {
         target: 'http://localhost:8000',
-      }
+      },
     },
   }
 })

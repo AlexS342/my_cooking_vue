@@ -72,6 +72,7 @@ export default {
 
                     localStorage.setItem('isAuth', "true");
                     this.$store.dispatch('SET_IS_AUTH_A', true);
+                    // console.log(response)
                     this.$router.push({path:'/recipes'})
                 })
                 .catch(function (error) {

@@ -8,15 +8,15 @@
                 </div>
                 <div class="description pdl2">
                     <router-link class="header mrb1" :to="'/recipe/' + recipe.id">
-                        {{recipe.id + " " + recipe.header }}
+                        {{recipe.id + " " + recipe.title }}
                     </router-link>
                     <p class="productList mrb1">
-                        <span v-for="item in recipe.products">{{item.product + ", "}}</span>
+                        <span v-for="item in recipe.products">{{item.name + ", "}}</span>
                     </p>
                     <div class="icons">
                         <div class="itemIcon pd1 mrl1">
                             <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                            <p class="iconText pdl1">{{ recipe.fullTime }}</p>
+                            <p class="iconText pdl1">{{ recipe['full_time'] }}</p>
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,7 @@
 <script>
 // @ является псевдонимом для /src
 import BrieflyRecipe from '@/components/BrieflyRecipe.vue'
+import axios from "axios";
 export default {
     name: 'RecipesView',
     components: {
@@ -18,17 +19,17 @@ export default {
             recipes:{
                 1:{
                     id:1,
-                    header:'Десерт "Страчателла" с малиновым соусом',
+                    title:'Десерт "Страчателла" с малиновым соусом',
                     products: {
-                        0:{product:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
-                        1:{product:"Маскарпоне", quantity:250, items:"г."},
-                        2:{product:"Молоко сгущенное", quantity:100, items:"мл."},
-                        3:{product:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
-                        4:{product:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
-                        5:{product:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
-                        6:{product:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
-                        7:{product:"Шоколад темный", quantity:50, items:"г."},
-                        8:{product:"Мята (листочки)", quantity:12, items:"шт"},
+                        0:{name:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
+                        1:{name:"Маскарпоне", quantity:250, items:"г."},
+                        2:{name:"Молоко сгущенное", quantity:100, items:"мл."},
+                        3:{name:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
+                        4:{name:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
+                        5:{name:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
+                        6:{name:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
+                        7:{name:"Шоколад темный", quantity:50, items:"г."},
+                        8:{name:"Мята (листочки)", quantity:12, items:"шт"},
                     },
                     active: {
                         0:{product:"Взбить творог блендором", quantity:30, items:"сек"},
@@ -46,18 +47,18 @@ export default {
                 },
                 2:{
                     id:2,
-                    header:'Паштет из говяжьего сердца, со смородиной и базиликом',
+                    title:'Паштет из говяжьего сердца, со смородиной и базиликом',
                     products: {
-                        0:{product:"Сердце говяжье", quantity:600, items:"г",},
-                        1:{product:"Лук шалот (или любой другой)", quantity:100, items:"г."},
-                        2:{product:"Смородина чёрная", quantity:100, items:"г."},
-                        3:{product:"Масло сливочное", quantity:100, items:"г."},
-                        4:{product:"Базилик (листья)", quantity:6, items:"г."},
-                        5:{product:"Тимьян свежий", quantity:3, items:"веточки"},
-                        6:{product:"Можжевельник сушёный", quantity:10, items:"шт."},
-                        7:{product:"Перец душистый горошком", quantity:8, items:"шт."},
-                        8:{product:"Перец молотый (смесь перцев)", quantity:2, items:"г."},
-                        9:{product:"Соль", quantity:"", items:"по вкусу"},
+                        0:{name:"Сердце говяжье", quantity:600, items:"г",},
+                        1:{name:"Лук шалот (или любой другой)", quantity:100, items:"г."},
+                        2:{name:"Смородина чёрная", quantity:100, items:"г."},
+                        3:{name:"Масло сливочное", quantity:100, items:"г."},
+                        4:{name:"Базилик (листья)", quantity:6, items:"г."},
+                        5:{name:"Тимьян свежий", quantity:3, items:"веточки"},
+                        6:{name:"Можжевельник сушёный", quantity:10, items:"шт."},
+                        7:{name:"Перец душистый горошком", quantity:8, items:"шт."},
+                        8:{name:"Перец молотый (смесь перцев)", quantity:2, items:"г."},
+                        9:{name:"Соль", quantity:"", items:"по вкусу"},
                     },
                     active: {
                         0:{product:"Подготовьте необходимые ингредиенты. Лук шалот можно заменить другим луком — обычным, красным, салатным. Чёрная смородина подойдёт свежая или замороженная. Сливочное масло возьмите хорошего качества. Базилик можно взять фиолетовый, у меня лимонный.", quantity:30, items:"сек"},
@@ -84,17 +85,17 @@ export default {
                 },
                 3:{
                     id:3,
-                    header:'Десерт "Страчателла" с малиновым соусом',
+                    title:'Десерт "Страчателла" с малиновым соусом',
                     products: {
-                        0:{product:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
-                        1:{product:"Маскарпоне", quantity:250, items:"г."},
-                        2:{product:"Молоко сгущенное", quantity:100, items:"мл."},
-                        3:{product:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
-                        4:{product:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
-                        5:{product:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
-                        6:{product:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
-                        7:{product:"Шоколад темный", quantity:50, items:"г."},
-                        8:{product:"Мята (листочки)", quantity:12, items:"шт"},
+                        0:{name:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
+                        1:{name:"Маскарпоне", quantity:250, items:"г."},
+                        2:{name:"Молоко сгущенное", quantity:100, items:"мл."},
+                        3:{name:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
+                        4:{name:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
+                        5:{name:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
+                        6:{name:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
+                        7:{name:"Шоколад темный", quantity:50, items:"г."},
+                        8:{name:"Мята (листочки)", quantity:12, items:"шт"},
                     },
                     active: {
                         0:{product:"Взбить творог блендором", quantity:30, items:"сек"},
@@ -112,18 +113,18 @@ export default {
                 },
                 4:{
                     id:4,
-                    header:'Паштет из говяжьего сердца, со смородиной и базиликом',
+                    title:'Паштет из говяжьего сердца, со смородиной и базиликом',
                     products: {
-                        0:{product:"Сердце говяжье", quantity:600, items:"г",},
-                        1:{product:"Лук шалот (или любой другой)", quantity:100, items:"г."},
-                        2:{product:"Смородина чёрная", quantity:100, items:"г."},
-                        3:{product:"Масло сливочное", quantity:100, items:"г."},
-                        4:{product:"Базилик (листья)", quantity:6, items:"г."},
-                        5:{product:"Тимьян свежий", quantity:3, items:"веточки"},
-                        6:{product:"Можжевельник сушёный", quantity:10, items:"шт."},
-                        7:{product:"Перец душистый горошком", quantity:8, items:"шт."},
-                        8:{product:"Перец молотый (смесь перцев)", quantity:2, items:"г."},
-                        9:{product:"Соль", quantity:"", items:"по вкусу"},
+                        0:{name:"Сердце говяжье", quantity:600, items:"г",},
+                        1:{name:"Лук шалот (или любой другой)", quantity:100, items:"г."},
+                        2:{name:"Смородина чёрная", quantity:100, items:"г."},
+                        3:{name:"Масло сливочное", quantity:100, items:"г."},
+                        4:{name:"Базилик (листья)", quantity:6, items:"г."},
+                        5:{name:"Тимьян свежий", quantity:3, items:"веточки"},
+                        6:{name:"Можжевельник сушёный", quantity:10, items:"шт."},
+                        7:{name:"Перец душистый горошком", quantity:8, items:"шт."},
+                        8:{name:"Перец молотый (смесь перцев)", quantity:2, items:"г."},
+                        9:{name:"Соль", quantity:"", items:"по вкусу"},
                     },
                     active: {
                         0:{product:"Подготовьте необходимые ингредиенты. Лук шалот можно заменить другим луком — обычным, красным, салатным. Чёрная смородина подойдёт свежая или замороженная. Сливочное масло возьмите хорошего качества. Базилик можно взять фиолетовый, у меня лимонный.", quantity:30, items:"сек"},
@@ -150,17 +151,17 @@ export default {
                 },
                 5:{
                     id:5,
-                    header:'Десерт "Страчателла" с малиновым соусом',
+                    title:'Десерт "Страчателла" с малиновым соусом',
                     products: {
-                        0:{product:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
-                        1:{product:"Маскарпоне", quantity:250, items:"г."},
-                        2:{product:"Молоко сгущенное", quantity:100, items:"мл."},
-                        3:{product:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
-                        4:{product:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
-                        5:{product:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
-                        6:{product:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
-                        7:{product:"Шоколад темный", quantity:50, items:"г."},
-                        8:{product:"Мята (листочки)", quantity:12, items:"шт"},
+                        0:{name:"Творог (мягкий, обезжиренный)", quantity:300, items:"г",},
+                        1:{name:"Маскарпоне", quantity:250, items:"г."},
+                        2:{name:"Молоко сгущенное", quantity:100, items:"мл."},
+                        3:{name:"Сахар (по вкусу)", quantity:1.5, items:"ст.л."},
+                        4:{name:"Ванильный сахар (~8 г)", quantity:1, items:"пакет"},
+                        5:{name:"Малина (мороженная + 6 штук для украшения)", quantity:300, items:"г."},
+                        6:{name:"Ликер (лимончелло, опционально)", quantity:20, items:"мл"},
+                        7:{name:"Шоколад темный", quantity:50, items:"г."},
+                        8:{name:"Мята (листочки)", quantity:12, items:"шт"},
                     },
                     active: {
                         0:{product:"Взбить творог блендором", quantity:30, items:"сек"},
@@ -178,18 +179,18 @@ export default {
                 },
                 6:{
                     id:6,
-                    header:'Паштет из говяжьего сердца, со смородиной и базиликом',
+                    title:'Паштет из говяжьего сердца, со смородиной и базиликом',
                     products: {
-                        0:{product:"Сердце говяжье", quantity:600, items:"г",},
-                        1:{product:"Лук шалот (или любой другой)", quantity:100, items:"г."},
-                        2:{product:"Смородина чёрная", quantity:100, items:"г."},
-                        3:{product:"Масло сливочное", quantity:100, items:"г."},
-                        4:{product:"Базилик (листья)", quantity:6, items:"г."},
-                        5:{product:"Тимьян свежий", quantity:3, items:"веточки"},
-                        6:{product:"Можжевельник сушёный", quantity:10, items:"шт."},
-                        7:{product:"Перец душистый горошком", quantity:8, items:"шт."},
-                        8:{product:"Перец молотый (смесь перцев)", quantity:2, items:"г."},
-                        9:{product:"Соль", quantity:"", items:"по вкусу"},
+                        0:{name:"Сердце говяжье", quantity:600, items:"г",},
+                        1:{name:"Лук шалот (или любой другой)", quantity:100, items:"г."},
+                        2:{name:"Смородина чёрная", quantity:100, items:"г."},
+                        3:{name:"Масло сливочное", quantity:100, items:"г."},
+                        4:{name:"Базилик (листья)", quantity:6, items:"г."},
+                        5:{name:"Тимьян свежий", quantity:3, items:"веточки"},
+                        6:{name:"Можжевельник сушёный", quantity:10, items:"шт."},
+                        7:{name:"Перец душистый горошком", quantity:8, items:"шт."},
+                        8:{name:"Перец молотый (смесь перцев)", quantity:2, items:"г."},
+                        9:{name:"Соль", quantity:"", items:"по вкусу"},
                     },
                     active: {
                         0:{product:"Подготовьте необходимые ингредиенты. Лук шалот можно заменить другим луком — обычным, красным, салатным. Чёрная смородина подойдёт свежая или замороженная. Сливочное масло возьмите хорошего качества. Базилик можно взять фиолетовый, у меня лимонный.", quantity:30, items:"сек"},
@@ -219,6 +220,19 @@ export default {
             testApiPost:"",
         }
     },
+    created() {
+        this.getAllRecipes()
+    },
+    methods:{
+        getAllRecipes: async function(){
+            await axios.post('/api/get-all-recipe', {data:null})
+                .then((response) => {
+                    console.log(response.data)
+                    this.recipes = response.data
+                })
+                .catch((e)=>{console.log(e)})
+        }
+    }
 }
 </script>
 
