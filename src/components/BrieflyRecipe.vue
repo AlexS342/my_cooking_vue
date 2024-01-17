@@ -1,27 +1,31 @@
 <template>
     <div class="brieflyRecipe w100p">
-
-        <div class="list w100p" v-for="recipe in recipes">
-            <div class="container pd3 w100p">
-                <div class="imgWRP">
-                    <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
-                </div>
-                <div class="description pdl2">
-                    <router-link class="header mrb1" :to="'/recipe/' + recipe.id">
-                        {{recipe.id + " " + recipe.title }}
-                    </router-link>
-                    <p class="productList mrb1">
-                        <span v-for="item in recipe.products">{{item.name + ", "}}</span>
-                    </p>
-                    <div class="icons">
-                        <div class="itemIcon pd1 mrl1">
-                            <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                            <p class="iconText pdl1">{{ recipe['full_time'] }}</p>
+        <template v-if="this.recipes.length === 0">
+            <div>Не один рецепт не найден</div>
+        </template>
+        <template v-if="this.recipes.length > 0">
+            <div class="list w100p" v-for="recipe in recipes">
+                <div class="container pd3 w100p">
+                    <div class="imgWRP">
+                        <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
+                    </div>
+                    <div class="description pdl2">
+                        <router-link class="header mrb1" :to="'/recipe/' + recipe.id">
+                            {{recipe.id + " " + recipe.title }}
+                        </router-link>
+                        <p class="productList mrb1">
+                            <span v-for="item in recipe.products">{{item.name + ", "}}</span>
+                        </p>
+                        <div class="icons">
+                            <div class="itemIcon pd1 mrl1">
+                                <img class="iconImg" src="../assets/icon/time.png" alt="list">
+                                <p class="iconText pdl1">{{ recipe['full_time'] }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </template>
 
     </div>
 </template>
@@ -34,9 +38,10 @@ export default {
     },
     data() {
         return {
-            //Объекты данных
+            showRecipes:true,
         }
     },
+    created() { },
 }
 </script>
 
