@@ -11,24 +11,31 @@
         <div class="form">
             <h3 class="formHeader">Регистрация</h3>
             <form class="list">
+
                 <label class="listLabel" for="name">Ваше имя</label>
-                <input class="listInput" name="name" id="name" type="text" required/>
-                <label class="listLabel" for="dateOfBirth">Ваша дата рождения</label>
-                <input class="listInput" name="dateOfBirth" id="dateOfBirth" type="date" required/>
-                <label class="listLabel" for="gender">Ваш пол (м/ж)</label>
-                <select class="listInput" name="dateOfBirth" id="dateOfBirth" required>
-                    <option></option>
-                    <option value="m">мужской</option>
-                    <option value="w">женский</option>
-                </select>
+                <input class="listInput" name="name" id="name" type="text" v-model="name"/>
+
+<!--                <label class="listLabel" for="dateOfBirth">Ваша дата рождения</label>-->
+<!--                <input class="listInput" name="dateOfBirth" id="dateOfBirth" type="date" required/>-->
+
+<!--                <label class="listLabel" for="gender">Ваш пол (м/ж)</label>-->
+<!--                <select class="listInput" name="gender" id="gender" required>-->
+<!--                    <option></option>-->
+<!--                    <option value="m">мужской</option>-->
+<!--                    <option value="w">женский</option>-->
+<!--                </select>-->
+
                 <label class="listLabel" for="username">Ваш email</label>
-                <input class="listInput" name="username" id="username" type="email" required/>
-                <label class="listLabel" for="password1">Введиде пароль</label>
-                <input class="listInput" name="password1" id="password1" type="password" required/>
-                <label class="listLabel" for="password2">Повторите пароль</label>
-                <input class="listInput" name="password2" id="password2" type="password" required/>
+                <input class="listInput" name="username" id="username" type="email" v-model="username"/>
+
+                <label class="listLabel" for="password">Введиде пароль</label>
+                <input class="listInput" name="password" id="password" type="password" v-model="password"/>
+
+                <label class="listLabel" for="password_confirmation">Повторите пароль</label>
+                <input class="listInput" name="password_confirmation" id="password_confirmation" type="password" v-model="password_confirmation"/>
+
                 <div class="listButtons">
-                    <input class="listButtonsItem" type="button" value="Регестрация">
+                    <input :class="activeButton" :disabled="isButtonDisabled" type="button" v-on:click="sendData" value="Регестрация">
                 </div>
             </form>
         </div>
@@ -36,11 +43,99 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     name: 'Registration',
     // props: {
     //     msg: String
     // }
+    data() {
+        return {
+            //test1@example.com // 123
+            name:"",
+            username:"",
+            password:"",
+            password_confirmation:"",
+            nameBool:false,
+            usernameBool:false,
+            passwordBool:false,
+
+            isButtonDisabled: true,
+            activeButton:"listButtonsItem__disable"
+            // activeButton:"listButtonsItem"
+        }
+    },
+    methods: {
+        /**
+         * При нажатии на кнопку "Вход" делает запрос на аутентификацию
+         */
+        sendData: async function() {
+
+            await axios
+                .post('/register', {
+                    name: this.name,
+                    email: this.username,
+                    password:this.password,
+                    password_confirmation: this.password_confirmation
+                })
+                .then((response) => {
+                    console.log('Регистрация успешна')
+                    console.log(response)
+                    localStorage.setItem('isAuth', "true");
+                    this.$store.dispatch('SET_IS_AUTH_A', true);
+
+                    this.$router.push({path:'/recipes'})
+                })
+                .catch(function (error) {
+                    console.log('Ошибка регистрации')
+                    console.log(error);
+                });
+        },
+
+        /**
+         * Активирует/Деактивирует кнопку "Регистрация" на вкладке "Регистрация"
+         */
+        statusRegistrationButton: function (){
+            if(this.passwordBool && this.usernameBool && this.nameBool){
+                this.isButtonDisabled = false;
+                this.activeButton = "listButtonsItem";
+            }else{
+                this.isButtonDisabled = true;
+                this.activeButton = "listButtonsItem__disable";
+            }
+        },
+    },
+    watch: {
+        //Отслеживает состояние, если изменилось, то выполняется
+        /**
+         * Отслеживаем ввод имени, если валиден, то поднимаем один из флагов для активации кнопки "Регистрация" и вызывает statusLoginButton
+         * @param n - (boolean) новое значение при изменении состояния
+         */
+        name(n){
+            this.nameBool = n.length >= 3 && n.length <= 25;
+            this.statusRegistrationButton()
+        },
+
+        /**
+         * Отслеживает ввод подтверждения пароля, если длина от 3 до 20 символов и совпадение с паролем, то поднимаем
+         * один из флагов для активации кнопки "Регистрация" и вызывает statusLoginButton
+         * @param n
+         */
+        username(n){
+            this.usernameBool = n.length >= 8 && n.length <= 30;
+            this.statusRegistrationButton()
+        },
+
+        /**
+         * Отслеживаем ввод пароля, если валиден, то поднимаем флад для активации кнопки "Регистрация" и вызывает statusLoginButton
+         * @param n - (boolean) новое значение при изменении состояния
+         */
+        password_confirmation(n){
+            this.passwordBool = n.length >= 3 && n.length <= 20 && this.password_confirmation === this.password;
+            this.statusRegistrationButton()
+        },
+    }
 }
 </script>
 
@@ -143,7 +238,6 @@ export default {
                     border-radius: 5px;
                     border: 1px solid #a1a1a1;
                     box-shadow: 1px 1px 0 0 #a5a5a5, inset 0 -1px 4px 0 #979797;
-                    cursor: pointer;
                 }
                 .listButtonsItem:hover{
                     background-color: #d2e9d3;
@@ -152,7 +246,18 @@ export default {
                     margin: 2px 0 0 0;
                     background-color: #beffc1;
                     box-shadow: -1px -1px 0 0 #a5a5a5, inset 1px 1px 4px 0 #979797;
-                    cursor: pointer;
+                }
+                .listButtonsItem__disable{
+                    margin: 0 0 2px 0;
+                    padding: 6px 24px;
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #a7a7a7;
+                    text-transform: uppercase;
+                    background-color: #8f8f8f;
+                    border-radius: 5px;
+                    border: 1px solid #cbcbcb;
+                    box-shadow: 1px 1px 0 0 #a5a5a5, inset 0 -1px 4px 0 #ffffff;
                 }
             }
         }

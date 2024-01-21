@@ -15,6 +15,9 @@ module.exports = defineConfig({
       '/logout': {
         target: 'http://localhost:8000',
       },
+      '/register': {
+        target: 'http://localhost:8000',
+      },
     },
   }
 })
