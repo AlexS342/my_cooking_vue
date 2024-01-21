@@ -2,6 +2,14 @@
 <!--    <div class="addRecipe">-->
         <form class="form w100p" method="post" enctype="multipart/form-data">
 
+            <div class="list w100p bc2" v-show="responseErr">
+                <div class="container pd3 w100p">
+                    <div class="title mrb2 w100p">
+                        <p class="titleText" style="color: red">{{massageErr}}</p>
+                    </div>
+                </div>
+            </div>
+
 <!--        НАЗВАНИЕ РЕЦЕПТА-->
             <div class="list w100p bc1">
                 <div class="container pd3 w100p">
@@ -11,31 +19,34 @@
                         <p class="titleShow" v-if="!showName" v-on:click="changeShowName">показать</p>
                     </div>
 
+                    <p style="color: red" v-show="titleErr">{{massageErr}}</p>
+
                     <template v-if="showName">
-                        <label class="hint mr1" for="name">Введите название рецепта</label>
-                        <input class="inputName mrx3 w100p" id="name" name="name" type="text">
+                        <label class="hint mr1" for="title">Введите название рецепта</label>
+                        <input class="inputName mrx3 w100p" id="title" name="title" type="text" v-model="title">
                     </template>
                 </div>
             </div>
 
 <!--        КАРТИНКА-->
-            <div class="list w100p bc2">
-                <div class="container pd3 w100p">
-                    <div class="title mrb2 w100p">
-                        <h3 class="titleText">Фото блюда</h3>
-                        <p class="titleShow" v-if="showImg" v-on:click="changeShowImg">свернуть</p>
-                        <p class="titleShow" v-if="!showImg" v-on:click="changeShowImg">показать</p>
-                    </div>
-                    <template v-if="showImg">
-                        <div class="imgWRP">
-                            <img class="img  w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
-                        </div>
-                        <span class="text mr1">Загрузите изображение готового блюда</span>
-                        <input class="inputFile" name="file-input" type="file" multiple>
-                        <label class="labelInputFile pdx3" for="file-input">Выберите файл <input class="inputFile" name="file-input" type="file" multiple></label>
-                    </template>
-                </div>
-            </div>
+<!--            <div class="list w100p bc2">-->
+<!--                <div class="container pd3 w100p">-->
+<!--                    <div class="title mrb2 w100p">-->
+<!--                        <h3 class="titleText">Фото блюда</h3>-->
+<!--                        <p class="titleShow" v-if="showImg" v-on:click="changeShowImg">свернуть</p>-->
+<!--                        <p class="titleShow" v-if="!showImg" v-on:click="changeShowImg">показать</p>-->
+<!--                    </div>-->
+<!--                    <template v-if="showImg">-->
+<!--                        <div class="imgWRP">-->
+<!--                            <img class="img  w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">-->
+<!--                        </div>-->
+<!--                        <span class="text mr1">Загрузите изображение готового блюда</span>-->
+<!--                        <label class="labelInputFile pdx3" for="file-input">Выберите файл-->
+<!--                            <input class="inputFile" name="file-input" id="file-input" type="file" multiple>-->
+<!--                        </label>-->
+<!--                    </template>-->
+<!--                </div>-->
+<!--            </div>-->
 
         <!--        СПИСОК ПРОДУКТОВ                -->
             <div class="list w100p bc3">
@@ -45,52 +56,31 @@
                         <p class="titleShow" v-if="showProduct" v-on:click="changeShowProduct">свернуть</p>
                         <p class="titleShow" v-if="!showProduct" v-on:click="changeShowProduct">показать</p>
                     </div>
+
+                    <div style="color: red" v-show="productErr">{{massageErr}}</div>
+
                     <template v-if="showProduct">
                         <div class="subtitleList w100p">
                             <p class="subtitleItem w60p">продукт</p>
                             <p class="subtitleItem w20p">вес</p>
                             <p class="subtitleItem w20p">ед.</p>
                         </div>
-                        <div class="itemProduct mrt2 w100p">
-                            <input class="inputText pdl1 w60p" type="text">
-                            <input class="inputNum w20p" type="number">
-                            <select class="select w20p">
-                                <option class="option" value="г.">г.</option>
-                                <option class="option" value="ст.л.">ст.л.</option>
-                                <option class="option" value="ч.л.">ч.л.</option>
-                                <option class="option" value="шт">шт</option>
-                                <option class="option" value="ст">ст</option>
-                                <option class="option" value="по вкусу">по вкусу</option>
-                            </select>
-                        </div>
-                        <div class="itemProduct mrt2 w100p">
-                            <input class="inputText pdl1 w60p" type="text">
-                            <input class="inputNum w20p" type="number">
-                            <select class="select w20p">
-                                <option value="г.">г.</option>
-                                <option value="ст.л.">ст.л.</option>
-                                <option value="ч.л.">ч.л.</option>
-                                <option value="шт">шт</option>
-                                <option value="ст">ст</option>
-                                <option value="по вкусу">по вкусу</option>
-                            </select>
-                        </div>
-                        <div class="itemProduct mrt2 w100p">
-                            <input class="inputText pdl1 w60p" type="text">
-                            <input class="inputNum w20p" type="number">
-                            <select class="select w20p">
-                                <option value="г.">г.</option>
-                                <option value="ст.л.">ст.л.</option>
-                                <option value="ч.л.">ч.л.</option>
-                                <option value="шт">шт</option>
-                                <option value="ст">ст</option>
-                                <option value="по вкусу">по вкусу</option>
-                            </select>
-                        </div>
+
+                        <template v-for="(product, index) in products">
+                            <div class="itemProduct mrt2 w100p">
+                                <input class="inputText pdl1 w60p" type="text" v-model.lazy.trim="products[index].name">
+                                <input class="inputNum w20p" type="number" v-model.lazy.number.trim="products[index].quantity">
+                                <select class="select w20p" v-model.lazy.trim="products[index].units">
+                                    <option v-for="(item) in arrProductUnits" :value="item">{{item}}</option>
+                                </select>
+                            </div>
+                        </template>
+
                         <div class="editItem mrt3 w100p">
-                        <input class="button" type="button" value="удалить поле">
-                        <input class="button" type="button" value="добавить поле">
-                    </div>
+                            <input class="button" type="button" v-on:click="removeInputProduct" value="удалить поле">
+                            <input class="button" type="button" v-on:click="addInputProduct" value="добавить поле">
+                        </div>
+
                     </template>
                 </div>
             </div>
@@ -106,20 +96,30 @@
 
                     <template v-if="showProcess">
                         <div class="subtitleList w100p">
-                            <p class="subtitleItem w100p">Поэтапный процесс приготовления</p>
+                            <p class="subtitleItem w80p">Поэтапный процесс приготовления</p>
+                            <p class="subtitleItem w20p">время</p>
                         </div>
-                        <div class="itemProcess mrt2 w100p">
-                            <p class="number mrr2">1.</p>
-                            <textarea class="textarea w100p" rows="3"></textarea>
-                        </div>
-                        <div class="itemProcess mrt2 w100p">
-                            <p class="number mrr2">2.</p>
-                            <textarea class="textarea w100p" rows="3"></textarea>
-                        </div>
+
+                        <div style="color: red" v-show="actionErr">{{massageErr}}</div>
+
+                        <template v-for="(action, index) in actions">
+                            <div class="itemProcess mrt2 w100p">
+                                <textarea class="textarea w80p" rows="3" v-model.lazy.trim="actions[index].name"></textarea>
+                                <div class="timer w20p pdl2">
+                                    <input class="timerNumber w100p" type="number" v-model.lazy.number.trim="actions[index].quantity">
+                                    <select class="timerItem w100p mrt1" v-model.lazy.trim="actions[index].units">
+                                        <option v-for="(item) in arrActionUnits" :value="item">{{item}}</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </template>
+
                         <div class="editItem mrt3 w100p">
-                            <input class="button" type="button" value="удалить поле">
-                            <input class="button" type="button" value="добавить поле">
+                            <input class="button" type="button" v-on:click="removeInputAction" value="удалить поле">
+                            <input class="button" type="button" v-on:click="addInputAction" value="добавить поле">
                         </div>
+
                     </template>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                             <input class="button" type="button" value="отмена">
                         </router-link>
 
-                        <input class="button" type="button" value="сохранить">
+                        <input class="button" type="button" value="сохранить" v-on:click="sendRecipe">
                     </div>
                 </div>
             </div>
@@ -142,6 +142,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     name: 'AddRecipe',
     // props: {
@@ -153,21 +155,339 @@ export default {
             showImg: true,
             showProduct: true,
             showProcess: true,
+            //Данные формы
+
+            arrProductUnits:{KG:'кг', GRAM:'грамм', LITER:'литр', ML:'мил. литр', SHT:'шт.', STL:'ст.ложка', DSL:'дес.ложка', CHL:'ч.ложка', ST:'стакан', UP:'уп.', PVK:'по вкусу',},
+            arrActionUnits:{DN:'День', CH:'Час', MN:'Минута', SK:'Секунда',},
+
+            title:"Жареная курица",
+            products:{
+                product1:{name:"Тушка курицы", quantity:"1", units: 'шт.',},
+                product2:{name:"Майонез оливковый", quantity:"150", units: 'грамм',},
+                product3:{name:"Соль", quantity:"", units: 'по вкусу',},
+            },
+            actions:{
+                action1: {name:"Разморозить курицу", quantity:"6", units: "Час",},
+                action2: {name:"Намазать майонезом", quantity:"", units: "Минута",},
+                action3: {name:"Посолить", quantity:"", units: "Минута",},
+                action4: {name:"Запечь в духовке при температуре 250 градусов", quantity:"45", units: "Минута",},
+            },
+            sendData:{},
+            //Проверка формы
+            massageErr:'',
+            titleErr:false,
+            productErr:false,
+            actionErr:false,
+            responseErr:false
         }
     },
     methods: {
+        sendRecipe: async function (){
+
+            if(!this.getDataForm()){
+                console.log('methods: => sendRecipe: => getDataForm: false')
+                return
+            }
+
+            console.log(this.sendData)
+
+            await axios
+                .post('/api/add-my-recipe', {
+                    title:this.sendData.title,
+                    products:this.sendData.products,
+                    actions:this.sendData.actions
+                })
+                .then((response) => {
+                    console.log(response)
+                    if(response.status === 200){
+                        this.$router.push({path:'/recipes'})
+                    }
+                })
+                .catch(function (error) {
+                        console.log(error);
+                });
+        },
+
+        /**
+         * Собирает данные из формы
+         * @returns {boolean}
+         */
+        getDataForm: function (){
+            let product
+            let action
+
+            //Удаляем пустые поля "Продукт"
+            let i = 0;
+            for(product in this.products){
+                ++i
+                if(this.products[product].name.length === 0){
+                    if(Object.keys(this.products).length > 2){
+                        delete this.products[product]
+                    }
+                    --i
+                }
+            }
+            if(i < 2){
+                this.productErr = true
+                this.massageErr = 'В рецепте должно быть как минимум два продукта'
+                return false;
+            }else{
+                this.productErr = false
+                this.massageErr = ''
+            }
+
+            //Удаляем пустые поля "Действие"
+            i = 0
+            for(action in this.actions){
+                ++i
+                if(this.actions[action].name.length === 0){
+                    if(Object.keys(this.actions).length > 2){
+                        delete this.actions[action]
+                    }
+                    --i
+                }
+            }
+            if(i < 2){
+                this.actionErr = true
+                this.massageErr = 'В рецепте должно быть как минимум два дейстыия по приготовлению'
+                return false;
+            }else{
+                this.actionErr = false
+                this.massageErr = ''
+            }
+
+            //Проверяем правильно ли заполнен рецепт
+            if(!this.validationForm()){
+                return false;
+            }
+
+            // Если установить null в пустых строках, возникает ошибка при повторной отправке
+            // Если для продукта выбрано "по вкусо", то вес продукта устанавливаем null
+            // Для неустановленых таймеров устанавливаем 0
+            // this.setTrueType()
+
+            //Объект для отправки на backend
+            this.sendData = {
+                    title:this.title,
+                    products:this.products,
+                    actions:this.actions,
+                }
+
+            return true
+        },
+
+        /**
+         * Сворачивает и разворачивает блок "Название рецепта"
+         */
         changeShowName: function () {
             this.showName = !this.showName
         },
+
+        /**
+         * Сворачивает и разворачивает блок "Фотография рецепта"
+         */
         changeShowImg: function () {
             this.showImg = !this.showImg
         },
+
+        /**
+         * Сворачивает и разворачивает блок "Продуктв рецепта"
+         */
         changeShowProduct: function () {
             this.showProduct = !this.showProduct
         },
+
+        /**
+         * Сворачивает и разворачивает блок "Действия рецепта"
+         */
         changeShowProcess: function () {
             this.showProcess = !this.showProcess
         },
+
+        /**
+         * Добавляет строку в блоке добавления продукта в рецепт
+         */
+        addInputProduct: function () {
+            let size = Object.keys(this.products).length;
+            ++size
+            let itemName = 'product' + size
+            this.products[itemName] = {name:"", quantity:"", units:"GRAM",}
+        },
+
+        /**
+         * Удаляет последнюю строку из блока добавления продуктов в рецепт
+         */
+        removeInputProduct: function () {
+            let size = Object.keys(this.products).length
+            let itemName = 'product' + size
+            delete this.products[itemName]
+        },
+
+        /**
+         * Добавляет строку в блок добавления действий приготовления рецепта
+         */
+        addInputAction: function () {
+            let size = Object.keys(this.actions).length;
+            ++size
+            let itemName = 'action' + size
+            this.actions[itemName] = {action:"", quantity:"", units:"MN"}
+        },
+
+        /**
+         * Удаляет последнюю строку из блока добаления действий приготовления рецепта
+         */
+        removeInputAction: function () {
+            let size = Object.keys(this.actions).length
+            let itemName = 'action' + size
+            delete this.actions[itemName]
+        },
+
+        /**
+         * Проверяет правильность заполнения полей рецепта, возвращает логическое значение
+         * @returns {boolean}
+         */
+        validationForm: function (){
+            this.titleErr = false
+            this.productErr = false
+            this.actionErr = false
+            this.massageErr = ''
+
+            //Валидация Названия рецепта
+            if(this.title.length < 5){
+                this.titleErr = true
+                this.massageErr = 'Короткое название рецепта. Минимум 5 символов.'
+                return false
+            }else if(this.title.length > 150){
+                this.titleErr = true
+                this.massageErr = 'Длинное название рецепта. Максимум 150 символов.'
+                return false
+            }
+
+            //Валидация продуктов
+            let product;
+            for(product in this.products){
+
+                if(this.products[product].name.length !== 0){
+                    if(this.products[product].name.length < 3){
+                        this.productErr = true
+                        this.massageErr = 'Короткое название одного из продуктов. Минимум 3 символа.'
+                        break
+                    }else if (this.products[product].name.length > 100){
+                        this.productErr = true
+                        this.massageErr = 'Длинное название одного из продуктов. Максимум 150 символов.'
+                        break
+                    }
+
+                }
+
+                if(this.products[product].quantity.length !== 0 || this.products[product].quantity === 0){
+                    this.products[product].quantity = Number(this.products[product].quantity)
+                    if(this.products[product].quantity < 1){
+                        this.productErr = true
+                        this.massageErr = 'Маленький вес одного из продуктов. Минимум 1.'
+                        break
+                    }else if(this.products[product].quantity > 1000){
+                        this.productErr = true
+                        this.massageErr = 'Большой вес одного из продуктов. Максимум 1000.'
+                        break
+                    }
+                }
+
+                if(this.products[product].quantity.length === 0 && this.products[product].units !== 'по вкусу'){
+                    this.productErr = true
+                    this.massageErr = 'Нужно указать вес продукта кроме тех строк, где выбрано "по вкусу"'
+                    break
+                }
+
+                if(this.products[product].quantity.length !== 0 && this.products[product].units === 'по вкусу'){
+                    this.productErr = true
+                    this.massageErr = 'Если вы выбрали "по вкусу", то ненужно указывать вес продукта'
+                    break
+                }
+
+                if(Object.values(this.arrProductUnits).indexOf(this.products[product].units) === -1){
+                    console.log('значение ' + this.products[product].units + ' не найдено')
+                    this.actionErr = true
+                    this.massageErr = 'Некоректные едицы времени приготовления. Выбирайте только преложенные варианты из выпадающего меню.'
+                    break
+                }
+            }
+            if(this.productErr){
+                return false
+            }
+
+            //Валидация действый
+            let action
+            for(action in this.actions){
+
+                if(this.actions[action].name.length !== 0){
+                    if(this.actions[action].name.length < 5){
+                        console.log(this.actions[action].name.length)
+                        this.actionErr = true
+                        this.massageErr = 'Короткое описание одного из процессовв. Минимум 5 символа.'
+                        break
+                    }
+                    else if(this.actions[action].name.length > 200){
+                        this.actionErr = true
+                        this.massageErr = 'Длинное описание одного из процессовв. Максисум 200 символа.'
+                        break
+                    }
+                }
+
+                if(this.actions[action].quantity.length !== 0){
+                    this.actions[action].quantity = Number(this.actions[action].quantity)
+                    if(this.actions[action].quantity < 1){
+                        this.actionErr = true
+                        this.massageErr = 'Указано маленькое время приготовления. Минимум 1'
+                        break
+                    } else if (this.actions[action].quantity > 1000){
+                        this.actionErr = true
+                        this.massageErr = 'Указано большое время приготовления. Максимум 1000'
+                        break
+                    }
+
+                }
+
+                if(Object.values(this.arrActionUnits).indexOf(this.actions[action].units) === -1){
+                    console.log('значение ' + this.actions[action].units + ' не найдено')
+                    this.actionErr = true
+                    this.massageErr = 'Некоректные едицы времени приготовления. Выбирайте только преложенные варианты из выпадающего меню.'
+                    break
+                }
+            }
+            return !this.actionErr;
+        },
+
+        //Если установить null в пустых строках, возникает ошибка при повторной отправке
+        // /**
+        //  * Заменяет пустую строку в параметре quantity на null
+        //  */
+        // setTrueType: function (){
+        //     let product
+        //     for(product in this.products){
+        //         if(this.products[product].quantity === ""){
+        //             this.products[product].quantity = null
+        //         }
+        //     }
+        //
+        //     let action
+        //     for(action in this.actions){
+        //         if(this.actions[action].quantity === ""){
+        //             this.actions[action].quantity = null
+        //         }else{
+        //             this.actions[action].quantity = this.actions[action].quantity * 1
+        //         }
+        //     }
+        // }
+
+
+    },
+    watch: {
+        // Отслеживает состояние, если изменилось, то выполняется
+        // titleErr(n){
+        //     this.showTitleErr = true;
+        // },
+
     }
 }
 </script>
@@ -283,7 +603,7 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
             .inputFile{
                 width: 0.1px;
                 height: 0.1px;
-                opacity: 0;
+                opacity: 0.1%;
                 position: absolute;
                 z-index: -10;
             }
@@ -389,11 +709,23 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
                     border-radius: 4px;
                     border: 1px solid #9b9b9b;
                 }
-                .number{
-                    min-width: 24px;
-                    max-width: 24px;
-                    font-size: 16px;
-                    font-weight: bold;
+                .timer{
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                }
+                .timerNumber{
+                    box-sizing: border-box;
+                    border: 1px solid #979797;
+                    border-radius: 3px;
+                    height: 24px;
+                }
+                .timerItem{
+                    text-align: center;
+                    border: 1px solid #979797;
+                    border-radius: 3px;
+                    background-color: white;
+                    height: 24px;
                 }
             }
 

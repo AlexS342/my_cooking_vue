@@ -1,20 +1,20 @@
 <template>
     <form class="form w100p" method="post" enctype="multipart/form-data">
         <!--        КАРТИНКА-->
-        <div class="list w100p bc2">
-            <div class="container pd3 w100p">
-                <div class="title mrb2 w100p">
-                    <h3 class="titleText">Фото блюда</h3>
-                    <p class="titleShow" v-if="showImg" v-on:click="changeShowImg">свернуть</p>
-                    <p class="titleShow" v-if="!showImg" v-on:click="changeShowImg">показать</p>
-                </div>
-                <template v-if="showImg">
-                    <div class="imgWRP">
-                        <img class="img  w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
-                    </div>
-                </template>
-            </div>
-        </div>
+<!--        <div class="list w100p bc2">-->
+<!--            <div class="container pd3 w100p">-->
+<!--                <div class="title mrb2 w100p">-->
+<!--                    <h3 class="titleText">Фото блюда</h3>-->
+<!--                    <p class="titleShow" v-if="showImg" v-on:click="changeShowImg">свернуть</p>-->
+<!--                    <p class="titleShow" v-if="!showImg" v-on:click="changeShowImg">показать</p>-->
+<!--                </div>-->
+<!--                <template v-if="showImg">-->
+<!--                    <div class="imgWRP">-->
+<!--                        <img class="img  w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">-->
+<!--                    </div>-->
+<!--                </template>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <!--        СПИСОК ПРОДУКТОВ                -->
         <div class="list w100p bc3">
@@ -27,9 +27,10 @@
                 <template v-if="showProduct">
                     <template v-for="(item, index) in recipe.products">
                         <div class="itemProduct mrt3 w100p">
-                            <p class="productIndex w10p">{{ Number(index) + 1 }}.</p>
-                            <p class="productText w70p">{{ item.product }}</p>
-                            <p class="productNum w20p">{{ item.quantity + " " + item.items}}</p>
+<!--                            <p class="productIndex w10p">{{ Number(index) + 1 }}.</p>-->
+                            <p class="productText w80p">{{ item.name }}</p>
+                            <p class="productNum w20p" v-if="item.quantity === null">{{item.units}}</p>
+                            <p class="productNum w20p" v-if="item.quantity !== null">{{item.quantity + " " + item.units}}</p>
                         </div>
                     </template>
                 </template>
@@ -45,10 +46,12 @@
                     <p class="titleShow" v-if="!showProcess" v-on:click="changeShowProcess">показать</p>
                 </div>
                 <template v-if="showProcess">
-                    <template v-for="(item, index) in recipe.active">
+                    <template v-for="(item, index) in recipe.actions">
                         <div class="itemProcess mrt3 w100p">
-                            <p class="number w10p">{{ Number(index) + 1 }}.</p>
-                            <p class="text w90p">{{ item.product }}</p>
+<!--                            <p class="number w10p">{{ Number(index) + 1 }}.</p>-->
+                            <p class="text w1000p">{{ item.name }}</p>
+<!--                            <p class="time w20p" v-if="item.quantity === null">{{ 'н.д.' }}</p>-->
+<!--                            <p class="time w20p" v-if="item.quantity !== null">{{ item.quantity + ' ' + item.units }}</p>-->
                         </div>
                     </template>
                 </template>
@@ -221,6 +224,10 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
                 .text{
                     font-size: 14px;
                     text-align: start;
+                }
+                .time{
+                    font-size: 14px;
+                    text-align: center;
                 }
                 .number{
                     font-size: 14px;

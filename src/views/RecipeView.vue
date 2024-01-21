@@ -1,6 +1,6 @@
 <template>
     <div class="recipes">
-        <h3 class="recipes__header">{{ this.recipe.id + " " + this.recipe.header }}</h3>
+        <h3 class="recipes__header">{{ this.recipe.id + " " + this.recipe.title }}</h3>
         <Recipe v-bind:recipe="this.recipe"/>
     </div>
 </template>
@@ -8,6 +8,7 @@
 <script>
 // @ является псевдонимом для /src
 import Recipe from '@/components/Recipe.vue'
+import axios from "axios";
 export default {
     name: 'RecipeView',
     components: {
@@ -237,6 +238,25 @@ export default {
                 this.recipe = this.recipes[item];
             }
         }
+
+
+        const url = '/api/get_recipe_for_id/?recipe_id=' + Number(this.$route.params.id)
+        console.log(url)
+
+        axios
+            .get(url, )
+            .then((response) => {
+
+                this.recipe = response.data
+                console.log(this.recipe)
+
+                // localStorage.setItem('isAuth', "true");
+                // this.$store.dispatch('SET_IS_AUTH_A', true);
+                // this.$router.push({path:'/recipes'})
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     },
 }
 </script>
