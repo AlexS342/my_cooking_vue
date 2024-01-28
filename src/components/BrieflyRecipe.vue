@@ -19,7 +19,7 @@
                         <div class="icons">
                             <div class="itemIcon pd1 mrl1">
                                 <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                                <p class="iconText pdl1">{{ recipe['full_time'] }}</p>
+                                <p class="iconText pdl1">{{ recipe['full_time'] }} мин</p>
                             </div>
                         </div>
                     </div>

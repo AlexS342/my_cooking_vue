@@ -35,7 +35,7 @@
                 <input class="listInput" name="password_confirmation" id="password_confirmation" type="password" v-model="password_confirmation"/>
 
                 <div class="listButtons">
-                    <input :class="activeButton" :disabled="isButtonDisabled" type="button" v-on:click="sendData" value="Регестрация">
+                    <input :class="activeButton" :disabled="isButtonDisabled" type="button" v-on:click="sendData" value="Регистрация">
                 </div>
             </form>
         </div>
