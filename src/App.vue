@@ -24,7 +24,16 @@ export default defineComponent({
         }
     },
     created() {
-        this.isAuth = localStorage.getItem("isAuth")
+
+        if(!!localStorage.getItem("isAuth")){
+            if(localStorage.getItem("isAuth") === "false"){
+                this.isAuth = false
+            }else{
+                this.isAuth = true
+            }
+        }else{
+            this.isAuth = false
+        }
         this.$store.dispatch('SET_IS_AUTH_A', this.isAuth);
     },
     methods: {},
