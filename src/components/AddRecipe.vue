@@ -124,6 +124,48 @@
                 </div>
             </div>
 
+            <!--        ФИЛЬТРЫ           -->
+            <div class="list w100p bc4">
+                <div class="container pd3 w100p">
+                    <div class="title mrb2 w100p">
+                        <h3 class="titleText">Фильтры</h3>
+                        <p class="titleShow" v-if="showFilter" v-on:click="changeShowFilter">свернуть</p>
+                        <p class="titleShow" v-if="!showFilter" v-on:click="changeShowFilter">показать</p>
+                    </div>
+
+                    <div style="color: red" v-show="filterErr">{{massageErr}}</div>
+
+                    <template v-if="showFilter">
+                        <div class="allFilter">
+                            <div class="filterWRP">
+                                <p class="filterLabel"><label for="typeRecipes">Тип блюда</label></p>
+                                <select class="filterSelectB" id="typeRecipes" v-model.lazy.trim="typeRecipes">
+                                    <option v-for="(item) in arrTypeRecipes" :value="item">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="filterWRP">
+                                <p class="filterLabel"><label for="categoryRecipes">Категория блюда</label></p>
+                                <select class="filterSelectB" id="categoryRecipes" v-model.lazy.trim="categoryRecipes">
+                                    <option v-for="(item) in arrCategoryRecipes" :value="item">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="filterWRP">
+                                <p class="filterLabel"><label for="portion">Количество порций</label></p>
+                                <input class="filterInputB" id="portion" type="number" v-model.lazy="portion">
+                            </div>
+                            <div class="filterWRP">
+                                <p class="filterLabel"><label for="time">Время приготовления</label></p>
+                                <input class="filterInputL" id="time" type="number" v-model.lazy.number="fullTime">
+                                <select class="filterSelectL" v-model.lazy.trim="fullTimeUnix">
+                                    <option v-for="(item) in arrFullTimeUnits" :value="item">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </template>
+                </div>
+            </div>
+
 <!--                    КНОПКИ                          -->
             <div class="list w100p">
                 <div class="container pd3 w100p">
@@ -155,30 +197,40 @@ export default {
             showImg: true,
             showProduct: true,
             showProcess: true,
-            //Данные формы
+            showFilter: true,
 
-            arrProductUnits:{KG:'кг', GRAM:'грамм', LITER:'литр', ML:'мил. литр', SHT:'шт.', STL:'ст.ложка', DSL:'дес.ложка', CHL:'ч.ложка', ST:'стакан', UP:'уп.', PVK:'по вкусу',},
+            arrProductUnits:{KG:'кг', GRAM:'грамм', LITER:'литр', ML:'мил. литр', SHT:'шт', STL:'ст.ложка', DSL:'дес.ложка', CHL:'ч.ложка', ST:'стакан', UP:'уп', PVK:'по вкусу',},
             arrActionUnits:{DN:'День', CH:'Час', MN:'Минута', SK:'Секунда',},
+            arrTypeRecipes:{HOT:'горячее', COLT:'холодное', DR:'другое', NK:'не указано',},
+            arrCategoryRecipes:{VP:'выпеска', GR:'гарниры', DR:'другое', DS:'десерты', MS:'мясо', NP:'напитки', NK:'не указано', OV:'овощи', RBb:'рыба', SL:'салаты', SP:'супы', SO:'соусы', FR:'фрукты',},
+            arrFullTimeUnits:{CH:'ч.', MN:'мин.',},
 
-            title:"Жареная курица",
+            title:"",
             products:{
-                product1:{name:"Тушка курицы", quantity:"1", units: 'шт.',},
-                product2:{name:"Майонез оливковый", quantity:"150", units: 'грамм',},
-                product3:{name:"Соль", quantity:"", units: 'по вкусу',},
+                product1:{name:"", quantity:"", units: 'грамм',},
+                product2:{name:"", quantity:"", units: 'грамм',},
+                product3:{name:"", quantity:"", units: 'грамм',},
             },
             actions:{
-                action1: {name:"Разморозить курицу", quantity:"6", units: "Час",},
-                action2: {name:"Намазать майонезом", quantity:"", units: "Минута",},
-                action3: {name:"Посолить", quantity:"", units: "Минута",},
-                action4: {name:"Запечь в духовке при температуре 250 градусов", quantity:"45", units: "Минута",},
+                action1: {name:"", quantity:"", units: "Минута",},
+                action2: {name:"", quantity:"", units: "Минута",},
+                action3: {name:"", quantity:"", units: "Минута",},
+                action4: {name:"", quantity:"", units: "Минута",},
             },
             sendData:{},
+            typeRecipes:'не указано',
+            categoryRecipes:'не указано',
+            portion:'',
+            fullTime:'',
+            fullTimeUnix:'мин.',
+
             //Проверка формы
             massageErr:'',
             titleErr:false,
             productErr:false,
             actionErr:false,
-            responseErr:false
+            responseErr:false,
+            filterErr:false,
         }
     },
     methods: {
@@ -195,7 +247,11 @@ export default {
                 .post('/api/add-my-recipe', {
                     title:this.sendData.title,
                     products:this.sendData.products,
-                    actions:this.sendData.actions
+                    actions:this.sendData.actions,
+                    portion:this.sendData.portion,
+                    full_time:this.sendData.full_time,
+                    type:this.sendData.type,
+                    category:this.sendData.category,
                 })
                 .then((response) => {
                     console.log(response)
@@ -261,17 +317,17 @@ export default {
                 return false;
             }
 
-            // Если установить null в пустых строках, возникает ошибка при повторной отправке
-            // Если для продукта выбрано "по вкусо", то вес продукта устанавливаем null
-            // Для неустановленых таймеров устанавливаем 0
-            // this.setTrueType()
-
             //Объект для отправки на backend
             this.sendData = {
-                    title:this.title,
-                    products:this.products,
-                    actions:this.actions,
-                }
+                title:this.title,
+                description:null,
+                products:this.products,
+                actions:this.actions,
+                type:this.typeRecipes,
+                category:this.categoryRecipes,
+                portion:this.portion,
+                full_time:this.fullTime + ' ' + this.fullTimeUnix
+            }
 
             return true
         },
@@ -305,13 +361,20 @@ export default {
         },
 
         /**
+         * Сворачивает и разворачивает блок "Фильтры"
+         */
+        changeShowFilter: function () {
+            this.showFilter = !this.showFilter
+        },
+
+        /**
          * Добавляет строку в блоке добавления продукта в рецепт
          */
         addInputProduct: function () {
             let size = Object.keys(this.products).length;
             ++size
             let itemName = 'product' + size
-            this.products[itemName] = {name:"", quantity:"", units:"GRAM",}
+            this.products[itemName] = {name:"", quantity:"", units:"грамм",}
         },
 
         /**
@@ -330,7 +393,8 @@ export default {
             let size = Object.keys(this.actions).length;
             ++size
             let itemName = 'action' + size
-            this.actions[itemName] = {action:"", quantity:"", units:"MN"}
+            this.actions[itemName] = {name:"", quantity:"", units:"Минута"}
+            console.log(this.actions)
         },
 
         /**
@@ -350,6 +414,8 @@ export default {
             this.titleErr = false
             this.productErr = false
             this.actionErr = false
+            this.filterErr = false
+
             this.massageErr = ''
 
             //Валидация Названия рецепта
@@ -377,7 +443,6 @@ export default {
                         this.massageErr = 'Длинное название одного из продуктов. Максимум 150 символов.'
                         break
                     }
-
                 }
 
                 if(this.products[product].quantity.length !== 0 || this.products[product].quantity === 0){
@@ -455,32 +520,78 @@ export default {
                     break
                 }
             }
-            return !this.actionErr;
+            if(this.actionErr){
+                return false
+            }
+            // return !this.actionErr;
+
+            //Валидация тип рецепта
+            if(Object.values(this.arrTypeRecipes).indexOf(this.typeRecipes) === -1){
+                console.log('значение ' + this.typeRecipes + ' не найдено')
+                this.filterErr = true
+                this.massageErr = 'Тип блюда указан не корректно'
+                return false
+            }
+
+            //Валидация категории рецепта
+            if(Object.values(this.arrCategoryRecipes).indexOf(this.categoryRecipes) === -1){
+                console.log('значение ' + this.categoryRecipes + ' не найдено')
+                this.filterErr = true
+                this.massageErr = 'Категория блюда указан не корректно'
+                return false
+            }
+
+            //Валидация единиц времени приготовления
+            if(Object.values(this.arrFullTimeUnits).indexOf(this.fullTimeUnix) === -1){
+                console.log('значение ' + this.fullTimeUnix + ' не найдено')
+                this.filterErr = true
+                this.massageErr = 'Время приготовления блюда должно измерятся в предложенных вариантах'
+                return false
+            }
+
+            //Валидация количества порций
+            if(typeof this.portion === 'string' && this.portion.length !== 0){
+                console.log('Количество порцый нужно указывать цифрами')
+                this.filterErr = true
+                this.massageErr = 'Количество порцый нужно указывать цифрами'
+                return false
+            }else if(typeof this.portion === 'number' && this.portion < 1){
+                console.log('Количество порций ' + this.portion + ' меньше 1')
+                this.filterErr = true
+                this.massageErr = 'Указано количество порцый меньще нуля'
+                return false
+            }else if(typeof this.portion === 'number' && this.portion > 50){
+                console.log('Количество порций ' + this.portion + ' больше 50')
+                this.filterErr = true
+                this.massageErr = 'Указано количество порцый больше 50'
+                return false
+            }
+
+            //Валидация времени приготовления (цифры)
+            if(typeof this.fullTime === 'string' && this.fullTime.length > 0){
+                console.log('Время приготовления нужно указывать цифрами')
+                this.filterErr = true
+                this.massageErr = 'Время приготовления нужно указывать цифрами'
+                return false
+            }
+            else if(typeof this.fullTime === 'number' && this.fullTime < 1){
+                console.log('Указано время приготовления ' + this.portion + ' меньше 1')
+                this.filterErr = true
+                this.massageErr = 'Указано количество порцый меньще нуля'
+                return false
+            }
+            else if(typeof this.fullTime === 'number' && this.fullTime > 500){
+                console.log('Указано время приготовления ' + this.portion + ' ,больше 500')
+                this.filterErr = true
+                this.massageErr = 'Указано количество порцый меньще нуля'
+                return false
+            }
+            else if(typeof this.fullTime === 'string' && this.fullTime.length === 0){
+                this.fullTimeUnix = ''
+            }
+
+            return true
         },
-
-        //Если установить null в пустых строках, возникает ошибка при повторной отправке
-        // /**
-        //  * Заменяет пустую строку в параметре quantity на null
-        //  */
-        // setTrueType: function (){
-        //     let product
-        //     for(product in this.products){
-        //         if(this.products[product].quantity === ""){
-        //             this.products[product].quantity = null
-        //         }
-        //     }
-        //
-        //     let action
-        //     for(action in this.actions){
-        //         if(this.actions[action].quantity === ""){
-        //             this.actions[action].quantity = null
-        //         }else{
-        //             this.actions[action].quantity = this.actions[action].quantity * 1
-        //         }
-        //     }
-        // }
-
-
     },
     watch: {
         // Отслеживает состояние, если изменилось, то выполняется
@@ -540,7 +651,6 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    //width: 100%;
     color: #4d4d4d;
 
     .list{
@@ -726,6 +836,42 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
                     border-radius: 3px;
                     background-color: white;
                     height: 24px;
+                }
+            }
+
+            .allFilter{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                width: 100%;
+                font-size: 14px;
+                padding-top: 12px;
+
+                .filterWRP{
+                    display: flex;
+                    flex-wrap: nowrap;
+                    margin-bottom: 12px;
+                    margin-left: 12px;
+                    margin-right: 12px;
+                    .filterLabel{
+                        width: 150px;
+                    }
+                    .filterInputB{
+                        width: 100px;
+                        box-sizing: border-box;
+                    }
+                    .filterInputL{
+                        width: 50px;
+                        box-sizing: border-box;
+                    }
+                    .filterSelectB{
+                        width: 100px;
+                        box-sizing: border-box;
+                    }
+                    .filterSelectL{
+                        width: 50px;
+                        box-sizing: border-box;
+                    }
                 }
             }
 
