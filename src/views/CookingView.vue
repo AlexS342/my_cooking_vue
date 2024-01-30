@@ -1,6 +1,6 @@
 <template>
     <div class="recipes">
-        <h3 class="recipes__header">{{ this.recipe.id + " " + this.recipe.header }}</h3>
+        <h3 class="recipes__header">{{this.recipe.title }}</h3>
         <Cooking v-bind:recipe="this.recipe"/>
     </div>
 </template>
@@ -8,6 +8,7 @@
 <script>
 // @ является псевдонимом для /src
 import Cooking from '@/components/Cooking.vue'
+import {mapGetters} from "vuex";
 export default {
     name: 'CookingView',
     components: {
@@ -30,7 +31,7 @@ export default {
             },
             //объект recipes заменяет получение данных от backend
             recipes:{
-                1:{
+                /*1:{
                     id:1,
                     header:'Десерт "Страчателла" с малиновым соусом',
                     products: {
@@ -227,17 +228,21 @@ export default {
                     },
                     fullTime:"10 мин",
                     portions:6,
-                },
+                },*/
             }
         }
     },
     created() {
-        for(let item in this.recipes){
-            if(this.recipes[item].id === Number(this.$route.params.id)){
-                this.recipe = this.recipes[item];
-            }
-        }
+        this.recipe = this.$store.getters.GET_RECIPE;
+        console.log(this.recipe)
     },
+    computed: {
+        ...mapGetters([
+            //перечисляем гетеры из сторе и потом используем как переменные.
+            'GET_RECIPE',
+            // ...
+        ])
+    }
 }
 </script>
 

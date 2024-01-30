@@ -13,7 +13,7 @@
             <form class="list">
 
                 <label class="listLabel" for="name">Ваше имя</label>
-                <input class="listInput" name="name" id="name" type="text" v-model="name"/>
+                <input class="listInput" name="name" id="name" type="text" v-model="name" placeholder="Иван Иванович"/>
 
 <!--                <label class="listLabel" for="dateOfBirth">Ваша дата рождения</label>-->
 <!--                <input class="listInput" name="dateOfBirth" id="dateOfBirth" type="date" required/>-->
@@ -26,7 +26,7 @@
 <!--                </select>-->
 
                 <label class="listLabel" for="username">Ваш email</label>
-                <input class="listInput" name="username" id="username" type="email" v-model="username"/>
+                <input class="listInput" name="username" id="username" type="email" v-model="username" placeholder="user@example.com"/>
 
                 <label class="listLabel" for="password">Введиде пароль</label>
                 <input class="listInput" name="password" id="password" type="password" v-model="password"/>

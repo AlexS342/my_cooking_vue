@@ -1,20 +1,20 @@
 <template>
     <div class="recipe w100p">
 <!--        КАРТИНКА                -->
-        <div class="list w100p">
-            <div class="container pd3 w100p">
-                <div class="title mrb2 w100p">
-                    <h3 class="titleText">Фото блюда</h3>
-                    <p class="titleShow" v-if="showImg" v-on:click="changeShowImg">свернуть</p>
-                    <p class="titleShow" v-if="!showImg" v-on:click="changeShowImg">показать</p>
-                </div>
-                <template v-if="showImg">
-                    <div class="imgWRP">
-                        <img class="img  w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
-                    </div>
-                </template>
-            </div>
-        </div>
+<!--        <div class="list w100p">-->
+<!--            <div class="container pd3 w100p">-->
+<!--                <div class="title mrb2 w100p">-->
+<!--                    <h3 class="titleText">Фото блюда</h3>-->
+<!--                    <p class="titleShow" v-if="showImg" v-on:click="changeShowImg">свернуть</p>-->
+<!--                    <p class="titleShow" v-if="!showImg" v-on:click="changeShowImg">показать</p>-->
+<!--                </div>-->
+<!--                <template v-if="showImg">-->
+<!--                    <div class="imgWRP">-->
+<!--                        <img class="img  w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">-->
+<!--                    </div>-->
+<!--                </template>-->
+<!--            </div>-->
+<!--        </div>-->
 
 
 <!--        СПИСОК ПРОДУКТОВ                -->
@@ -28,15 +28,14 @@
 
                 <template v-if="showProduct">
                     <div class="listProduct w100p">
-
                         <template v-for="(item) in this.recipe.products">
                             <div class="itemProduct pdy2 w100p">
                                 <div class="check">
                                     <input class="checkInput mrr2" type="checkbox">
-                                    <label class="checkLabel">{{item.product}}</label>
+                                    <label class="checkLabel">{{item.name}}</label>
                                 </div>
                                 <p class="weight">
-                                    {{ item.quantity + " " + item.items}}
+                                    {{ item.quantity + " " + item.units}}
                                 </p>
                             </div>
                         </template>
@@ -57,16 +56,16 @@
 
                 <template v-if="showProcess">
                     <div class="listProcess w100p">
-                        <template v-for="(item) in recipe.active">
+                        <template v-for="(item) in recipe.actions">
                             <div class="itemProcess pdy2 w100p">
-                            <div class="check">
-                                <input class="checkInput mrr2" type="checkbox">
-                                <label class="checkLabel">{{item.product}}</label>
+                                <div class="check">
+                                    <input class="checkInput mrr2" type="checkbox">
+                                    <label class="checkLabel">{{item.name}}</label>
+                                </div>
+                                <div class="time pdy1">
+                                    <p class="timeWeight" v-if="checkingDataType(item.quantity, item.units)">{{ item.quantity + " " + item.units}}</p>
+                                </div>
                             </div>
-                            <div class="time pdy1">
-                                <p class="timeWeight" v-if="checkingDataType(item.quantity, item.items)">{{ item.quantity + " " + item.items}}</p>
-                            </div>
-                        </div>
                         </template>
 
                     </div>
@@ -115,6 +114,11 @@ export default {
             this.showProcess = !this.showProcess;
         },
         checkingDataType: function (a, b){
+            // if(a != null){
+            //     return a + ' ' + b
+            // }else{
+            //     return b
+            // }
             return Number.isInteger(a) && typeof b === 'string';
         }
     }
@@ -272,8 +276,8 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
                     }
 
                     .time{
-                        min-width: 50px;
-                        max-width: 50px;
+                        min-width: 60px;
+                        max-width: 60px;
                         //background-color: #d7d7ff;
                         //border-radius: 4px;
 

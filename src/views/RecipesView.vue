@@ -1,6 +1,6 @@
 <template>
     <div class="recipes">
-        <h3 class="recipes__header">Мои рецепты</h3>
+        <h3 class="recipes__header">Рецепты</h3>
         <div v-show="GET_IS_AUTH" class="listButtons">
             <p :class="this.allRecipeClass" v-on:click="setRecipesShow('all')" >Все</p>
             <p :class="this.myRecipeClass" v-on:click="setRecipesShow('my')" >Мои</p>
@@ -64,7 +64,6 @@ export default {
                 this.myRecipeClass = 'listButtonsItem'
                 this.saveRecipeClass = 'listButtonsItem__active'
                 this.getRecipes('/api/get-save-user-recipe')
-                // this.recipes = {}
             }
         },
     },

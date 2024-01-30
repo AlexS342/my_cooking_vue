@@ -6,20 +6,32 @@
         <template v-if="this.recipes.length > 0">
             <div class="list w100p" v-for="recipe in recipes">
                 <div class="container pd3 w100p">
-                    <div class="imgWRP">
-                        <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">
-                    </div>
+<!--                    <div class="imgWRP">-->
+<!--                        <img class="img w100p" src="../assets/img/grecheskiy-salat.jpg" alt="photo">-->
+<!--                    </div>-->
                     <div class="description pdl2">
                         <router-link class="header mrb1" :to="'/recipe/' + recipe.id">
-                            {{recipe.id + " " + recipe.title }}
+                            {{recipe.title }}
                         </router-link>
                         <p class="productList mrb1">
                             <span v-for="item in recipe.products">{{item.name + ", "}}</span>
                         </p>
                         <div class="icons">
-                            <div class="itemIcon pd1 mrl1">
+                            <div class="itemIcon pd1 mrl1" v-if="typeof recipe['type'] === 'string'">
+                                <img class="iconImg" src="../assets/icon/type.png" alt="list">
+                                <p class="iconText pdl1">{{ recipe['type'] }}</p>
+                            </div>
+                            <div class="itemIcon pd1 mrl1" v-if="typeof recipe['category'] === 'string'">
+                                <img class="iconImg" src="../assets/icon/category.png" alt="list">
+                                <p class="iconText pdl1">{{ recipe['category'] }}</p>
+                            </div>
+                            <div class="itemIcon pd1 mrl1" v-if="typeof recipe['portion'] === 'number'">
+                                <img class="iconImg" src="../assets/icon/portion.png" alt="list">
+                                <p class="iconText pdl1">{{ recipe['portion'] }}</p>
+                            </div>
+                            <div class="itemIcon pd1 mrl1" v-if="typeof recipe['full_time'] === 'string'">
                                 <img class="iconImg" src="../assets/icon/time.png" alt="list">
-                                <p class="iconText pdl1">{{ recipe['full_time'] }} мин</p>
+                                <p class="iconText pdl1">{{ recipe['full_time'] }}</p>
                             </div>
                         </div>
                     </div>
@@ -112,8 +124,9 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
             }
 
             .description{
-                min-width: 65%;
-                max-width: 65%;
+                //min-width: 65%;
+                //max-width: 65%;
+                width: 100%;
                 display: flex;
                 flex-direction: column;
                 box-sizing: border-box;

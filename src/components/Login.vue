@@ -12,7 +12,7 @@
             <h3 class="formHeader">Авторизация</h3>
             <form class="list">
                 <label class="listLabel" for="username">Email пользователя</label>
-                <input class="listInput" name="username" id="username" type="email" v-model="login" placeholder="JonConer81"/>
+                <input class="listInput" name="username" id="username" type="email" v-model="login" placeholder="user@example.com"/>
                 <label class="listLabel" for="password">Пароль пользователя</label>
                 <input class="listInput" name="password" id="password" type="password" v-model="password"/>
                 <div class="listButtons">

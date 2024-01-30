@@ -51,7 +51,7 @@
 <!--                            <p class="number w10p">{{ Number(index) + 1 }}.</p>-->
                             <p class="text w1000p">{{ item.name }}</p>
 <!--                            <p class="time w20p" v-if="item.quantity === null">{{ 'н.д.' }}</p>-->
-<!--                            <p class="time w20p" v-if="item.quantity !== null">{{ item.quantity + ' ' + item.units }}</p>-->
+                            <p class="time w20p" v-if="item.quantity !== null">{{ item.quantity + ' ' + item.units }}</p>
                         </div>
                     </template>
                 </template>
