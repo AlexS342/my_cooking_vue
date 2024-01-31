@@ -43,6 +43,7 @@ export default {
     },
     methods:{
         logout: async function (){
+
             await axios.post('/logout', )
                 .then(() => {
                     //Очистить localStore
@@ -54,7 +55,16 @@ export default {
                     //Перенаправить пользователя
                     this.$router.push({path:'/'})
                 })
-                .catch((e)=>{console.log(e)})
+                .catch((e)=>{
+                    if(e.response.status === 401 || e.response.status === 419){
+                        localStorage.setItem('isAuth', "false");
+                        this.$store.dispatch('SET_IS_AUTH_A', false);
+                        // this.$router.push({path:'/login'})
+                    }else {
+                        console.log(e)
+                    }
+
+                })
         }
 
     },

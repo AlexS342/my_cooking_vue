@@ -97,7 +97,7 @@
                     <template v-if="showProcess">
                         <div class="subtitleList w100p">
                             <p class="subtitleItem w80p">Поэтапный процесс приготовления</p>
-                            <p class="subtitleItem w20p">время</p>
+                            <p class="subtitleItem w20p">таймер</p>
                         </div>
 
                         <div style="color: red" v-show="actionErr">{{massageErr}}</div>
@@ -207,9 +207,9 @@ export default {
 
             title:"",
             products:{
-                product1:{name:"", quantity:"", units: 'грамм',},
-                product2:{name:"", quantity:"", units: 'грамм',},
-                product3:{name:"", quantity:"", units: 'грамм',},
+                product1:{name:"", quantity:"", units: 'г.',},
+                product2:{name:"", quantity:"", units: 'г.',},
+                product3:{name:"", quantity:"", units: 'г.',},
             },
             actions:{
                 action1: {name:"", quantity:"", units: "мин.",},
@@ -374,7 +374,7 @@ export default {
             let size = Object.keys(this.products).length;
             ++size
             let itemName = 'product' + size
-            this.products[itemName] = {name:"", quantity:"", units:"грамм",}
+            this.products[itemName] = {name:"", quantity:"", units:"г.",}
         },
 
         /**
@@ -393,7 +393,7 @@ export default {
             let size = Object.keys(this.actions).length;
             ++size
             let itemName = 'action' + size
-            this.actions[itemName] = {name:"", quantity:"", units:"Минута"}
+            this.actions[itemName] = {name:"", quantity:"", units:"мин."}
             console.log(this.actions)
         },
 

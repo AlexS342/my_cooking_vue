@@ -4,7 +4,7 @@
         <div v-show="GET_IS_AUTH" class="listButtons">
             <p :class="this.allRecipeClass" v-on:click="setRecipesShow('all')" >Все</p>
             <p :class="this.myRecipeClass" v-on:click="setRecipesShow('my')" >Мои</p>
-            <p :class="this.saveRecipeClass" v-on:click="setRecipesShow('save')" >Сохраненые</p>
+            <p :class="this.saveRecipeClass" v-on:click="setRecipesShow('save')" >Закладки</p>
         </div>
         <BrieflyRecipe v-bind:recipes="this.recipes"/>
     </div>
