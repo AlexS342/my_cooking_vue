@@ -51,8 +51,11 @@ export default {
                 // response => {}
             )
             .catch(
-                error => console.log(error)
-            )
+                (error) => {
+                    console.log(error);
+                    let message = 'Status: ' + error.response.status + '; Code: ' + error.code + '; Message: ' + error.message + '; Response: ' + error.response.data.message
+                    this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                })
     },
     methods: {
         /**
@@ -71,9 +74,15 @@ export default {
 
                     this.$router.push({path:'/recipes'})
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                .catch(
+                    (error) => {
+                        let message = 'Status: ' + error.response.status + '; Code: ' + error.code + '; Message: ' + error.message + '; Response: ' + error.response.data.message
+                        this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message, error.response.status]);
+                        console.log(error)
+                        if(error.response.status === 401 || error.response.status === 419){
+                            this.$router.push({path:'/login'})
+                        }
+                    });
         },
         /**
          * Активирует/Деактивирует кнопку "Вход" на вкладке "Авторизация"
@@ -95,7 +104,7 @@ export default {
          * @param n - (boolean) новое значение при изменении состояния
          */
         login(n){
-            this.loginBool = n.length >= 3;
+            this.loginBool = n.length >= 8;
             this.statusLoginButton()
         },
         /**

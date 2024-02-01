@@ -63,9 +63,15 @@ export default {
                 this.$store.dispatch('SET_RECIPE_A', this.recipe);
                 // console.log(this.recipe)
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+            .catch(
+                (error) => {
+                    let message = 'Status: ' + error.response.status + '; Code: ' + error.code + '; Message: ' + error.message + '; Response: ' + error.response.data.message
+                    this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                    console.log(error)
+                    if(error.response.status === 401 || error.response.status === 419){
+                        this.$router.push({path:'/login'})
+                    }
+                });
     },
 }
 </script>

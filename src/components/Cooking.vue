@@ -34,9 +34,8 @@
                                     <input class="checkInput mrr2" type="checkbox">
                                     <label class="checkLabel">{{item.name}}</label>
                                 </div>
-                                <p class="weight">
-                                    {{ item.quantity + " " + item.units}}
-                                </p>
+                                <p class="weight" v-if="item.quantity === null">{{item.units}}</p>
+                                <p class="weight" v-if="item.quantity !== null">{{ item.quantity + " " + item.units}}</p>
                             </div>
                         </template>
 

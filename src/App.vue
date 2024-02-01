@@ -1,6 +1,10 @@
 <template>
     <div class="WRP">
         <Header/>
+        <div class="error" v-show="GET_RESPONSE_ERR">
+            <p class="error_text">{{ GET_ERR_MESSAGE }}</p>
+            <div class="error_close" v-on:click="closeErr">X</div>
+        </div>
         <main>
             <router-view/>
         </main>
@@ -15,6 +19,7 @@ import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import LoginView from '@/views/LoginView.vue'
 import {defineComponent} from "vue";
+import {mapGetters} from "vuex";
 
 export default defineComponent({
     components: {LoginView, Footer, Header},
@@ -36,8 +41,22 @@ export default defineComponent({
         }
         this.$store.dispatch('SET_IS_AUTH_A', this.isAuth);
     },
-    methods: {},
+    methods: {
+        closeErr: function (){
+            let message = ''
+            this.$store.dispatch('SET_RESPONSE_ERR_A', [false, message]);
+        }
+    },
     watch: {},
+    computed: {
+        ...mapGetters([
+            //перечисляем гетеры из сторе и потом используем как переменные.
+            'GET_IS_AUTH',
+            'GET_RESPONSE_ERR',
+            'GET_ERR_MESSAGE',
+            // ...
+        ])
+    }
 })
 
 
@@ -116,6 +135,22 @@ table {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    .error{
+        width: 100%;
+        max-width: 600px;
+        margin: 12px auto;
+        display: flex;
+        .error_text{
+            color: red;
+            padding-left: 4px;
+        }
+        .error_close{
+            font-weight: 700;
+            font-size: 20px;
+            padding: 4px 12px 4px 4px;
+        }
+    }
 }
 
 header {

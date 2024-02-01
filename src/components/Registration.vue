@@ -12,7 +12,7 @@
             <h3 class="formHeader">Регистрация</h3>
             <form class="list">
 
-                <label class="listLabel" for="name">Ваше имя</label>
+                <label class="listLabel" for="name">Ваше имя <span>(от 3 до 25 символов)</span></label>
                 <input class="listInput" name="name" id="name" type="text" v-model="name" placeholder="Иван Иванович"/>
 
 <!--                <label class="listLabel" for="dateOfBirth">Ваша дата рождения</label>-->
@@ -25,10 +25,10 @@
 <!--                    <option value="w">женский</option>-->
 <!--                </select>-->
 
-                <label class="listLabel" for="username">Ваш email</label>
+                <label class="listLabel" for="username">Ваш email <span>(от 8 до 30 символов)</span></label>
                 <input class="listInput" name="username" id="username" type="email" v-model="username" placeholder="user@example.com"/>
 
-                <label class="listLabel" for="password">Введиде пароль</label>
+                <label class="listLabel" for="password">Введиде пароль <span>(от 8 до 20 символов)</span></label>
                 <input class="listInput" name="password" id="password" type="password" v-model="password"/>
 
                 <label class="listLabel" for="password_confirmation">Повторите пароль</label>
@@ -87,10 +87,15 @@ export default {
 
                     this.$router.push({path:'/recipes'})
                 })
-                .catch(function (error) {
-                    console.log('Ошибка регистрации')
-                    console.log(error);
-                });
+                .catch(
+                    (error) => {
+                        let message = 'Status: ' + error.response.status + '; Code: ' + error.code + '; Message: ' + error.message + '; Response: ' + error.response.data.message
+                        this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                        console.log(error)
+                        if(error.response.status === 401 || error.response.status === 419){
+                            this.$router.push({path:'/login'})
+                        }
+                    });
         },
 
         /**
@@ -132,7 +137,7 @@ export default {
          * @param n - (boolean) новое значение при изменении состояния
          */
         password_confirmation(n){
-            this.passwordBool = n.length >= 3 && n.length <= 20 && this.password_confirmation === this.password;
+            this.passwordBool = n.length >= 8 && n.length <= 20 && this.password_confirmation === this.password;
             this.statusRegistrationButton()
         },
     }
@@ -210,6 +215,9 @@ export default {
             .listLabel{
                 font-size: 14px;
                 margin-left: 16px;
+            }
+            .listLabel>span{
+                font-size: 10px;
             }
             .listInput{
                 margin: 6px 16px 12px 16px;

@@ -46,7 +46,15 @@ export default {
                 .then((response) => {
                     this.recipes = response.data
                 })
-                .catch((e)=>{console.log(e)})
+                .catch(
+                    (error) => {
+                        let message = 'Status: ' + error.response.status + '; Code: ' + error.code + '; Message: ' + error.message + '; Response: ' + error.response.data.message
+                        this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                        console.log(error)
+                        if(error.response.status === 401 || error.response.status === 419){
+                            this.$router.push({path:'/login'})
+                        }
+                    })
         },
         setRecipesShow: function (show){
             if(show === 'all'){

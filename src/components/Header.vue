@@ -55,13 +55,15 @@ export default {
                     //Перенаправить пользователя
                     this.$router.push({path:'/'})
                 })
-                .catch((e)=>{
-                    if(e.response.status === 401 || e.response.status === 419){
+                .catch((error)=>{
+                    if(error.response.status === 401 || error.response.status === 419){
                         localStorage.setItem('isAuth', "false");
                         this.$store.dispatch('SET_IS_AUTH_A', false);
                         // this.$router.push({path:'/login'})
                     }else {
-                        console.log(e)
+                        let message = 'Status: ' + error.response.status + '; Code: ' + error.code + '; Message: ' + error.message + '; Response: ' + error.response.data.message
+                        this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                        console.log(error)
                     }
 
                 })
@@ -77,6 +79,7 @@ export default {
         ...mapGetters([
             //перечисляем гетеры из сторе и потом используем как переменные.
             'GET_IS_AUTH',
+            'GET_RESPONSE_ERR',
             // ...
         ])
     }

@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     isAuth:false,
-    responseErr:'',
+    responseErr:false,
+    errorMessage:'',
     recipe:{},
   },
 
@@ -18,6 +19,9 @@ export default createStore({
     GET_RESPONSE_ERR: state => {
       return state.responseErr;
     },
+    GET_ERR_MESSAGE: state => {
+      return state.errorMessage;
+    },
   },
 
   // this.$store.commit('SET_NAME', your_name);
@@ -31,6 +35,9 @@ export default createStore({
     SET_RESPONSE_ERR_M: (state, payload) => {
       state.responseErr = payload;
     },
+    SET_ERR_MESSAGE_M: (state, payload) => {
+      state.errorMessage = payload;
+    },
   },
 
   // this.$store.dispatch('SET_IS_AUTH_A', isAuth);
@@ -38,11 +45,14 @@ export default createStore({
     SET_IS_AUTH_A: (context, payload) => {
       context.commit('SET_IS_AUTH_M', payload);
     },
+    // payload = [bool]
     SET_RECIPE_A: (context, payload) => {
       context.commit('SET_RECIPE_M', payload);
     },
+    // payload = [bool, string]
     SET_RESPONSE_ERR_A: (context, payload) => {
-      context.commit('SET_RESPONSE_ERR_M', payload);
+      context.commit('SET_RESPONSE_ERR_M', payload[0]);
+      context.commit('SET_ERR_MESSAGE_M', payload[1]);
     },
   },
 
