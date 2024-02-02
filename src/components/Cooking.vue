@@ -102,6 +102,11 @@ export default {
             showProcess: true,
         }
     },
+    // created() {
+    //     let data = localStorage.getItem('recipe')
+    //     this.$store.dispatch('SET_RECIPE_A', data);
+    //     console.log(data)
+    // },
     methods: {
         changeShowImg: function () {
             this.showImg = !this.showImg;

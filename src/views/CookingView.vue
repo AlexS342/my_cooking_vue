@@ -18,16 +18,16 @@ export default {
         return {
             //пустой recipe объект для инициализации
             recipe:{
-                id:0,
-                header:'',
-                products:{
-                    0:{product:"", quantity:0, items:"",},
-                },
-                active:{
-                    0:{product:"", quantity:0, items:""},
-                },
-                fullTime:"",
-                portions:0,
+                // id:0,
+                // header:'',
+                // products:{
+                //     0:{product:"", quantity:0, items:"",},
+                // },
+                // active:{
+                //     0:{product:"", quantity:0, items:""},
+                // },
+                // fullTime:"",
+                // portions:0,
             },
             //объект recipes заменяет получение данных от backend
             recipes:{
@@ -233,8 +233,11 @@ export default {
         }
     },
     created() {
-        this.recipe = this.$store.getters.GET_RECIPE;
-        console.log(this.recipe)
+        let data = localStorage.getItem('recipe')
+        this.recipe = JSON.parse(data)
+    },
+    watch: {
+
     },
     computed: {
         ...mapGetters([

@@ -60,8 +60,12 @@ export default {
             .get(url, )
             .then((response) => {
                 this.recipe = response.data
-                this.$store.dispatch('SET_RECIPE_A', this.recipe);
-                // console.log(this.recipe)
+
+                // Пока store не нужен, реализовано через localstorage
+                // this.$store.dispatch('SET_RECIPE_A', this.recipe);
+
+                let data = JSON.stringify(this.recipe)
+                localStorage.setItem('recipe', data);
             })
             .catch(
                 (error) => {
