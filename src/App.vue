@@ -20,6 +20,7 @@ import Footer from '@/components/Footer.vue'
 import LoginView from '@/views/LoginView.vue'
 import {defineComponent} from "vue";
 import {mapGetters} from "vuex";
+import axios from "axios";
 
 export default defineComponent({
     components: {LoginView, Footer, Header},
@@ -45,13 +46,38 @@ export default defineComponent({
         closeErr: function (){
             let message = ''
             this.$store.dispatch('SET_RESPONSE_ERR_A', [false, message]);
+        },
+        getUser: async function (){
+            await axios.get('/api/user', )
+                .then((response) => {
+                    console.log(response)
+                    this.user = response.data
+                    this.$store.dispatch('SET_USER_A', this.user);
+                })
+                .catch((error)=>{
+                    if(error.response.status === 401 || error.response.status === 419){
+                        localStorage.setItem('isAuth', "false");
+                        this.$store.dispatch('SET_IS_AUTH_A', false);
+                    }else {
+                        let message = 'Status: ' + error.response.status + '; Code: ' + error.code + '; Message: ' + error.message + '; Response: ' + error.response.data.message
+                        this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                        console.log(error)
+                    }
+                })
         }
     },
-    watch: {},
+    watch: {
+        GET_IS_AUTH(n,o){
+            if(n){
+                this.getUser()
+            }
+        }
+    },
     computed: {
         ...mapGetters([
             //перечисляем гетеры из сторе и потом используем как переменные.
             'GET_IS_AUTH',
+            'GET_USER',
             'GET_RESPONSE_ERR',
             'GET_ERR_MESSAGE',
             // ...

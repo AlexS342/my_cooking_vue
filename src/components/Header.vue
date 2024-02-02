@@ -39,6 +39,7 @@ export default {
     data() {
         return {
             isAuth:false,
+            user:{},
         }
     },
     methods:{
@@ -65,10 +66,8 @@ export default {
                         this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
                         console.log(error)
                     }
-
                 })
-        }
-
+        },
     },
     watch: {
         store(n,o){

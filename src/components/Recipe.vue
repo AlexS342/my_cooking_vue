@@ -58,6 +58,21 @@
             </div>
         </div>
 
+        <div class="windowWRP" v-show="showWindow">
+            <div class="window">
+                <p class="windowText">
+                    Вы уверены, что хотите удалть рецепт
+                </p>
+
+                <div class="windowAction">
+                    <input class="button" type="button" v-on:click="cancelDeletion" value="Нет">
+                    <input class="button" type="button" v-on:click="performDeletion" value="Да">
+                </div>
+
+            </div>
+        </div>
+
+
         <!--                    КНОПКИ                          -->
         <div class="list w100p">
             <div class="container pd3 w100p">
@@ -65,7 +80,13 @@
                     <router-link to="/recipes">
                         <input class="button" type="button" value="назад">
                     </router-link>
-<!--                    <input class="button" type="button" value="Редактировать">-->
+
+<!--                    <input class="button" type="button" v-if="GET_IS_AUTH" v-on:click="confirmDeletion" value="Удалить">-->
+                    <input class="button" type="button" v-if="showButtonDel()" v-on:click="confirmDeletion" value="Удалить">
+
+<!--                    <router-link :to="'#'">-->
+<!--                        <input class="button" type="button" value="Изменить">-->
+<!--                    </router-link>-->
                     <router-link :to="'/cooking/' + recipe.id">
                         <input class="button" type="button" value="готовить">
                     </router-link>
@@ -77,6 +98,9 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+import axios from "axios";
+
 export default {
     name: 'Recipe',
     props: {
@@ -87,6 +111,7 @@ export default {
             showImg: true,
             showProduct: true,
             showProcess: true,
+            showWindow: false
         }
     },
     methods: {
@@ -99,6 +124,63 @@ export default {
         changeShowProcess: function () {
             this.showProcess = !this.showProcess;
         },
+        showButtonDel: function (){
+            let isAuth = this.$store.getters.GET_IS_AUTH
+            let user = this.$store.getters.GET_USER
+            let recipe = this.$props.recipe
+            if(isAuth && user.id === recipe.user_id){
+                return true
+            }else{
+                return false
+            }
+        },
+        confirmDeletion: function () {
+            this.showWindow = true
+        },
+        cancelDeletion: function (){
+            this.showWindow = false
+        },
+        performDeletion: async function (){
+
+            const url = '/api/del-my-recipe/?id=' + this.$props.recipe.id + '&user_id=' + this.$props.recipe.user_id
+
+            await axios.delete(url, )
+                .then((response) => {
+                    this.showWindow = false
+
+                    if(response.data.answer){
+                        console.log(response.data.message)
+                        this.$router.push({path:'/recipes'})
+                    }else{
+                        console.log(response.data.message)
+                        console.log(response.data.errMessage)
+                        let message = response.data.message + '; ' + response.data.errMessage
+                        this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                    }
+                })
+                .catch((error)=>{
+                    console.log(error)
+                    this.showWindow = false
+                    if(error.response.status === 401 || error.response.status === 419){
+                        localStorage.setItem('isAuth', "false");
+                        this.$store.dispatch('SET_IS_AUTH_A', false);
+                        this.$router.push({path:'/login'})
+                    }
+                    else {
+                        let message = 'Status: ' + error.response.status + '; Code: ' + error.code + '; Message: ' + error.message + '; Response: ' + error.response.data.message
+                        this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                        console.log(error)
+                    }
+                })
+        }
+    },
+    computed: {
+        ...mapGetters([
+            //перечисляем гетеры из сторе и потом используем как переменные.
+            'GET_IS_AUTH',
+            'GET_RESPONSE_ERR',
+            // ...
+        ])
     }
 }
 </script>
@@ -241,10 +323,48 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
                 justify-content: space-between;
 
                 .button{
-                    padding: 6px 12px;
-                    font-size: 12px;
+                    padding: 6px 6px;
+                    font-size: 10px;
                     text-transform: uppercase;
                 }
+            }
+        }
+    }
+
+    .windowWRP{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #00000040;
+
+        .window{
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: white;
+            border: 2px solid red;
+            border-radius: 12px;
+            padding: 12px;
+            box-sizing: border-box;
+            margin-top: 50vh;
+
+            .windowText{
+                font-size: 18px;
+                font-weight: 700;
+                font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+                color: red;
+                margin: 12px;
+            }
+            .windowAction{
+                display: flex;
+                justify-content: space-around;
+            }
+            .windowAction>input{
+                width: 60px;
+                padding: 6px 12px;
+                text-align: center;
             }
         }
     }
