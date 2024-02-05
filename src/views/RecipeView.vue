@@ -58,14 +58,15 @@ export default {
 
         axios
             .get(url, )
-            .then((response) => {
-                this.recipe = response.data
+            .then(
+                (response) => {
+                    this.recipe = response.data
+                    // console.log(this.recipe)
 
-                // Пока store не нужен, реализовано через localstorage
-                // this.$store.dispatch('SET_RECIPE_A', this.recipe);
+                    this.$store.dispatch('SET_RECIPE_A', this.recipe);
 
-                let data = JSON.stringify(this.recipe)
-                localStorage.setItem('recipe', data);
+                    let data = JSON.stringify(this.recipe)
+                    localStorage.setItem('recipe', data);
             })
             .catch(
                 (error) => {

@@ -81,12 +81,14 @@
                         <input class="button" type="button" value="назад">
                     </router-link>
 
-<!--                    <input class="button" type="button" v-if="GET_IS_AUTH" v-on:click="confirmDeletion" value="Удалить">-->
-                    <input class="button" type="button" v-if="showButtonDel()" v-on:click="confirmDeletion" value="Удалить">
+                    <router-link v-if="showButton()" :to="'/edit_recipes/' +  recipe.id">
+                        <input class="button" type="button" value="Изменить">
+                    </router-link>
 
-<!--                    <router-link :to="'#'">-->
-<!--                        <input class="button" type="button" value="Изменить">-->
-<!--                    </router-link>-->
+<!--                    <input class="button" type="button" v-if="showButton()" v-on:click="confirmDeletion" value="Изменить">-->
+
+                    <input class="button" type="button" v-if="showButton()" v-on:click="confirmDeletion" value="Удалить">
+
                     <router-link :to="'/cooking/' + recipe.id">
                         <input class="button" type="button" value="готовить">
                     </router-link>
@@ -124,7 +126,7 @@ export default {
         changeShowProcess: function () {
             this.showProcess = !this.showProcess;
         },
-        showButtonDel: function (){
+        showButton: function (){
             let isAuth = this.$store.getters.GET_IS_AUTH
             let user = this.$store.getters.GET_USER
             let recipe = this.$props.recipe

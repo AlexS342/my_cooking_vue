@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import RecipesView from '../views/RecipesView.vue'
 import RecipeView from '../views/RecipeView.vue'
 import CookingView from '../views/CookingView.vue'
+import EditRecipeView from "@/views/EditRecipeView.vue";
 
 const routes = [
   {
@@ -46,7 +47,12 @@ const routes = [
     // это генерирует отдельный фрагмент (about.[hash].js) для этого маршрута
     // который загружается в режиме ожидания при посещении маршрута.
     component: () => import('../views/AddRecipeView.vue')
-  }
+  },
+  {
+    path: '/edit_recipes/:id',
+    name: 'edit_recipes',
+    component: EditRecipeView
+  },
 ]
 
 const router = createRouter({
