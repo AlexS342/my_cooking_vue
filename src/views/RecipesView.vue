@@ -97,6 +97,7 @@ export default {
 
         .listButtons {
             width: 100%;
+            max-width: 800px;
             display: flex;
             //justify-content: space-evenly;
             //margin: 12px;
@@ -132,6 +133,7 @@ export default {
         }
     }
     .recipes__header{
+        max-width: 800px;
         margin-top: 12px;
         text-transform: uppercase;
         padding: 12px;
