@@ -58,6 +58,7 @@
             </div>
         </div>
 
+<!--        Подтверждение удаления рецепта-->
         <div class="windowWRP" v-show="showWindow">
             <div class="window">
                 <p class="windowText">
@@ -67,6 +68,34 @@
                 <div class="windowAction">
                     <input class="button" type="button" v-on:click="cancelDeletion" value="Нет">
                     <input class="button" type="button" v-on:click="performDeletion" value="Да">
+                </div>
+
+            </div>
+        </div>
+
+<!--        Уведомление о событии-->
+        <div class="windowWRP" v-show="alertWindow">
+            <div class="alertWindow">
+                <p class="alertWindowText">
+                    {{ this.alertMessage }}
+                </p>
+
+                <div class="alertWindowAction">
+                    <input class="button" type="button" v-on:click="closeAlertWindow" value="Закрыть">
+                </div>
+
+            </div>
+        </div>
+
+        <!--        Уведомление о событии неудачном-->
+        <div class="windowWRP" v-show="alertWindowRed">
+            <div class="alertWindowRed">
+                <p class="alertWindowText">
+                    {{ this.alertMessageRed }}
+                </p>
+
+                <div class="alertWindowAction">
+                    <input class="button" type="button" v-on:click="closeAlertWindowRed" value="Закрыть">
                 </div>
 
             </div>
@@ -85,7 +114,7 @@
                         <input class="button" type="button" value="Изменить">
                     </router-link>
 
-<!--                    <input class="button" type="button" v-if="showButton()" v-on:click="confirmDeletion" value="Изменить">-->
+                    <input class="button" type="button" v-if="showButtonMark()" v-on:click="addBookmark" value="Закладка">
 
                     <input class="button" type="button" v-if="showButton()" v-on:click="confirmDeletion" value="Удалить">
 
@@ -113,7 +142,11 @@ export default {
             showImg: true,
             showProduct: true,
             showProcess: true,
-            showWindow: false
+            showWindow: false,
+            alertWindow: false,
+            alertMessage:'',
+            alertWindowRed: false,
+            alertMessageRed:'',
         }
     },
     methods: {
@@ -135,6 +168,64 @@ export default {
             }else{
                 return false
             }
+        },
+        showButtonMark: function () {
+            let isAuth = this.$store.getters.GET_IS_AUTH
+            let user = this.$store.getters.GET_USER
+            let recipe = this.$props.recipe
+            if(isAuth && user.id !== recipe.user_id){
+                return true
+            }else{
+                return false
+            }
+        },
+        addBookmark: async function () {
+            const url = '/api/set-bookmark-recipe/?recipe_id=' + this.recipe.id
+            console.log(url)
+
+            await axios.get(url, )
+                .then((response) => {
+                    console.log(response)
+                    //
+                    if(response.data.answer){
+                        console.log(response.data.message)
+                        this.alertMessage = response.data.message
+                        this.openAlertWindow()
+                    }else{
+                        console.log(response.data.message)
+                        this.alertMessageRed = response.data.message
+                        this.openAlertWindowRed()
+                    //     console.log(response.data.errMessage)
+                    //     let message = response.data.message + '; ' + response.data.errMessage
+                    //     this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                    }
+                })
+                .catch((error)=>{
+                    console.log(error)
+                    this.showWindow = false
+                    if(error.response.status === 401 || error.response.status === 419){
+                        localStorage.setItem('isAuth', "false");
+                        this.$store.dispatch('SET_IS_AUTH_A', false);
+                        this.$router.push({path:'/login'})
+                    }
+                    else {
+                        let message = 'Status: ' + error.response.status + '; Code: ' + error.code + '; Message: ' + error.message + '; Response: ' + error.response.data.message
+                        this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                        console.log(error)
+                    }
+                })
+        },
+        openAlertWindow: function () {
+            this.alertWindow = true;
+        },
+        closeAlertWindow: function () {
+            this.alertWindow = false;
+        },
+        openAlertWindowRed: function () {
+            this.alertWindowRed = true;
+        },
+        closeAlertWindowRed: function () {
+            this.alertWindowRed = false;
         },
         confirmDeletion: function () {
             this.showWindow = true
@@ -365,6 +456,62 @@ $length-pd1: 3px;  $length-pd2: 6px;  $length-pd3: 12px;
             }
             .windowAction>input{
                 width: 60px;
+                padding: 6px 12px;
+                text-align: center;
+            }
+        }
+        .alertWindow{
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #b7ffa6;
+            border: 2px solid #3d9600;
+            border-radius: 12px;
+            padding: 12px;
+            box-sizing: border-box;
+            margin-top: 50vh;
+
+            .alertWindowText{
+                font-size: 18px;
+                font-weight: 700;
+                font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+                color: #135d00;
+                margin: 12px;
+            }
+            .alertWindowAction{
+                display: flex;
+                justify-content: flex-end
+            }
+            .alertWindowAction>input{
+                width: 80px;
+                padding: 6px 12px;
+                text-align: center;
+            }
+        }
+        .alertWindowRed{
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #ffa6a6;
+            border: 2px solid #ff0000;
+            border-radius: 12px;
+            padding: 12px;
+            box-sizing: border-box;
+            margin-top: 50vh;
+
+            .alertWindowText{
+                font-size: 18px;
+                font-weight: 700;
+                font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+                color: #ff0000;
+                margin: 12px;
+            }
+            .alertWindowAction{
+                display: flex;
+                justify-content: flex-end
+            }
+            .alertWindowAction>input{
+                width: 80px;
                 padding: 6px 12px;
                 text-align: center;
             }

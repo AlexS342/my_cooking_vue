@@ -44,6 +44,7 @@ export default {
         getRecipes: async function(api){
             await axios.post(api, {data:null})
                 .then((response) => {
+                    console.log(response.data)
                     this.recipes = response.data
                 })
                 .catch(
@@ -71,7 +72,7 @@ export default {
                 this.allRecipeClass = 'listButtonsItem'
                 this.myRecipeClass = 'listButtonsItem'
                 this.saveRecipeClass = 'listButtonsItem__active'
-                this.getRecipes('/api/get-save-user-recipe')
+                this.getRecipes('/api/get-bookmark-recipe')
             }
         },
     },
