@@ -116,6 +116,8 @@
 
                     <input class="button" type="button" v-if="showButtonMark()" v-on:click="addBookmark" value="Закладка">
 
+                    <input class="button" type="button" v-if="showButtonClear()" v-on:click="clearBookmark" value="Стереть">
+
                     <input class="button" type="button" v-if="showButton()" v-on:click="confirmDeletion" value="Удалить">
 
                     <router-link :to="'/cooking/' + recipe.id">
@@ -144,8 +146,8 @@ export default {
             showProcess: true,
             showWindow: false,
             alertWindow: false,
-            alertMessage:'',
             alertWindowRed: false,
+            alertMessage:'',
             alertMessageRed:'',
         }
     },
@@ -173,7 +175,19 @@ export default {
             let isAuth = this.$store.getters.GET_IS_AUTH
             let user = this.$store.getters.GET_USER
             let recipe = this.$props.recipe
-            if(isAuth && user.id !== recipe.user_id){
+            let page = localStorage.getItem("pageRecipes")
+            if(isAuth && user.id !== recipe.user_id && page === 'all'){
+                return true
+            }else{
+                return false
+            }
+        },
+        showButtonClear: function () {
+            let isAuth = this.$store.getters.GET_IS_AUTH
+            let user = this.$store.getters.GET_USER
+            let recipe = this.$props.recipe
+            let page = localStorage.getItem("pageRecipes")
+            if(isAuth && user.id !== recipe.user_id && page === 'save'){
                 return true
             }else{
                 return false
@@ -181,23 +195,60 @@ export default {
         },
         addBookmark: async function () {
             const url = '/api/set-bookmark-recipe/?recipe_id=' + this.recipe.id
-            console.log(url)
+            // console.log(url)
 
             await axios.get(url, )
                 .then((response) => {
-                    console.log(response)
+                    // console.log(response)
                     //
                     if(response.data.answer){
-                        console.log(response.data.message)
+                        // console.log(response.data.message)
                         this.alertMessage = response.data.message
                         this.openAlertWindow()
                     }else{
-                        console.log(response.data.message)
+                        // console.log(response.data.message)
                         this.alertMessageRed = response.data.message
                         this.openAlertWindowRed()
                     //     console.log(response.data.errMessage)
                     //     let message = response.data.message + '; ' + response.data.errMessage
                     //     this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                    }
+                })
+                .catch((error)=>{
+                    console.log(error)
+                    this.showWindow = false
+                    if(error.response.status === 401 || error.response.status === 419){
+                        localStorage.setItem('isAuth', "false");
+                        this.$store.dispatch('SET_IS_AUTH_A', false);
+                        this.$router.push({path:'/login'})
+                    }
+                    else {
+                        let message = 'Status: ' + error.response.status + '; Code: ' + error.code + '; Message: ' + error.message + '; Response: ' + error.response.data.message
+                        this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
+                        console.log(error)
+                    }
+                })
+        },
+        clearBookmark: async function() {
+            const url = '/api/del-bookmark-recipe/?recipe_id=' + this.recipe.id
+            // console.log(url)
+
+            await axios.delete(url, )
+                .then((response) => {
+                    // console.log(response)
+                    //
+                    if(response.data.answer){
+                        // console.log(response.data.message)
+                        // this.alertMessage = response.data.message
+                        // this.openAlertWindow()
+                        this.$router.push({path:'/recipes'})
+                    }else{
+                        // console.log(response.data.message)
+                        // this.alertMessageRed = response.data.message
+                        // this.openAlertWindowRed()
+                        //     console.log(response.data.errMessage)
+                        //     let message = response.data.message + '; ' + response.data.errMessage
+                        //     this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
                     }
                 })
                 .catch((error)=>{
@@ -242,11 +293,11 @@ export default {
                     this.showWindow = false
 
                     if(response.data.answer){
-                        console.log(response.data.message)
+                        // console.log(response.data.message)
                         this.$router.push({path:'/recipes'})
                     }else{
-                        console.log(response.data.message)
-                        console.log(response.data.errMessage)
+                        // console.log(response.data.message)
+                        // console.log(response.data.errMessage)
                         let message = response.data.message + '; ' + response.data.errMessage
                         this.$store.dispatch('SET_RESPONSE_ERR_A', [true, message]);
                     }

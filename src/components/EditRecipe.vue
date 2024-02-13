@@ -218,10 +218,10 @@ export default {
         }
     },
     created() {
-        // let data = localStorage.getItem('recipe')
-        // this.recipe = JSON.parse(data)
 
-        this.recipe = this.$store.getters.GET_RECIPE;
+        // this.recipe = this.$store.getters.GET_RECIPE;
+        let data = localStorage.getItem('recipe')
+        this.recipe = JSON.parse(data)
 
         if(this.recipe.full_time == null){
             this.recipe.fullTime = ''
@@ -508,7 +508,7 @@ export default {
                 }
 
                 if(Object.values(this.arrProductUnits).indexOf(this.recipe.products[product].units) === -1){
-                    console.log('значение ' + this.products[product].units + ' не найдено')
+                    // console.log('значение ' + this.products[product].units + ' не найдено')
                     this.actionErr = true
                     this.massageErr = 'Некоректные едицы времени приготовления. Выбирайте только преложенные варианты из выпадающего меню.'
                     break
@@ -551,7 +551,7 @@ export default {
                 }
 
                 if(Object.values(this.arrActionUnits).indexOf(this.recipe.actions[action].units) === -1){
-                    console.log('значение ' + this.recipe.actions[action].units + ' не найдено')
+                    // console.log('значение ' + this.recipe.actions[action].units + ' не найдено')
                     this.actionErr = true
                     this.massageErr = 'Некоректные едицы времени приготовления. Выбирайте только преложенные варианты из выпадающего меню.'
                     break
@@ -564,7 +564,7 @@ export default {
 
             //Валидация тип рецепта
             if(Object.values(this.arrTypeRecipes).indexOf(this.recipe.type) === -1){
-                console.log('значение ' + this.recipe.type + ' не найдено')
+                // console.log('значение ' + this.recipe.type + ' не найдено')
                 this.filterErr = true
                 this.massageErr = 'Тип блюда указан не корректно'
                 return false
@@ -572,7 +572,7 @@ export default {
 
             //Валидация категории рецепта
             if(Object.values(this.arrCategoryRecipes).indexOf(this.recipe.category) === -1){
-                console.log('значение ' + this.recipe.categoryRecipes + ' не найдено')
+                // console.log('значение ' + this.recipe.categoryRecipes + ' не найдено')
                 this.filterErr = true
                 this.massageErr = 'Категория блюда указан не корректно'
                 return false
@@ -580,7 +580,7 @@ export default {
 
             //Валидация единиц времени приготовления
             if(Object.values(this.arrFullTimeUnits).indexOf(this.recipe.fullTimeUnix) === -1){
-                console.log('значение ' + this.recipe.fullTimeUnix + ' не найдено')
+                // console.log('значение ' + this.recipe.fullTimeUnix + ' не найдено')
                 this.filterErr = true
                 this.massageErr = 'Время приготовления блюда должно измерятся в предложенных вариантах'
                 return false
@@ -588,17 +588,17 @@ export default {
 
             //Валидация количества порций
             if(typeof this.recipe.portion === 'string' && this.recipe.portion.length !== 0){
-                console.log('Количество порцый нужно указывать цифрами')
+                // console.log('Количество порцый нужно указывать цифрами')
                 this.filterErr = true
                 this.massageErr = 'Количество порцый нужно указывать цифрами'
                 return false
             }else if(typeof this.recipe.portion === 'number' && this.recipe.portion < 1){
-                console.log('Количество порций ' + this.recipe.portion + ' меньше 1')
+                // console.log('Количество порций ' + this.recipe.portion + ' меньше 1')
                 this.filterErr = true
                 this.massageErr = 'Указано количество порцый меньще нуля'
                 return false
             }else if(typeof this.recipe.portion === 'number' && this.recipe.portion > 50){
-                console.log('Количество порций ' + this.recipe.portion + ' больше 50')
+                // console.log('Количество порций ' + this.recipe.portion + ' больше 50')
                 this.filterErr = true
                 this.massageErr = 'Указано количество порцый больше 50'
                 return false
@@ -606,19 +606,19 @@ export default {
 
             //Валидация времени приготовления (цифры)
             if(typeof this.recipe.fullTime === 'string' && this.recipe.fullTime.length > 0){
-                console.log('Время приготовления нужно указывать цифрами')
+                // console.log('Время приготовления нужно указывать цифрами')
                 this.filterErr = true
                 this.massageErr = 'Время приготовления нужно указывать цифрами'
                 return false
             }
             else if(typeof this.recipe.fullTime === 'number' && this.recipe.fullTime < 1){
-                console.log('Указано время приготовления ' + this.portion + ' меньше 1')
+                // console.log('Указано время приготовления ' + this.portion + ' меньше 1')
                 this.filterErr = true
                 this.massageErr = 'Указано количество порцый меньще нуля'
                 return false
             }
             else if(typeof this.recipe.fullTime === 'number' && this.recipe.fullTime > 500){
-                console.log('Указано время приготовления ' + this.portion + ' ,больше 500')
+                // console.log('Указано время приготовления ' + this.portion + ' ,больше 500')
                 this.filterErr = true
                 this.massageErr = 'Указано количество порцый меньще нуля'
                 return false

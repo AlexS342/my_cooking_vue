@@ -68,7 +68,6 @@ export default {
                         password: this.password,
                 })
                 .then(() => {
-
                     localStorage.setItem('isAuth', "true");
                     this.$store.dispatch('SET_IS_AUTH_A', true);
 

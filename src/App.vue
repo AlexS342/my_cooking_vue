@@ -41,6 +41,12 @@ export default defineComponent({
             this.isAuth = false
         }
         this.$store.dispatch('SET_IS_AUTH_A', this.isAuth);
+
+        if(!!localStorage.getItem("pageRecipes")){
+            // console.log(localStorage.getItem("pageRecipes"))
+        }else{
+            localStorage.setItem('pageRecipes', "my");
+        }
     },
     methods: {
         closeErr: function (){
@@ -50,7 +56,7 @@ export default defineComponent({
         getUser: async function (){
             await axios.get('/api/user', )
                 .then((response) => {
-                    console.log(response)
+                    // console.log(response)
                     this.user = response.data
                     this.$store.dispatch('SET_USER_A', this.user);
                 })

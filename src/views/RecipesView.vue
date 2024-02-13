@@ -34,8 +34,15 @@ export default {
     created() {
         this.isAuth = this.$store.getters.GET_IS_AUTH;
         if(this.isAuth){
-            this.setRecipesShow('my')
-            this.getRecipes('/api/get-my-user-recipe')
+            let page = localStorage.getItem("pageRecipes")
+            this.setRecipesShow(page)
+            if(page === 'all'){
+                this.getRecipes('/api/get-all-recipe')
+            }else if(page === 'my'){
+                this.getRecipes('/api/get-my-user-recipe')
+            }else if('save'){
+                this.getRecipes('/api/get-bookmark-recipe')
+            }
         }else{
             this.getRecipes('/api/get-all-recipe')
         }
@@ -59,16 +66,19 @@ export default {
         },
         setRecipesShow: function (show){
             if(show === 'all'){
+                localStorage.setItem('pageRecipes', "all");
                 this.allRecipeClass = 'listButtonsItem__active'
                 this.myRecipeClass = 'listButtonsItem'
                 this.saveRecipeClass = 'listButtonsItem'
                 this.getRecipes('/api/get-all-recipe')
             }else if(show === 'my'){
+                localStorage.setItem('pageRecipes', "my");
                 this.allRecipeClass = 'listButtonsItem'
                 this.myRecipeClass = 'listButtonsItem__active'
                 this.saveRecipeClass = 'listButtonsItem'
                 this.getRecipes('/api/get-my-user-recipe')
             }else if (show === 'save'){
+                localStorage.setItem('pageRecipes', "save");
                 this.allRecipeClass = 'listButtonsItem'
                 this.myRecipeClass = 'listButtonsItem'
                 this.saveRecipeClass = 'listButtonsItem__active'
